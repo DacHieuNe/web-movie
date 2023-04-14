@@ -1,0 +1,29 @@
+@mixin abs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin respond($breakpoint) {
+  @if ($breakpoint == desktop) {
+    @media (max-width: 74.9375em) {
+      @content;
+    }
+  }
+  @if ($breakpoint == tablet) {
+    @media (max-width: 61.9375em) {
+      @content;
+    }
+  }
+  @if ($breakpoint == large-phone) {
+    @media (max-width: 47.9375em) {
+      @content;
+    }
+  }
+  @if ($breakpoint == small-phone) {
+    @media (max-width: 35.9375em) {
+      @content;
+    }
+  }
+}

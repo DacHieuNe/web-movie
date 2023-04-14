@@ -1,0 +1,146 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__signup, &__signin {
+    position: relative;
+    z-index: 3;
+  }
+  &__note {
+    margin-bottom: 0.8rem;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: SVN-Avobold, sans-serif;
+    text-align: center;
+  }
+  &__image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__overlay {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+  &__content {
+    position: relative;
+    z-index: 3;
+    max-width: 767px;
+    min-width: 767px;
+    margin: 0 auto;
+    &--primary {
+      padding: 4rem;
+      background-color: $color-purple-light;
+    }
+    h1 {
+      margin: 0 0 1.6rem;
+      color: #fff;
+      font-size: 4.2rem;
+      font-weight: 600;
+      font-family: SVN-Avobold, sans-serif;
+      text-align: center;
+    }
+  }
+  &__form {
+    position: relative;
+    z-index: 5;
+    max-width: 55rem;
+    margin: 0 auto;
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      &--primary {
+        flex-direction: column;
+        margin-bottom: 1.6rem;
+      }
+      &--secondary {
+        align-items: center;
+      }
+      .label {
+        margin-bottom: 0.8rem;
+        color: #fff;
+        cursor: pointer;
+        &--primary {
+          font-size: 1.8rem;
+          letter-spacing: 0.1rem;
+        }
+        &--secondary {
+          margin-left: 1rem;
+          font-size: 1.5rem;
+          transform: translateY(3px);
+        }
+      }
+      .title {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+      .input-primary {
+        padding: 1.5rem 1rem;
+        border-radius: 0.5rem;
+        border: 0.2rem solid transparent;
+        outline: none;
+        font-size: 1.6rem;
+        &:focus {
+          border-color: $color-secondary-dark;
+        }
+        &::-webkit-input-placeholder {
+          color: $color-gray-dark;
+          font-family: SVN-Avobold, sans-serif;
+          font-size: 1.5rem;
+          letter-spacing: 1px;
+        }
+      }
+      .input-secondary {
+        width: 1.6rem;
+        height: 1.6rem;
+        accent-color: $color-primary;
+      }
+    }
+    .form-btn {
+      margin-top: 1.2rem;
+    }
+    .form-error {
+      margin: 0.6rem 0;
+      color: $color-gray-red;
+      font-size: 1.6rem;
+      font-weight: 600;
+      font-family: SVN-Avobold, sans-serif;
+      text-shadow: 0 0 10px #000;
+      letter-spacing: 0.6px;
+    }
+  }
+  &__logo {
+    position: absolute;
+    bottom: 10%;
+    right: 2%;
+    img {
+      width: 200px;
+      height: 200px;
+    }
+    &--primary {
+      animation: 3s infinite alternate image-scale;
+      @keyframes image-scale {
+        0% {
+          transform: rotate(0) scale(0);
+        }
+        50% {
+          transform: rotate(45deg) scale(0.5);
+        }
+        100% {
+          transform: rotate(-45deg) scale(1);
+        }
+      }
+    }
+  }
+}

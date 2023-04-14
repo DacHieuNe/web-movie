@@ -1,0 +1,21 @@
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: $color-black;
+  font-size: $default-font-size;
+  &__primary {
+    padding: 1rem 1.4rem 1.2rem;
+    border: 0.1rem solid $color-secondary-light;
+    border-radius: 3rem;
+    transition: all 0.2s;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  &__form {
+    color: $color-blue-light;
+    font-size: 1.7rem;
+    font-weight: 600;
+    font-family: SVN-Avobold, sans-serif;
+  }
+}

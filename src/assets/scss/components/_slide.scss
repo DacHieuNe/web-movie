@@ -1,0 +1,110 @@
+.slide {
+  position: relative;
+  &__wrap {
+    white-space: nowrap;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__item {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-height: 50rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    white-space: initial;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    &--1 {
+      background-image: url("https://store.bbcosplay.com/news/kimetsu-no-yaiba-season-3-cong-bo-them-movie1.jpg");
+    }
+    &--2 {
+      background-image: url("https://gamek.mediacdn.vn/133514250583805952/2020/6/5/photo-2-15913722021431126749769.jpg");
+    }
+    &--3 {
+      background-image: url("https://upload.wikimedia.org/wikipedia/vi/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg");
+    }
+    &:not(:first-child) {
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  &__body {
+    position: absolute;
+    z-index: 4;
+    left: 10rem;
+    bottom: 3rem;
+  }
+  &__tag {
+    display: inline-block;
+    padding: 0.8rem 0.8rem 1rem;
+    margin-bottom: 3rem;
+    color: $color-primary;
+    background-color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: SVN-Avobold, sans-serif;
+  }
+  &__heading {
+    max-width: 50rem;
+    margin-top: 0;
+    margin-bottom: 3rem;
+    color: #fff;
+    font-size: 3.6rem;
+    font-weight: 600;
+  }
+  &__desc {
+    max-width: 60rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+  &__icon {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    color: $color-white;
+    transform: translate(-50%, -50%);
+  }
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 0 3px #fff;
+    background-color: $color-blue-dark;
+    transform: rotate(45deg);
+  }
+  &__prev,
+  &__next {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    width: 3.6rem;
+    height: 3.6rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  &__prev {
+    left: 20px;
+  }
+  &__next {
+    right: 20px;
+  }
+}

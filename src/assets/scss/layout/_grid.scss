@@ -1,0 +1,39 @@
+.container {
+  max-width: 1316px;
+  margin: 0 auto;
+  @include respond(desktop) {
+    max-width: 960px;
+  }
+  @include respond(tablet) {
+    max-width: 720px;
+  }
+  @include respond(large-phone) {
+    max-width: 100%;
+  }
+  @include respond(small-phone) {
+    max-width: 100%;
+  }
+}
+.container-fluid {
+  width: 100%;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col {
+  position: relative;
+}
+.col-xl-12 {
+  position: relative;
+  width: 100%;
+}
+.f-grow-xl-1 {
+  flex-grow: 1;
+}
+.items-center {
+  align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}

@@ -1,0 +1,18 @@
+.input {
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  outline: none;
+  color: $color-black;
+  font-size: $default-font-size;
+  &__primary {
+    border-radius: 3rem;
+    border: 0.1rem solid $color-secondary-light;
+    transition: all 0.2s;
+    &:focus {
+      border: 0.2rem solid $color-primary;
+    }
+  }
+  &::placeholder {
+    color: $color-secondary-light;
+  }
+}
