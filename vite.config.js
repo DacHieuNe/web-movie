@@ -4,12 +4,12 @@ import { resolve } from "path";
 
 export default defineConfig({
   build: {
-    rollupOptinos: {
+    rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
         detail: resolve(__dirname, "detail.html"),
-        signup: resolve(__dirname, "signup.html"),
         home: resolve(__dirname, "home.html"),
+        authen: resolve(__dirname, "authen.html"),
       },
     },
   },

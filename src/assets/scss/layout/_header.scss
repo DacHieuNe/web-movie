@@ -1,6 +1,21 @@
 .header {
   padding: 1rem;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15);
+  color: #000;
+  &__role {
+    display: inline-block;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.1rem;
+    transform: translateY(-2px);
+    &--admin {
+      background-color: $color-primary;
+    }
+    &--mod {
+      background-color: $color-tertiary-light;
+    }
+  }
   &__info {
     display: flex;
     align-items: center;
@@ -26,8 +41,14 @@
     }
   }
   &__name {
-    color: $color-primary;
-    font-size: 1.6rem;
+    color: inherit;
+    font-size: 1.5rem;
+    &--admin {
+      color: $color-primary;
+    }
+    &--mod {
+      color: $color-tertiary-light;
+    }
   }
   &__email {
     margin-top: 0.5rem;

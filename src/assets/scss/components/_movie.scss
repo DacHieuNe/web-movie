@@ -1,0 +1,48 @@
+.movie {
+  width: calc(300% / 12 - 15px);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    .movie__body {
+      background-image: linear-gradient(
+        to bottom,
+        transparent,
+        $color-tertiary-normal
+      );
+    }
+  }
+  &__box {
+    position: relative;
+  }
+  &__image {
+    img {
+      width: 100%;
+      object-fit: cover;
+      vertical-align: middle;
+    }
+  }
+  &__body {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1.2rem;
+    background-image: linear-gradient(to bottom, transparent, $color-black);
+    transition: all 0.1s;
+  }
+  &__name {
+    margin-block: 0.8rem;
+    color: $color-white;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  &__episode {
+    color: $color-white;
+    font-size: 1.3rem;
+  }
+  &__view {
+    color: $color-white;
+    font-size: 1.3rem;
+  }
+}

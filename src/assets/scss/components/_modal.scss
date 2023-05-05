@@ -4,7 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  &__signup, &__signin {
+  &__signup,
+  &__signin {
     position: relative;
     z-index: 3;
   }
@@ -15,6 +16,9 @@
     font-weight: 600;
     font-family: SVN-Avobold, sans-serif;
     text-align: center;
+    @include respond(tablet) {
+      font-size: 1.6rem;
+    }
   }
   &__image {
     position: absolute;
@@ -38,9 +42,23 @@
     max-width: 767px;
     min-width: 767px;
     margin: 0 auto;
+    @include respond(tablet) {
+      max-width: 540px;
+      min-width: 540px;
+    }
+    @include respond(small-phone) {
+      max-width: 320px;
+      min-width: 320px;
+    }
     &--primary {
       padding: 4rem;
       background-color: $color-purple-light;
+      @include respond(tablet) {
+        padding: 2rem;
+      }
+      @include respond(small-phone) {
+        padding: 1rem;
+      }
     }
     h1 {
       margin: 0 0 1.6rem;
@@ -49,6 +67,9 @@
       font-weight: 600;
       font-family: SVN-Avobold, sans-serif;
       text-align: center;
+      @include respond(tablet) {
+        font-size: 3rem;
+      }
     }
   }
   &__form {
@@ -56,7 +77,11 @@
     z-index: 5;
     max-width: 55rem;
     margin: 0 auto;
+    .form-wrap {
+      position: relative;
+    }
     .form-group {
+      position: relative;
       display: flex;
       flex-wrap: wrap;
       &--primary {
@@ -73,19 +98,32 @@
         &--primary {
           font-size: 1.8rem;
           letter-spacing: 0.1rem;
+          @include respond(tablet) {
+            font-size: 1.5rem;
+          }
         }
         &--secondary {
           margin-left: 1rem;
           font-size: 1.5rem;
           transform: translateY(3px);
+          @include respond(small-phone) {
+            font-size: 1.2rem;
+          }
         }
       }
       .title {
         color: #fff;
         font-size: 1.5rem;
         font-weight: 500;
+        @include respond(tablet) {
+          padding-bottom: 24px;
+        }
+        @include respond(small-phone) {
+          font-size: 1.3rem;
+        }
       }
       .input-primary {
+        width: 100%;
         padding: 1.5rem 1rem;
         border-radius: 0.5rem;
         border: 0.2rem solid transparent;
@@ -119,6 +157,21 @@
       text-shadow: 0 0 10px #000;
       letter-spacing: 0.6px;
     }
+    .form-icon {
+      position: absolute;
+      top: 50%;
+      right: 2%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      &--primary {
+        width: 30px;
+        height: 30px;
+        @include respond(small-phone) {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
   }
   &__logo {
     position: absolute;
@@ -141,6 +194,12 @@
           transform: rotate(-45deg) scale(1);
         }
       }
+    }
+    @include respond(small-phone) {
+      position: fixed;
+      top: 0;
+      bottom: initial;
+      right: -5%;
     }
   }
 }

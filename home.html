@@ -9,9 +9,85 @@
       href="./src/assets/images/logo.ico"
     />
     <title>Anime - Manga</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="src/assets/vendors/slick.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="src/assets/vendors/slick-theme.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
+  <body data-theme="light">
+    <template id="slide-template">
+      <div class="slide__item" id="slide__item">
+        <div class="slide__body">
+          <span class="slide__tag"></span>
+          <h2 class="slide__heading"></h2>
+          <p class="slide__desc"></p>
+          <button class="btn btn__slide">
+            WATCH NOW
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </template>
+    <template id="movie-template">
+      <div class="movie">
+        <div class="movie__box">
+          <div class="movie__image">
+            <img
+              src="https://i7.xem-truyen.com/manga/14/14430/01.thumb_500x.png"
+              alt="movie-image"
+            />
+          </div>
+          <div class="movie__body">
+            <h3 class="movie__name"></h3>
+            <div class="row justify-between">
+              <div class="movie__episode"></div>
+              <div class="movie__view"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template id="manga-template">
+      <div class="manga">
+        <div class="manga__image">
+          <img src="" alt="thumbnail" />
+        </div>
+        <div class="manga__chapter"></div>
+        <div class="manga__title"></div>
+      </div>
+    </template>
+    <template id="today-template">
+      <div class="today">
+        <div class="today__image">
+          <img src="" alt="thumbnail" />
+        </div>
+        <div class="today__title"></div>
+      </div>
+    </template>
     <div class="loader" id="loader">
       <div class="loader-body"><span>Loading...</span></div>
     </div>
@@ -35,8 +111,11 @@
                       />
                     </div>
                     <div class="header__security">
-                      <h3>Hi, <span class="header__name">Hieu</span></h3>
-                      <h3 class="header__email">thanhtra@gmail.com</h3>
+                      <h3>
+                        Hi, <span class="header__name"></span>
+                        <span class="header__role"></span>
+                      </h3>
+                      <h3 class="header__email"></h3>
                     </div>
                     <!-- <button class="btn btn__icon">
                       <svg
@@ -56,7 +135,7 @@
                     </button> -->
                   </div>
                   <div class="header__light">
-                    <button class="btn btn__icon">
+                    <button id="button__theme" class="btn btn__icon">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -117,6 +196,14 @@
                     </svg>
                   </button>
                 </div>
+                <div class="header__logout">
+                  <button
+                    id="header__btn"
+                    class="btn btn__slide btn__slide--primary"
+                  >
+                    Đăng Xuất
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -130,7 +217,7 @@
             <div class="col-xl-12">
               <div class="slide">
                 <div class="slide__wrap" id="slide__wrap">
-                  <div class="slide__item slide__item--1" id="slide__item">
+                  <!-- <div class="slide__item slide__item--1" id="slide__item">
                     <div class="slide__body">
                       <span class="slide__tag">Adventure</span>
                       <h2 class="slide__heading">
@@ -225,7 +312,7 @@
                         </span>
                       </button>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="slide__prev" id="slide__prev">
                   <div class="slide__bg"></div>
@@ -270,7 +357,197 @@
           </div>
         </div>
       </section>
+      <section class="new">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <h3 class="heading__primary">TẬP MỚI NHẤT</h3>
+            </div>
+          </div>
+          <div class="row gap-12 movie__wrap"></div>
+        </div>
+      </section>
+      <section class="story">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="heading__primary">TRUYỆN TRANH</div>
+            </div>
+          </div>
+          <div class="row gap-12 manga__wrap"></div>
+        </div>
+      </section>
+      <section class="section-today">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <h3 class="heading__primary">HÔM NAY XEM GÌ</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="today__wrap"></div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+    <footer class="footer">
+      <section class="footer__header">
+        <div class="container">
+          <div class="row items-center footer--primary">
+            <div class="col-xl-6">
+              <h3 class="footer__info">
+                Liên hệ với chúng tôi thông qua mạng xã hội.
+              </h3>
+            </div>
+            <div class="col-xl-6">
+              <div class="footer__social">
+                <a
+                  class="footer__icon footer--link"
+                  href="https://www.facebook.com/DacHieuNe.Hihi1/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a
+                  class="footer__icon footer--link"
+                  href="https://www.facebook.com/DacHieuNe.Hihi1/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-google"></i>
+                </a>
+                <a
+                  class="footer__icon footer--link"
+                  href="https://www.facebook.com/DacHieuNe.Hihi1/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a
+                  class="footer__icon footer--link"
+                  href="https://www.facebook.com/DacHieuNe.Hihi1/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a
+                  class="footer__icon footer--link"
+                  href="https://www.facebook.com/DacHieuNe.Hihi1/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a
+                  class="footer__icon footer--link"
+                  href="https://www.facebook.com/DacHieuNe.Hihi1/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="footer__main">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4">
+              <div class="footer__body">
+                <h3 class="footer__title">Đắc Hiếu Company</h3>
+                <p class="footer__desc">
+                  Nếu như bạn đang có nhu cầu sử dụng dịch vụ thiết kế website
+                  mà vẫn chưa tìm được công ty nào thích hợp thì bạn hoàn toàn
+                  có thể tìm đến với doanh nghiệp chúng tôi.
+                </p>
+              </div>
+            </div>
+            <div class="col-xl-4">
+              <div class="footer__body">
+                <h3 class="footer__title">PRODUCTS</h3>
+                <ul class="footer__list">
+                  <li>
+                    <a
+                      class="footer__link footer--link"
+                      href="https://dachieudz.github.io/robot/"
+                      target="_blank"
+                    >
+                      Website Marketing 1
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="footer__link footer--link"
+                      href="https://dachieudz.github.io/web/"
+                      target="_blank"
+                    >
+                      Website Marketing 2
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="footer__link footer--link"
+                      href="https://dachieudz.github.io/shoptify/"
+                      target="_blank"
+                    >
+                      Website bán hàng 1
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="footer__link footer--link"
+                      href="https://dachieudz.github.io/shop/"
+                      target="_blank"
+                    >
+                      Website bán hàng 2
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-4">
+              <div class="footer__body">
+                <h3 class="footer__title">Contact</h3>
+                <ul class="footer__list">
+                  <li class="footer__item items-center">
+                    <span class="footer__subicon">
+                      <i class="fa-solid fa-house"></i>
+                    </span>
+                    <span class="footer__subtitle">
+                      TT. Diên Khánh, Nha Trang
+                    </span>
+                  </li>
+                  <li class="footer__item items-center">
+                    <span class="footer__subicon">
+                      <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <span class="footer__subtitle">
+                      hieu.td.63cntt@ntu.edu.vn
+                    </span>
+                  </li>
+                  <li class="footer__item items-center">
+                    <span class="footer__subicon">
+                      <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <span class="footer__subtitle"> +0 123 456 789 </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-1.11.0.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-migrate-1.2.1.min.js"
+    ></script>
+    <script type="module" src="/src/js/vendors/slick.min.js"></script>
     <script type="module" src="/src/js/home.js"></script>
   </body>
 </html>

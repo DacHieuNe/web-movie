@@ -1,0 +1,19 @@
+.loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  &--primary {
+    border: 0.4rem solid #fff;
+  }
+  &--default {
+    border-bottom-color: transparent;
+  }
+  &__body {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    animation: 1s infinite spin;
+  }
+}

@@ -28,12 +28,30 @@
   position: relative;
   width: 100%;
 }
+.col-xl-3 {
+  position: relative;
+  width: calc(300% / 12);
+}
+.col-xl-4 {
+  position: relative;
+  width: calc(400% / 12);
+}
+.col-xl-6 {
+  position: relative;
+  width: 50%;
+}
 .f-grow-xl-1 {
   flex-grow: 1;
 }
 .items-center {
   align-items: center;
 }
+.justify-between {
+  justify-content: space-between;
+}
 .justify-end {
   justify-content: flex-end;
+}
+.gap-12 {
+  gap: 1.2rem;
 }

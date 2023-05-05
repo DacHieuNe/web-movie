@@ -20,15 +20,6 @@
     white-space: initial;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    &--1 {
-      background-image: url("https://store.bbcosplay.com/news/kimetsu-no-yaiba-season-3-cong-bo-them-movie1.jpg");
-    }
-    &--2 {
-      background-image: url("https://gamek.mediacdn.vn/133514250583805952/2020/6/5/photo-2-15913722021431126749769.jpg");
-    }
-    &--3 {
-      background-image: url("https://upload.wikimedia.org/wikipedia/vi/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg");
-    }
     &:not(:first-child) {
     }
     &::before {

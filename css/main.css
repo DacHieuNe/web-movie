@@ -41,8 +41,30 @@ ul {
   list-style: none;
 }
 
+body::-webkit-scrollbar {
+  width: 14px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #ececec;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(220, 38, 38);
+  border: 3px solid #ececec;
+  border-radius: 30px;
+}
+
 body {
   font-family: S-Normal, sans-serif;
+}
+
+.heading__primary {
+  margin-block: 1rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 3.75rem;
+  color: rgb(220, 38, 38);
 }
 
 @keyframes rotating {
@@ -53,6 +75,19 @@ body {
     transform: rotate(calc(360deg * var(--direction)));
   }
 }
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .container {
   max-width: 1316px;
   margin: 0 auto;
@@ -96,6 +131,21 @@ body {
   width: 100%;
 }
 
+.col-xl-3 {
+  position: relative;
+  width: 25%;
+}
+
+.col-xl-4 {
+  position: relative;
+  width: 33.3333333333%;
+}
+
+.col-xl-6 {
+  position: relative;
+  width: 50%;
+}
+
 .f-grow-xl-1 {
   flex-grow: 1;
 }
@@ -104,13 +154,36 @@ body {
   align-items: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .justify-end {
   justify-content: flex-end;
+}
+
+.gap-12 {
+  gap: 1.2rem;
 }
 
 .header {
   padding: 1rem;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15);
+  color: #000;
+}
+.header__role {
+  display: inline-block;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  transform: translateY(-2px);
+}
+.header__role--admin {
+  background-color: rgb(220, 38, 38);
+}
+.header__role--mod {
+  background-color: #0d6efd;
 }
 .header__info {
   display: flex;
@@ -137,8 +210,14 @@ body {
   font-size: 1.4rem;
 }
 .header__name {
+  color: inherit;
+  font-size: 1.5rem;
+}
+.header__name--admin {
   color: rgb(220, 38, 38);
-  font-size: 1.6rem;
+}
+.header__name--mod {
+  color: #0d6efd;
 }
 .header__email {
   margin-top: 0.5rem;
@@ -166,6 +245,82 @@ body {
 }
 .header__wrap {
   min-width: 30rem;
+}
+
+.footer {
+  padding-top: 60px;
+}
+.footer__body {
+  padding: 0 12px;
+}
+.footer__header {
+  background-color: #21d191;
+}
+.footer__main {
+  padding: 40px 0;
+  color: #000;
+  background-color: #ecf0f3;
+}
+.footer__social {
+  display: flex;
+  justify-content: end;
+}
+.footer__icon {
+  padding: 20px 12px;
+  color: #fff;
+  font-size: 18px;
+}
+.footer--link {
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.footer--link:hover {
+  color: rgb(220, 38, 38);
+}
+.footer__info {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+}
+.footer__title {
+  position: relative;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.footer__title::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 20%;
+  height: 2px;
+  background-color: rgb(220, 38, 38);
+}
+.footer__desc {
+  font-size: 16px;
+}
+.footer__list {
+  list-style: none;
+}
+.footer__link {
+  padding-block: 4px;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 500;
+}
+.footer__item {
+  display: flex;
+  margin-bottom: 12px;
+}
+.footer__subicon {
+  margin-right: 12px;
+  color: inherit;
+  font-size: 15px;
+}
+.footer__subtitle {
+  font-size: 16px;
 }
 
 .btn {
@@ -217,6 +372,12 @@ body {
   height: 16px;
   transform: translateY(3px);
 }
+.btn__slide--primary {
+  border-radius: 0.5rem;
+  margin-left: 1.6rem;
+  font-family: SVN-Avobold, sans-serif;
+  letter-spacing: 0;
+}
 .btn__form {
   width: 100%;
   padding: 1.5rem 1rem;
@@ -226,6 +387,11 @@ body {
   font-size: 2.2rem;
   font-family: SVN-Avobold, sans-serif;
   letter-spacing: 0.1rem;
+}
+@media (max-width: 35.9375em) {
+  .btn__form {
+    font-size: 1.6rem;
+  }
 }
 
 .input {
@@ -250,12 +416,12 @@ body {
 .link {
   display: inline-block;
   text-decoration: none;
-  color: #000;
+  color: inherit;
   font-size: 1.6rem;
 }
 .link__primary {
   padding: 1rem 1.4rem 1.2rem;
-  border: 0.1rem solid #c6c3c3;
+  border: 0.2rem solid #c6c3c3;
   border-radius: 3rem;
   transition: all 0.2s;
 }
@@ -267,6 +433,11 @@ body {
   font-size: 1.7rem;
   font-weight: 600;
   font-family: SVN-Avobold, sans-serif;
+}
+@media (max-width: 35.9375em) {
+  .link__form {
+    font-size: 1.5rem;
+  }
 }
 
 .slide {
@@ -292,15 +463,6 @@ body {
   white-space: initial;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-}
-.slide__item--1 {
-  background-image: url("https://store.bbcosplay.com/news/kimetsu-no-yaiba-season-3-cong-bo-them-movie1.jpg");
-}
-.slide__item--2 {
-  background-image: url("https://gamek.mediacdn.vn/133514250583805952/2020/6/5/photo-2-15913722021431126749769.jpg");
-}
-.slide__item--3 {
-  background-image: url("https://upload.wikimedia.org/wikipedia/vi/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg");
 }
 .slide__item::before {
   content: "";
@@ -396,6 +558,11 @@ body {
   font-family: SVN-Avobold, sans-serif;
   text-align: center;
 }
+@media (max-width: 61.9375em) {
+  .modal__note {
+    font-size: 1.6rem;
+  }
+}
 .modal__image {
   position: absolute;
   inset: 0;
@@ -419,9 +586,31 @@ body {
   min-width: 767px;
   margin: 0 auto;
 }
+@media (max-width: 61.9375em) {
+  .modal__content {
+    max-width: 540px;
+    min-width: 540px;
+  }
+}
+@media (max-width: 35.9375em) {
+  .modal__content {
+    max-width: 320px;
+    min-width: 320px;
+  }
+}
 .modal__content--primary {
   padding: 4rem;
   background-color: rgba(125, 63, 152, 0.52);
+}
+@media (max-width: 61.9375em) {
+  .modal__content--primary {
+    padding: 2rem;
+  }
+}
+@media (max-width: 35.9375em) {
+  .modal__content--primary {
+    padding: 1rem;
+  }
 }
 .modal__content h1 {
   margin: 0 0 1.6rem;
@@ -431,13 +620,22 @@ body {
   font-family: SVN-Avobold, sans-serif;
   text-align: center;
 }
+@media (max-width: 61.9375em) {
+  .modal__content h1 {
+    font-size: 3rem;
+  }
+}
 .modal__form {
   position: relative;
   z-index: 5;
   max-width: 55rem;
   margin: 0 auto;
 }
+.modal__form .form-wrap {
+  position: relative;
+}
 .modal__form .form-group {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
 }
@@ -457,17 +655,38 @@ body {
   font-size: 1.8rem;
   letter-spacing: 0.1rem;
 }
+@media (max-width: 61.9375em) {
+  .modal__form .form-group .label--primary {
+    font-size: 1.5rem;
+  }
+}
 .modal__form .form-group .label--secondary {
   margin-left: 1rem;
   font-size: 1.5rem;
   transform: translateY(3px);
+}
+@media (max-width: 35.9375em) {
+  .modal__form .form-group .label--secondary {
+    font-size: 1.2rem;
+  }
 }
 .modal__form .form-group .title {
   color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
 }
+@media (max-width: 61.9375em) {
+  .modal__form .form-group .title {
+    padding-bottom: 24px;
+  }
+}
+@media (max-width: 35.9375em) {
+  .modal__form .form-group .title {
+    font-size: 1.3rem;
+  }
+}
 .modal__form .form-group .input-primary {
+  width: 100%;
   padding: 1.5rem 1rem;
   border-radius: 0.5rem;
   border: 0.2rem solid transparent;
@@ -500,6 +719,23 @@ body {
   text-shadow: 0 0 10px #000;
   letter-spacing: 0.6px;
 }
+.modal__form .form-icon {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.modal__form .form-icon--primary {
+  width: 30px;
+  height: 30px;
+}
+@media (max-width: 35.9375em) {
+  .modal__form .form-icon--primary {
+    width: 25px;
+    height: 25px;
+  }
+}
 .modal__logo {
   position: absolute;
   bottom: 10%;
@@ -521,6 +757,14 @@ body {
   }
   100% {
     transform: rotate(-45deg) scale(1);
+  }
+}
+@media (max-width: 35.9375em) {
+  .modal__logo {
+    position: fixed;
+    top: 0;
+    bottom: initial;
+    right: -5%;
   }
 }
 
@@ -547,7 +791,7 @@ body {
   width: 100%;
   height: 100vh;
   margin: 0;
-  background-color: black;
+  background-color: #c6c3c3;
   overflow: hidden;
 }
 .loader-body {
@@ -588,6 +832,147 @@ body {
 .loader-body::after {
   border-top: 0.3em solid gold;
   transform: rotate(240deg);
+}
+
+.loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+}
+.loading--primary {
+  border: 0.4rem solid #fff;
+}
+.loading--default {
+  border-bottom-color: transparent;
+}
+.loading__body {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  animation: 1s infinite spin;
+}
+
+.movie {
+  width: calc(25% - 15px);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.movie:hover .movie__body {
+  background-image: linear-gradient(to bottom, transparent, #81ecec);
+}
+.movie__box {
+  position: relative;
+}
+.movie__image img {
+  width: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.movie__body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1.2rem;
+  background-image: linear-gradient(to bottom, transparent, #000);
+  transition: all 0.1s;
+}
+.movie__name {
+  margin-block: 0.8rem;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+.movie__episode {
+  color: #fff;
+  font-size: 1.3rem;
+}
+.movie__view {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.manga {
+  position: relative;
+  width: calc(16.6666666667% - 12px);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.manga:hover .manga__title {
+  background-image: linear-gradient(to bottom, transparent, rgb(220, 38, 38));
+}
+.manga:hover .manga__chapter {
+  background-color: rgb(220, 38, 38);
+}
+.manga__image {
+  width: 100%;
+}
+.manga__image img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.manga__chapter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 8px 12px 9px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: black;
+  font-size: 14px;
+  transition: all 0.1s;
+}
+.manga__title {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 30px 12px 12px 12px;
+  color: #fff;
+  background-image: linear-gradient(to bottom, transparent, #000);
+  font-size: 16px;
+  transition: all 0.1s;
+}
+
+.today {
+  position: relative;
+  cursor: pointer;
+}
+.today:hover .today__title {
+  background-image: linear-gradient(to bottom, transparent, rgb(220, 38, 38));
+}
+.today__image {
+  width: 100%;
+}
+.today__image img {
+  width: 100%;
+  height: 280px;
+  border-radius: 5px;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.today__title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  line-height: 1.5;
+  padding: 30px 12px 12px 12px;
+  color: #fff;
+  background-image: linear-gradient(to bottom, transparent, #000);
+  font-size: 16px;
+  transition: all 0.1s;
+}
+.today__view {
+  padding-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .banner {

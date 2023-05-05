@@ -45,6 +45,12 @@
       height: 16px;
       transform: translateY(3px);
     }
+    &--primary {
+      border-radius: 0.5rem;
+      margin-left: 1.6rem;
+      font-family: SVN-Avobold, sans-serif;
+      letter-spacing: 0;
+    }
   }
   &__form {
     width: 100%;
@@ -55,5 +61,8 @@
     font-size: 2.2rem;
     font-family: SVN-Avobold, sans-serif;
     letter-spacing: 0.1rem;
+    @include respond(small-phone) {
+      font-size: 1.6rem;
+    }
   }
 }
