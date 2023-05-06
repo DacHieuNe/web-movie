@@ -10,6 +10,7 @@ import {
   handleCloseModal,
   handleMouseEvent,
   paramScroll,
+  handleRemoveDataLocalStorage,
 } from "@/js/utils";
 // import { paramScroll } from "./utils/constant";
 
@@ -77,7 +78,9 @@ import {
       "#btn-header-menu",
       ".modal--secondary"
     );
+    handleRemoveDataLocalStorage(".btn__data");
     handleSignOut(".btn__signout");
+    handleResizeWindow("home");
     handleLoadingPage("loader");
   }
 })();

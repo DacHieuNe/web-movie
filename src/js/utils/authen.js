@@ -109,9 +109,6 @@ export const handleSignOut = (selectorButton) => {
       if (localStorage.getItem("users")) {
         localStorage.removeItem("users");
       }
-      if (localStorage.getItem("datas")) {
-        localStorage.removeItem("datas");
-      }
       await signOut(auth);
     });
   });

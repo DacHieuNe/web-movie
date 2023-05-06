@@ -136,12 +136,16 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         const slideDesc = item.querySelector(".slide__desc");
         if (!slideDesc) return;
 
-        if (slideDesc.clientHeight > 136) {
-          slideDesc.style.maxHeight = "13.6rem";
-          slideDesc.style.overflow = "hidden";
-          slideDesc.title = slideDesc.textContent;
-          slideDesc.textContent = slideDesc.textContent.slice(0, 330);
-          slideDesc.textContent += "...";
+        if (window.innerWidth > 767) {
+          if (slideDesc.textContent.length > 330) {
+            slideDesc.title = slideDesc.textContent;
+            slideDesc.textContent = slideDesc.textContent.slice(0, 330) + "...";
+          }
+        } else {
+          if (slideDesc.textContent.length > 114) {
+            slideDesc.title = slideDesc.textContent;
+            slideDesc.textContent = slideDesc.textContent.slice(0, 114) + "...";
+          }
         }
       });
     }
@@ -149,9 +153,28 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
       domList.forEach((item) => {
         let movieName = item.querySelector(".movie__name");
         if (!movieName) return;
-        if (movieName.textContent.length > 26) {
-          movieName.title = movieName.textContent;
-          movieName.textContent = movieName.textContent.slice(0, 26) + "...";
+        if (window.innerWidth > 575) {
+          if (movieName.textContent.length > 20) {
+            movieName.title = movieName.textContent;
+            movieName.textContent = movieName.textContent.slice(0, 20) + "...";
+          }
+        } else {
+          if (movieName.textContent.length > 50) {
+            movieName.title = movieName.textContent;
+            movieName.textContent = movieName.textContent.slice(0, 50) + "...";
+          }
+        }
+      });
+    }
+    case "story": {
+      domList.forEach((item) => {
+        const storyName = item.querySelector(".manga__title");
+        if (!storyName) return;
+
+        storyName.title = storyName.textContent;
+        if (storyName.textContent.length > 22) {
+          storyName.title = storyName.textContent;
+          storyName.textContent = storyName.textContent.slice(0, 22) + "...";
         }
       });
     }
@@ -160,6 +183,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         const todayTitle = item.querySelector(".today__title");
         if (!todayTitle) return;
 
+        todayTitle.MOD;
         handleInnerHTML(
           item,
           ".today__title",

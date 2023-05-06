@@ -138,7 +138,7 @@ export const handleChangeTheme = (selector) => {
   if (!footerMain) return;
 
   const buttonMenu = document.querySelector(".btn__menu");
-  if(!buttonMenu) return;
+  if (!buttonMenu) return;
 
   element.addEventListener("click", () => {
     if (document.body.dataset.theme == "light") {
@@ -150,7 +150,7 @@ export const handleChangeTheme = (selector) => {
       footerMain.style.color = "#fff";
 
       buttonMenu.style.color = "#fff";
-      
+
       document.body.style.backgroundColor = "#0b0c2a";
       document.body.dataset.theme = "dark";
     } else {
@@ -165,6 +165,16 @@ export const handleChangeTheme = (selector) => {
 
       document.body.style.backgroundColor = "#fff";
       document.body.dataset.theme = "light";
+    }
+  });
+};
+export const handleRemoveDataLocalStorage = (selectorButton) => {
+  const buttonElement = document.querySelector(selectorButton);
+  if (!buttonElement) return;
+
+  buttonElement.addEventListener("click", () => {
+    if (localStorage.getItem("datas")) {
+      localStorage.removeItem("datas");
     }
   });
 };

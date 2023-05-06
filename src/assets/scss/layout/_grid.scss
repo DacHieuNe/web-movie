@@ -71,4 +71,14 @@
   .gap-md-16 {
     gap: 16px;
   }
+  .col-sm-6 {
+    position: relative;
+    width: 50%;
+  }
+}
+@include respond(small-phone) {
+  .col-xs-6 {
+    position: relative;
+    width: 50%;
+  }
 }
