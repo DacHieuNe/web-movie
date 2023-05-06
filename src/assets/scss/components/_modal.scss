@@ -1,9 +1,31 @@
 .modal {
   position: fixed;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  &--primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &--secondary {
+    left: -320px;
+    z-index: 5;
+    visibility: hidden;
+    backdrop-filter: blur(0.4px) brightness(0.7);
+    transition: 1s cubic-bezier(0.825, 0.09, 0.085, 1.01);
+    &.active {
+      left: 0;
+      visibility: visible;
+      .modal__content--secondary {
+        .link__modal {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .btn__reject {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
   &__signup,
   &__signin {
     position: relative;
@@ -39,25 +61,48 @@
   &__content {
     position: relative;
     z-index: 3;
-    max-width: 767px;
-    min-width: 767px;
-    margin: 0 auto;
-    @include respond(tablet) {
-      max-width: 540px;
-      min-width: 540px;
-    }
-    @include respond(small-phone) {
-      max-width: 320px;
-      min-width: 320px;
-    }
     &--primary {
+      max-width: 767px;
+      min-width: 767px;
+      margin: 0 auto;
       padding: 4rem;
       background-color: $color-purple-light;
       @include respond(tablet) {
+        max-width: 540px;
+        min-width: 540px;
         padding: 2rem;
       }
       @include respond(small-phone) {
+        max-width: 320px;
+        min-width: 320px;
         padding: 1rem;
+      }
+    }
+    &--secondary {
+      width: 32rem;
+      height: 100%;
+      padding: 6rem 2rem;
+      background: linear-gradient(
+          to bottom,
+          #323232 0%,
+          #3f3f3f 40%,
+          #1c1c1c 150%
+        ),
+        linear-gradient(
+          to top,
+          rgba(255, 255, 255, 0.4) 0%,
+          rgba(0, 0, 0, 0.25) 200%
+        );
+      background-blend-mode: multiply;
+      h3 {
+        color: #fff;
+        margin-bottom: 3rem;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .link__modal {
+        opacity: 0;
+        transform: translateY(300px);
       }
     }
     h1 {
@@ -201,5 +246,10 @@
       bottom: initial;
       right: -5%;
     }
+  }
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
   }
 }

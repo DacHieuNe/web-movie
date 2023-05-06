@@ -17,6 +17,8 @@
     }
   }
   &__info {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     column-gap: 1rem;
@@ -66,15 +68,32 @@
   }
   &__nav {
     padding-right: 5rem;
+    @include respond(desktop) {
+      padding-right: 3rem;
+    }
   }
   &__item {
     padding-inline: 1rem;
+    @include respond(desktop) {
+      padding-inline: 0.6rem;
+    }
   }
   &__search {
     position: relative;
+    z-index: 2;
     display: flex;
+    @include respond(desktop) {
+      max-width: 210px;
+    }
   }
   &__wrap {
     min-width: 30rem;
+    @include respond(desktop) {
+      min-width: 24em;
+    }
+  }
+  &__logout {
+    position: relative;
+    z-index: 2;
   }
 }

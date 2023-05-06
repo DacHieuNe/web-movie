@@ -1,9 +1,13 @@
 .manga {
   position: relative;
+  z-index: 5;
   width: calc(100% / 6 - 12px);
   border-radius: 5px;
   overflow: hidden;
   cursor: pointer;
+  @include respond(tablet) {
+    width: calc(100% / 3 - 16px);
+  }
   &:hover {
     .manga__title {
       background-image: linear-gradient(to bottom, transparent, $color-primary);

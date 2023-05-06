@@ -3,6 +3,9 @@ import * as path from "path";
 import { resolve } from "path";
 
 export default defineConfig({
+  server: {
+    port: 5175,
+  },
   build: {
     rollupOptions: {
       input: {

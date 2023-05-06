@@ -1,6 +1,9 @@
 .today {
   position: relative;
+  z-index: 5;
+  border-radius: 5px;
   cursor: pointer;
+  overflow: hidden;
   &:hover {
     .today__title {
       background-image: linear-gradient(to bottom, transparent, $color-primary);
@@ -11,7 +14,6 @@
     img {
       width: 100%;
       height: 280px;
-      border-radius: 5px;
       object-fit: cover;
       vertical-align: middle;
     }

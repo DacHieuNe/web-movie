@@ -4,12 +4,30 @@
   color: inherit;
   font-size: $default-font-size;
   &__primary {
+    position: relative;
+    z-index: 2;
     padding: 1rem 1.4rem 1.2rem;
     border: 0.2rem solid $color-secondary-light;
     border-radius: 3rem;
     transition: all 0.2s;
+    @include respond(desktop) {
+      padding-inline: 1.2rem;
+    }
     &:hover {
       color: $color-primary;
+    }
+  }
+  &__modal {
+    color: #fff;
+    font-size: 2rem;
+    padding-block: 1.6rem;
+    transition: color 0.2s cubic-bezier(0.075, 0.82, 0.165, 1),
+      opacity 1s cubic-bezier(0.825, 0.09, 0.085, 1.01),
+      transform 1s cubic-bezier(0.825, 0.09, 0.085, 1.01),
+      padding 0.2s cubic-bezier(0.825, 0.09, 0.085, 1.01);
+    &:hover {
+      color: $color-primary;
+      padding-left: 1.6rem;
     }
   }
   &__form {

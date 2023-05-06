@@ -4,10 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loading...</title>
+    <title>Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="src/assets/images/logo.ico"
+    />
+    <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <h3>error</h3>
-    <script src="src/js/main.js"></script>
+    <div class="video">
+      <video autoplay muted loop>
+        <source src="src/assets/videos/loading.mp4" />
+      </video>
+      <div class="video-content">
+        <h2 class="video-title">Trang web sẽ điều hướng sau vài phút ...</h2>
+        <div class="video-contact">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/DacHieuNe.Hihi1/"
+            class="link link__primary"
+            >Liên hệ Admin</a
+          >
+        </div>
+      </div>
+      <div class="mouse mouse--primary" id="mouse">
+        <img src="src/assets/images/one-piece.png" alt="onepiece" />
+      </div>
+    </div>
+    <script type="module" src="src/js/main.js"></script>
   </body>
 </html>

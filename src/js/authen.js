@@ -3,15 +3,12 @@ import {
   handlePushURL,
   handleRedirectURL,
   handleMouseEvent,
-  handleLoadingPage,
   handleTogglePassword,
   handleAuthen,
 } from "@/js/utils";
 
-(() => {
-  console.log("cc");
-  handleAuthen("index");
-  handleLoadingPage("loader");
+(async () => {
+  await handleAuthen("index");
   handlePushURL("/sign-up");
   handleRedirectURL(
     "modal__signup",

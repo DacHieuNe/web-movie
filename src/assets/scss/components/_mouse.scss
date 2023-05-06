@@ -1,11 +1,19 @@
 .mouse {
-  position: fixed;
+  &--primary {
+    position: absolute;
+  }
+  &--secondary {
+    position: fixed;
+  }
   z-index: 1;
   top: 0;
   left: 0;
   img {
-    width: 60x;
+    width: 60px;
     height: 60px;
     object-fit: contain;
+  }
+  @include respond(tablet) {
+    display: none;
   }
 }
