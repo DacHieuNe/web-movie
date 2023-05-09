@@ -1,0 +1,54 @@
+.live {
+  --text: #000;
+  position: relative;
+  z-index: 5;
+  padding: 0 12px;
+  &__title {
+    margin: 16px 0 8px;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 500;
+    font-family: SVN-Avobold, sans-serif;
+  }
+  &__view {
+    margin-bottom: 12px;
+    color: var(--text);
+    font-size: 14px;
+  }
+  &__emotion {
+    position: relative;
+    z-index: 5;
+    padding: 6px 12px 8px 30px;
+    border-radius: 30px;
+    color: #fff;
+    background-color: var(--text);
+    font-size: 12px;
+    &--primary {
+      --text: #dc2626;
+      margin-right: 12px;
+    }
+    &--secondary {
+      --text: #0f766e;
+    }
+  }
+  &__amount {
+    display: inline-block;
+    padding: 1px 8px 2px;
+    border-radius: 30px;
+    color: var(--text);
+    background-color: $color-gray-regular;
+    font-size: 10px;
+    font-family: SVN-Avobold, sans-serif;
+    transform: translateY(-1px);
+  }
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    animation: 1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite opaSlateScale;
+    transform: translateY(-50%);
+  }
+}

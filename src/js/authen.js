@@ -1,7 +1,7 @@
 import {
   handleSubmitForm,
   handlePushURL,
-  handleRedirectURL,
+  handleRedirectPage,
   handleMouseEvent,
   handleTogglePassword,
   handleAuthen,
@@ -10,7 +10,7 @@ import {
 (async () => {
   await handleAuthen("index");
   handlePushURL("/sign-up");
-  handleRedirectURL(
+  handleRedirectPage(
     "modal__signup",
     "link-signup",
     "modal__signin",

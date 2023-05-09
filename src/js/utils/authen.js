@@ -24,6 +24,13 @@ export const handleAuthen = async (location) => {
         }
       }
     }
+    if (location == "movie-detail") {
+      if (!localData) {
+        window.location.assign("/");
+      } else if (!user) {
+        window.location.assign("/authen.html");
+      }
+    }
     if (location == "home") {
       // nếu vào trang Home mà không có data thì redirect về lai /
       if (!localData) {
@@ -31,35 +38,36 @@ export const handleAuthen = async (location) => {
       } else if (!user) {
         window.location.assign("/authen.html");
       } else if (user) {
-        const searchParams = new URLSearchParams(window.location.search);
-        if (!searchParams.has("id")) {
-          history.pushState(
-            {},
-            "",
-            `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
-          );
-        }
-        let valueId = searchParams.get("id");
-        valueId = valueId.slice(0, valueId.length - 1);
-        if (user.uid != valueId) {
-          history.pushState(
-            {},
-            "",
-            `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
-          );
-          // window.location.assign(
-          //   `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
-          // );
-        }
-        let count = 0;
-        searchParams.forEach((e) => {
-          count++;
-        });
-        if (count > 1) {
-          window.location.assign(
-            `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
-          );
-        }
+        history.pushState({}, "", "/home");
+        // const searchParams = new URLSearchParams(window.location.search);
+        // if (!searchParams.has("id")) {
+        //   history.pushState(
+        //     {},
+        //     "",
+        //     `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
+        //   );
+        // }
+        // let valueId = searchParams.get("id");
+        // valueId = valueId.slice(0, valueId.length - 1);
+        // if (user.uid != valueId) {
+        //   history.pushState(
+        //     {},
+        //     "",
+        //     `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
+        //   );
+        // window.location.assign(
+        //   `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
+        // );
+        // }
+        // let count = 0;
+        // searchParams.forEach((e) => {
+        //   count++;
+        // });
+        // if (count > 1) {
+        //   window.location.assign(
+        //     `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`
+        //   );
+        // }
         // if(searchParams )
         // window.location.assign(
         //   `/home.html?id=${user.uid}${Math.floor(Math.random() * 10 + 0)}`

@@ -40,6 +40,10 @@
   position: relative;
   width: 50%;
 }
+.col-xl-9 {
+  position: relative;
+  width: 75%;
+}
 .f-grow-xl-1 {
   flex-grow: 1;
 }
@@ -51,6 +55,9 @@
 }
 .justify-end {
   justify-content: flex-end;
+}
+.f-col {
+  flex-direction: column;
 }
 .gap-xl-12 {
   gap: 1.2rem;
@@ -71,6 +78,8 @@
   .gap-md-16 {
     gap: 16px;
   }
+}
+@include respond(large-phone) {
   .col-sm-6 {
     position: relative;
     width: 50%;
@@ -80,5 +89,9 @@
   .col-xs-6 {
     position: relative;
     width: 50%;
+  }
+  .col-xs-12 {
+    position: relative;
+    width: 100%;
   }
 }

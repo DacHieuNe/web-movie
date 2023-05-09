@@ -3,6 +3,7 @@ import slideApi from "@/js/api/slideApi";
 import movieNewApi from "@/js/api/movieNewApi";
 import animeApi from "@/js/api/animeApi";
 import todayApi from "@/js/api/todayApi";
+import allApi from "@/js/api/allApi";
 
 export const handleGetAccessToken = async () => {
   try {
@@ -41,10 +42,18 @@ export const handleDataAnime = async (token) => {
   }
   return null;
 };
-
 export const handleDataToday = async (token) => {
   try {
     const data = await todayApi.getAll(token);
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+  return null;
+};
+export const handleDataAll = async (token) => {
+  try {
+    const data = await allApi.getAll(token);
     return data;
   } catch (error) {
     console.log("error", error);

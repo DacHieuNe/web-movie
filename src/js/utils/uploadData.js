@@ -1,6 +1,34 @@
 import { role } from "./constant";
 import { handleInnerHTML } from "./common";
 
+const cloneResultMovie = (selectorTemplate, data) => {
+  const templateElement = document.querySelector(selectorTemplate);
+  if (!templateElement) return;
+
+  const content = templateElement.content;
+
+  const { name, view, image } = data;
+
+  const item = content.querySelector(".result").cloneNode(true);
+
+  const imageElement = item.querySelector(".result__img > img");
+  if (!imageElement) return;
+  imageElement.src = image;
+
+  const viewElement = item.querySelector(".result__info > span");
+  if (!viewElement) return;
+  viewElement.textContent = `${view} lượt xem`;
+
+  const nameElement = item.querySelector(".result__info > h4");
+  if (!nameElement) return;
+  nameElement.textContent = name;
+  if (nameElement.textContent.length > 24) {
+    nameElement.title = nameElement.textContent;
+    nameElement.textContent = nameElement.textContent.slice(0, 24) + "...";
+  }
+
+  return item;
+};
 const cloneDataSlide = (selectorTemplate, data) => {
   const templateElement = document.querySelector(selectorTemplate);
   if (!templateElement) return;
@@ -32,9 +60,10 @@ const cloneDataNewMovie = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { name, images, episode, view } = data;
+  const { id, name, images, episode, view } = data;
 
   const movieGrid = content.querySelector(".movie").cloneNode(true);
+  movieGrid.dataset.id = id;
 
   const movieItem = movieGrid.querySelector(".movie__box");
 
@@ -106,6 +135,12 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
   const wrapElement = document.querySelector(selectorWrap);
   if (!wrapElement) return;
 
+  let caseSpecial = null;
+  let caseNumber = 0;
+  if (type == "today") {
+    caseSpecial = wrapElement.querySelectorAll(".swiper-slide");
+  }
+
   let domList = [];
   list.forEach((item) => {
     let itemList;
@@ -128,7 +163,12 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
       }
     }
     domList.push(itemList);
-    wrapElement.appendChild(itemList);
+    if (type == "today") {
+      caseSpecial[caseNumber].appendChild(itemList);
+      caseNumber++;
+    } else {
+      wrapElement.appendChild(itemList);
+    }
   });
   switch (type) {
     case "slide": {
@@ -141,10 +181,17 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
             slideDesc.title = slideDesc.textContent;
             slideDesc.textContent = slideDesc.textContent.slice(0, 330) + "...";
           }
-        } else {
+        }
+        if (window.innerWidth > 575 && window.innerWidth < 768) {
           if (slideDesc.textContent.length > 114) {
             slideDesc.title = slideDesc.textContent;
             slideDesc.textContent = slideDesc.textContent.slice(0, 114) + "...";
+          }
+        }
+        if (window.innerWidth < 576) {
+          if (slideDesc.textContent.length > 80) {
+            slideDesc.title = slideDesc.textContent;
+            slideDesc.textContent = slideDesc.textContent.slice(0, 80) + "...";
           }
         }
       });
@@ -172,9 +219,16 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         if (!storyName) return;
 
         storyName.title = storyName.textContent;
-        if (storyName.textContent.length > 22) {
-          storyName.title = storyName.textContent;
-          storyName.textContent = storyName.textContent.slice(0, 22) + "...";
+        if (window.innerWidth < 576) {
+          if (storyName.textContent.length > 60) {
+            storyName.title = storyName.textContent;
+            storyName.textContent = storyName.textContent.slice(0, 60) + "...";
+          }
+        } else {
+          if (storyName.textContent.length > 22) {
+            storyName.title = storyName.textContent;
+            storyName.textContent = storyName.textContent.slice(0, 22) + "...";
+          }
         }
       });
     }
@@ -201,6 +255,7 @@ export const handleUploadUserToUI = (
   selectorEmail,
   selectorRole
 ) => {
+  console.log("user", localStorage.getItem("users"));
   const usersValue = JSON.parse(localStorage.getItem("users")) || {
     username: "",
     email: "",
@@ -242,4 +297,150 @@ export const handleUploadUserToUI = (
     return;
   }
   roleElement.classList.add("header--user");
+};
+export const handleUploadSearchMovie = (
+  selectorSearch,
+  selectorInput,
+  selectorResult,
+  selectorNoresult,
+  selectorResultList,
+  list
+) => {
+  const searchElement = document.querySelector(selectorSearch);
+  if (!searchElement) return;
+
+  const inputElement = document.querySelector(selectorInput);
+  if (!inputElement) return;
+
+  searchElement.addEventListener("click", () => {
+    const searchValue = inputElement.value;
+
+    inputElement.value = "";
+    const data = list.filter((item) =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    const resultElement = document.querySelector(selectorResult);
+    if (!resultElement) return;
+    resultElement.classList.remove("active--secondary");
+    resultElement.classList.add("active--primary");
+
+    const resultInformElement = resultElement.querySelector(selectorNoresult);
+    if (!resultInformElement) return;
+    resultInformElement.classList.remove("active");
+    resultInformElement.textContent = "";
+
+    const resultListElement = resultElement.querySelector(selectorResultList);
+    if (!resultListElement) return;
+    resultListElement.textContent = "";
+
+    if (!searchValue) {
+      resultInformElement.classList.add("active");
+      resultInformElement.textContent = "Nhập tên anime để tìm kiếm.";
+      return;
+    }
+
+    if (data.length > 0) {
+      data.forEach((item) => {
+        const itemNew = cloneResultMovie("#result-template", item);
+        resultListElement.appendChild(itemNew);
+      });
+      if (resultElement.offsetHeight > 540) {
+        resultElement.classList.add("active--secondary");
+      }
+    } else {
+      resultInformElement.classList.add("active");
+      resultInformElement.textContent = "Không có kết quả tìm kiếm phù hợp.";
+    }
+  });
+};
+
+export const handleUploadDetailMovie = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  let id = searchParams.get("id") ? searchParams.get("id") : null;
+  let type = searchParams.get("type") ? searchParams.get("type") : null;
+
+  const localData = JSON.parse(localStorage.getItem("datas"));
+  if (!localData) return;
+
+  let dataTemp = null;
+  switch (type) {
+    case "news": {
+      const { news } = localData;
+      dataTemp = news;
+      break;
+    }
+    case "slides": {
+      const { slides } = localData;
+      dataTemp = slides;
+      break;
+    }
+    case "todays": {
+      const { todays } = localData;
+      dataTemp = todays;
+      break;
+    }
+    default:
+      break;
+  }
+  const dataMain = dataTemp.find((item) => item.id == id);
+
+  const {
+    episode,
+    youtubeID,
+    name,
+    view,
+    images,
+    love,
+    follower,
+    description,
+    tag,
+  } = dataMain;
+  const liveElement = document.querySelector(".live");
+  if (!liveElement) return;
+
+  const iframeElement = liveElement.querySelector("iframe");
+  if (!iframeElement) return;
+  iframeElement.src = `https://www.youtube.com/embed/${youtubeID}?rel=0&autoplay=1`;
+
+  const liveTitleElement = liveElement.querySelector(".live__title");
+  if (!liveTitleElement) return;
+  liveTitleElement.textContent = name;
+
+  const liveViewElement = liveElement.querySelector(".live__view");
+  if (!liveViewElement) return;
+  liveViewElement.textContent = `${view} lượt xem`;
+
+  const liveLoveElement = liveElement.querySelector("#live-love");
+  if (!liveLoveElement) return;
+  liveLoveElement.textContent = love;
+
+  const liveFollowerElement = liveElement.querySelector("#live-follower");
+  if (!liveFollowerElement) return;
+  liveFollowerElement.textContent = follower;
+
+  const infoElement = document.querySelector(".info");
+  if (!infoElement) return;
+
+  const infoImageElement = infoElement.querySelector(".info__img img");
+  if (!infoImageElement) return;
+  infoImageElement.src = images;
+
+  const infoDescElement = infoElement.querySelector(".info__desc");
+  if (!infoDescElement) return;
+  infoDescElement.textContent = description;
+
+  const infoTagList = infoElement.querySelectorAll(".info__tag");
+  if (!infoTagList) return;
+  infoTagList.forEach((item, index) => {
+    if (!tag[index]) {
+      item.remove();
+      return;
+    }
+    item.textContent = tag[index] || "";
+  });
+
+  const episodeElement = document.querySelector("#episode");
+  if (!episodeElement) return;
+  episodeElement.textContent = episode;
 };

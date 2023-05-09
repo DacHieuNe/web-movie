@@ -1,0 +1,57 @@
+.playlist {
+  --text: #000;
+  height: 500px;
+  border: 1px solid $color-secondary-light;
+  &__title {
+    position: relative;
+    z-index: 5;
+    display: inline-block;
+    padding-block: 12px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    &.active {
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $color-primary;
+      }
+    }
+    &--primary {
+      margin-right: 8px;
+    }
+    &--secondary {
+      cursor: pointer;
+    }
+  }
+  &__line {
+    padding-inline: 12px;
+    &--primary {
+      border-bottom: 1px solid $color-secondary-light;
+    }
+  }
+  &__wrap {
+    &--primary {
+      width: 74px;
+      padding: 6px;
+      border-radius: 3px;
+      background-color: $color-gray-normal;
+    }
+    &--secondary {
+    }
+  }
+  &__episode {
+    color: var(--text);
+    font-size: 13px;
+  }
+  &__play {
+    width: 16px;
+    height: 16px;
+    color: var(--text);
+    cursor: pointer;
+  }
+}

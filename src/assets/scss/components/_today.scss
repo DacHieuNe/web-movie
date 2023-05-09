@@ -16,6 +16,9 @@
       height: 280px;
       object-fit: cover;
       vertical-align: middle;
+      @include respond(small-phone) {
+        height: 220px;
+      }
     }
   }
   &__title {
@@ -29,10 +32,16 @@
     background-image: linear-gradient(to bottom, transparent, $color-black);
     font-size: 16px;
     transition: all 0.1s;
+    @include respond(small-phone) {
+      font-size: 14px;
+    }
   }
   &__view {
     padding-top: 12px;
     font-size: 13px;
     font-weight: 500;
+    @include respond(small-phone) {
+      font-size: 12px;
+    }
   }
 }

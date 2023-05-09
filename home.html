@@ -9,7 +9,7 @@
       href="./src/assets/images/logo.ico"
     />
     <title>Anime - Manga</title>
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="src/assets/vendors/slick.css"
@@ -18,6 +18,10 @@
       rel="stylesheet"
       type="text/css"
       href="src/assets/vendors/slick-theme.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
     />
     <link
       rel="stylesheet"
@@ -118,11 +122,12 @@
                 </nav>
                 <div class="header__search f-grow-xl-1">
                   <input
+                    id="input-search"
                     type="text"
                     class="input input__primary"
                     placeholder="Search movie ... "
                   />
-                  <button class="btn btn__inside">
+                  <button id="btn-search" class="btn btn__inside">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -138,6 +143,29 @@
                       />
                     </svg>
                   </button>
+                  <div class="header__result">
+                    <h3 class="header__noresult"></h3>
+                    <ul class="header__result-list"></ul>
+                    <button
+                      id="btn-close-search"
+                      class="btn btn__reject btn__reject--secondary"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
                 <div class="header__logout">
                   <button
@@ -328,7 +356,26 @@
           </div>
           <div class="row">
             <div class="col-xl-12">
-              <div class="today__wrap"></div>
+              <div class="swiper today__container" style="z-index: 5">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper today__wrap">
+                  <!-- Slides -->
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -338,12 +385,12 @@
       <section class="footer__header">
         <div class="container">
           <div class="row items-center footer--primary">
-            <div class="col-xl-6">
+            <div class="col-xl-6 col-xs-12">
               <h3 class="footer__info">
                 Liên hệ với chúng tôi thông qua mạng xã hội.
               </h3>
             </div>
-            <div class="col-xl-6">
+            <div class="col-xl-6 col-xs-12">
               <div class="footer__social">
                 <a
                   class="footer__icon footer--link"
@@ -395,7 +442,7 @@
       <section class="footer__main">
         <div class="container">
           <div class="row">
-            <div class="col-xl-4 col-sm-6">
+            <div class="col-xl-4 col-sm-6 col-xs-12">
               <div class="footer__body">
                 <h3 class="footer__title">Đắc Hiếu Company</h3>
                 <p class="footer__desc">
@@ -405,7 +452,7 @@
                 </p>
               </div>
             </div>
-            <div class="col-xl-4 col-sm-6">
+            <div class="col-xl-4 col-sm-6 col-xs-12">
               <div class="footer__body">
                 <h3 class="footer__title">PRODUCTS</h3>
                 <ul class="footer__list">
@@ -448,7 +495,7 @@
                 </ul>
               </div>
             </div>
-            <div class="col-xl-4 col-sm-6">
+            <div class="col-xl-4 col-sm-6 col-xs-12">
               <div class="footer__body">
                 <h3 class="footer__title">Contact</h3>
                 <ul class="footer__list">
@@ -508,7 +555,7 @@
       </div>
     </template>
     <template id="movie-template">
-      <div class="movie">
+      <div class="movie" data-type="news">
         <div class="movie__box">
           <div class="movie__image">
             <img
@@ -543,6 +590,20 @@
         <div class="today__title"></div>
       </div>
     </template>
+    <template id="result-template">
+      <li class="result">
+        <div class="result__img">
+          <img
+            src="https://images.unsplash.com/photo-1682687221006-b7fd60cf9dd0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            alt="image"
+          />
+        </div>
+        <div class="result__info">
+          <h4>ONE PIECE TẬP 1019</h4>
+          <span>6,324,366 lượt xem</span>
+        </div>
+      </li>
+    </template>
     <div class="loader" id="loader">
       <div class="loader-body"><span>Loading...</span></div>
     </div>
@@ -571,7 +632,10 @@
             <a href="" class="link link__modal">BXH</a>
           </li>
         </ul>
-        <button class="btn btn__reject" id="btn-modal-reject">
+        <button
+          class="btn btn__reject btn__reject--primary"
+          id="btn-modal-reject"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -592,12 +656,56 @@
         </button>
       </div>
     </div>
+    <div class="action">
+      <div id="btn-scroll-top" class="action__wrap">
+        <div class="action__top">
+          <svg width="60" height="60">
+            <circle
+              r="25"
+              cx="30"
+              cy="30"
+              fill="none"
+              stroke="#ccc"
+              stroke-width="2"
+            />
+            <circle
+              id="scroll-top"
+              r="25"
+              cx="30"
+              cy="30"
+              fill="none"
+              stroke="#dc2626"
+              stroke-width="2"
+              stroke-dasharray="157"
+              stroke-dashoffset="157"
+            />
+          </svg>
+        </div>
+        <div class="action__top-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75"
+            />
+          </svg>
+        </div>
+        <div class="action__top-effect"></div>
+      </div>
+    </div>
     <div class="wrap">
       <div class="mouse mouse--primary" id="mouse">
         <img src="src/assets/images/one-piece.png" alt="onepiece" />
       </div>
     </div>
-    <script
+    <!-- <script
       type="text/javascript"
       src="//code.jquery.com/jquery-1.11.0.min.js"
     ></script>
@@ -605,7 +713,41 @@
       type="text/javascript"
       src="//code.jquery.com/jquery-migrate-1.2.1.min.js"
     ></script>
-    <script type="module" src="/src/js/vendors/slick.min.js"></script>
+    <script src="/src/js/vendors/slick.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script type="module" src="/src/js/home.js"></script>
+    <!-- <script>
+      $(document).ready(function () {
+        $(".today__wrap").slick({
+          arrows: false,
+          infinite: true,
+          slidesToShow: 6,
+          slidesToScroll: 6,
+          responsive: [
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+              },
+            },
+            {
+              breakpoint: 576,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+              },
+            },
+          ],
+        });
+      });
+    </script> -->
   </body>
 </html>

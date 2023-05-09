@@ -9,10 +9,15 @@ import {
   handleOpenModal,
   handleCloseModal,
   handleMouseEvent,
+  handleUploadSearchMovie,
+  handleCloseResultSearch,
+  handleScrollEffect,
+  handleScrollTop,
+  handleRedirectURLMovie,
+  handlePushURL,
   paramScroll,
   handleRemoveDataLocalStorage,
 } from "@/js/utils";
-// import { paramScroll } from "./utils/constant";
 
 (async () => {
   await handleAuthen("home");
@@ -20,18 +25,47 @@ import {
   const { pathname } = url;
   if (pathname != "/") {
     // handleLoadingPage("loader");
-    handleUploadUserToUI(".header__name", ".header__email", ".header__role");
-
+    setTimeout(() => {
+      handleUploadUserToUI(".header__name", ".header__email", ".header__role");
+    }, 2200);
+    // handleUploadUserToUI(".header__name", ".header__email", ".header__role");
     // fetch data movie slide
 
     const data = localStorage.getItem("datas");
     if (!data) return;
 
+    const swiper = new Swiper(".today__container", {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 12,
+      allowTouchMove: true,
+      grabCursor: true,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        576: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+        },
+        768: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+        },
+        992: {
+          slidesPerView: 6,
+          slidesPerGroup: 6,
+        },
+      },
+    });
     const {
-      slide: dataSlide,
-      new: dataMovieNew,
-      anime: dataAnime,
-      today: dataToday,
+      all: dataAll,
+      slides: dataSlide,
+      news: dataMovieNew,
+      storys: dataAnime,
+      todays: dataToday,
     } = JSON.parse(data);
     handleUploadListToUI(".slide__wrap", dataSlide, "slide");
     handleUploadListToUI(".movie__wrap", dataMovieNew, "new-movie");
@@ -41,32 +75,8 @@ import {
     paramScroll.length = dataSlide.length;
     handleSlideMain();
 
-    $(document).ready(function () {
-      $(".today__wrap").slick({
-        arrows: false,
-        infinite: true,
-        slidesToShow: 6,
-        slidesToScroll: 6,
-        responsive: [
-          {
-            breakpoint: 992,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-            },
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-            },
-          },
-        ],
-      });
-    });
     handleMouseEvent("mouse");
-    handleChangeTheme("#button__theme", "#2c3e50");
+    handleChangeTheme("#button__theme");
     handleOpenModal("#btn-header-menu", ".modal--secondary");
     handleCloseModal(
       "#btn-modal-reject",
@@ -79,8 +89,19 @@ import {
       ".modal--secondary"
     );
     handleRemoveDataLocalStorage(".btn__data");
+    handleScrollEffect("scroll-top");
+    handleScrollTop("#btn-scroll-top");
+    handleUploadSearchMovie(
+      "#btn-search",
+      "#input-search",
+      ".header__result",
+      ".header__noresult",
+      ".header__result-list",
+      dataAll
+    );
+    handleCloseResultSearch("#btn-close-search", ".header__result");
+    handleRedirectURLMovie(".movie__wrap");
     handleSignOut(".btn__signout");
-    handleResizeWindow("home");
     handleLoadingPage("loader");
   }
 })();

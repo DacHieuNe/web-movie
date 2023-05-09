@@ -1,8 +1,8 @@
 import axiosClient from "./axiosClient";
 
-const slideApi = {
-  getAllSlide(token) {
-    const url = "/api/slides";
+const allApi = {
+  getAll(token) {
+    const url = "/api/all";
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -11,4 +11,4 @@ const slideApi = {
   },
 };
 
-export default slideApi;
+export default allApi;

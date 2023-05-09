@@ -4,6 +4,7 @@ import {
   handleGetAccessToken,
   handleDataSlide,
   handleDataNewMovie,
+  handleDataAll,
   handleAuthen,
   handlePushURL,
   handleMouseEvent,
@@ -26,13 +27,16 @@ import {
 
   const dataToday = await handleDataToday(token);
 
+  const dataAll = await handleDataAll(token);
+
   localStorage.setItem(
     "datas",
     JSON.stringify({
-      slide: dataSlide,
-      new: dataMovieNew,
-      anime: dataAnime,
-      today: dataToday,
+      all: dataAll,
+      slides: dataSlide,
+      news: dataMovieNew,
+      storys: dataAnime,
+      todays: dataToday,
     })
   );
   const localUser = localStorage.getItem("users");

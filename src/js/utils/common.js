@@ -1,5 +1,6 @@
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
+import { circumference } from "./constant";
 
 export const handleToggleActive = (selector) => {
   const element = document.querySelector(selector);
@@ -74,7 +75,7 @@ export const showToastError = (message = "Register error !") => {
 export const handlePushURL = (url) => {
   history.pushState({}, "", url);
 };
-export const handleRedirectURL = (
+export const handleRedirectPage = (
   parentFirst,
   childFirst,
   parentSecond,
@@ -140,6 +141,9 @@ export const handleChangeTheme = (selector) => {
   const buttonMenu = document.querySelector(".btn__menu");
   if (!buttonMenu) return;
 
+  const resultElement = document.querySelector(".header__result");
+  if (!resultElement) return;
+
   element.addEventListener("click", () => {
     if (document.body.dataset.theme == "light") {
       header.style.backgroundColor = "#070720";
@@ -150,6 +154,9 @@ export const handleChangeTheme = (selector) => {
       footerMain.style.color = "#fff";
 
       buttonMenu.style.color = "#fff";
+
+      resultElement.style.setProperty("--bg-color", "#000");
+      resultElement.style.setProperty("--color", "#fff");
 
       document.body.style.backgroundColor = "#0b0c2a";
       document.body.dataset.theme = "dark";
@@ -162,6 +169,9 @@ export const handleChangeTheme = (selector) => {
       footerMain.style.color = "#000";
 
       buttonMenu.style.color = "#000";
+
+      resultElement.style.setProperty("--bg-color", "#fff");
+      resultElement.style.setProperty("--color", "#000");
 
       document.body.style.backgroundColor = "#fff";
       document.body.dataset.theme = "light";
@@ -176,5 +186,74 @@ export const handleRemoveDataLocalStorage = (selectorButton) => {
     if (localStorage.getItem("datas")) {
       localStorage.removeItem("datas");
     }
+  });
+};
+
+export const handleScrollEffect = (type) => {
+  window.addEventListener("scroll", () => {
+    if (type == "scroll-top") {
+      let percent = (document.documentElement.scrollTop * 100) / 1694;
+      if (window.innerWidth < 576) {
+        percent = (document.documentElement.scrollTop * 100) / 7017;
+      } else if (window.innerWidth < 768) {
+        percent = (document.documentElement.scrollTop * 100) / 2771;
+      } else if (window.innerWidth < 992) {
+        percent = (document.documentElement.scrollTop * 100) / 2319;
+      }
+
+      const element = document.getElementById(type);
+      if (!element) return;
+
+      const effectElement = document.querySelector(".action__top-effect");
+      if (!effectElement) return;
+
+      element.style.strokeDashoffset =
+        circumference - (percent / 100) * circumference;
+
+      // 152.088
+      effectElement.style.setProperty(
+        "--rotate",
+        360 -
+          ((circumference - (percent / 100) * circumference) * 360) / 157 +
+          "deg"
+      );
+    }
+  });
+};
+
+export const handleScrollTop = (selector) => {
+  const element = document.querySelector(selector);
+  if (!element) return;
+
+  element.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+};
+
+export const handleCloseResultSearch = (selectorClick, selectorResult) => {
+  const clickElement = document.querySelector(selectorClick);
+  if (!clickElement) return;
+
+  const resultElement = document.querySelector(selectorResult);
+  if (!resultElement) return;
+
+  clickElement.addEventListener("click", () => {
+    resultElement.classList.remove("active--primary");
+  });
+};
+
+export const handleRedirectURLMovie = (selector) => {
+  const element = document.querySelector(selector);
+  if (!element) return;
+
+  element.addEventListener("click", (e) => {
+    if (!e.target.matches(".movie")) return;
+
+    window.location.assign(
+      `/detail.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
+    );
   });
 };

@@ -8,6 +8,10 @@
   @include respond(tablet) {
     width: calc(100% / 3 - 16px);
   }
+  @include respond(small-phone) {
+    width: calc(100% - 16px);
+    margin-bottom: 24px;
+  }
   &:hover {
     .manga__title {
       background-image: linear-gradient(to bottom, transparent, $color-primary);
@@ -46,5 +50,8 @@
     background-image: linear-gradient(to bottom, transparent, $color-black);
     font-size: 16px;
     transition: all 0.1s;
+    @include respond(small-phone) {
+      font-size: 18px;
+    }
   }
 }

@@ -3,6 +3,7 @@ import * as path from "path";
 import { resolve } from "path";
 
 export default defineConfig({
+  base: "/",
   server: {
     port: 5175,
   },

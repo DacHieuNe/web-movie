@@ -25,6 +25,9 @@
       color: $color-primary;
       padding-left: 1.6rem;
     }
+    @include respond(small-phone) {
+      font-size: 1.6rem;
+    }
   }
   &__form {
     color: $color-blue-light;

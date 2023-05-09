@@ -31,5 +31,7 @@ export const role = {
 };
 
 export const authenStatus = {
-  status: ""
+  status: "",
 };
+
+export const circumference = 157;
