@@ -255,7 +255,6 @@ export const handleUploadUserToUI = (
   selectorEmail,
   selectorRole
 ) => {
-  console.log("user", localStorage.getItem("users"));
   const usersValue = JSON.parse(localStorage.getItem("users")) || {
     username: "",
     email: "",
@@ -395,6 +394,7 @@ export const handleUploadDetailMovie = () => {
     follower,
     description,
     tag,
+    category,
   } = dataMain;
   const liveElement = document.querySelector(".live");
   if (!liveElement) return;
@@ -443,4 +443,14 @@ export const handleUploadDetailMovie = () => {
   const episodeElement = document.querySelector("#episode");
   if (!episodeElement) return;
   episodeElement.textContent = episode;
+
+  const infoCategoryList = infoElement.querySelectorAll(".info__category");
+  if (!infoCategoryList) return;
+  infoCategoryList.forEach((item, index) => {
+    if (!category[index]) {
+      item.remove();
+      return;
+    }
+    item.textContent = category[index];
+  });
 };

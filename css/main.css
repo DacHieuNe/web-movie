@@ -55,6 +55,11 @@ body::-webkit-scrollbar-thumb {
   border-radius: 30px;
 }
 
+::selection {
+  background-color: #81ecec;
+  color: #fff;
+}
+
 body {
   font-family: S-Normal, sans-serif;
 }
@@ -168,6 +173,11 @@ body {
   width: 75%;
 }
 
+.col-xl-8 {
+  position: relative;
+  width: 66.6666666667%;
+}
+
 .f-grow-xl-1 {
   flex-grow: 1;
 }
@@ -203,6 +213,10 @@ body {
   .col-md-none {
     display: none;
   }
+  .col-md-12 {
+    position: relative;
+    width: 100%;
+  }
   .f-grow-md-1 {
     flex: 1;
   }
@@ -214,6 +228,13 @@ body {
   .col-sm-6 {
     position: relative;
     width: 50%;
+  }
+  .col-sm-none {
+    display: none;
+  }
+  .col-sm-12 {
+    position: relative;
+    width: 100%;
   }
 }
 @media (max-width: 35.9375em) {
@@ -1540,10 +1561,11 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 24px;
-  height: 24px;
-  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
   color: #dc2626;
+  font-size: 18px;
+  transform: translate(-50%, -50%);
 }
 .action__top-effect {
   --rotate: 0deg;
@@ -1569,6 +1591,12 @@ body {
   --text: #000;
   height: 500px;
   border: 1px solid #c6c3c3;
+}
+@media (max-width: 61.9375em) {
+  .playlist {
+    height: auto;
+    margin-top: 20px;
+  }
 }
 .playlist__title {
   position: relative;
@@ -1624,6 +1652,7 @@ body {
   padding: 0 12px;
 }
 .live__title {
+  line-height: 1.5;
   margin: 16px 0 8px;
   color: var(--text);
   font-size: 20px;
@@ -1761,7 +1790,9 @@ body {
   padding-top: 16px;
 }
 .info__tag {
-  padding: 6px 8px 8px;
+  position: relative;
+  z-index: 5;
+  padding: 8px 10px 10px;
   margin: 4px;
   border-radius: 5px;
   color: #000;

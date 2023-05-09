@@ -13,6 +13,7 @@ import {
   handleCloseResultSearch,
   handleScrollEffect,
   handleScrollTop,
+  handleDefaultScroll,
   handleRedirectURLMovie,
   handlePushURL,
   paramScroll,
@@ -76,7 +77,10 @@ import {
     handleSlideMain();
 
     handleMouseEvent("mouse");
-    handleChangeTheme("#button__theme");
+    handleChangeTheme({
+      element: "#button__theme",
+      location: "",
+    });
     handleOpenModal("#btn-header-menu", ".modal--secondary");
     handleCloseModal(
       "#btn-modal-reject",
@@ -89,7 +93,6 @@ import {
       ".modal--secondary"
     );
     handleRemoveDataLocalStorage(".btn__data");
-    handleScrollEffect("scroll-top");
     handleScrollTop("#btn-scroll-top");
     handleUploadSearchMovie(
       "#btn-search",
@@ -101,6 +104,10 @@ import {
     );
     handleCloseResultSearch("#btn-close-search", ".header__result");
     handleRedirectURLMovie(".movie__wrap");
+    handleScrollEffect({
+      element: "#scroll-top",
+      value: handleDefaultScroll(),
+    });
     handleSignOut(".btn__signout");
     handleLoadingPage("loader");
   }

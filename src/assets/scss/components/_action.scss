@@ -18,10 +18,11 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 24px;
-    height: 24px;
-    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
     color: $color-primary;
+    font-size: 18px;
+    transform: translate(-50%, -50%);
   }
   &__top-effect {
     --rotate: 0deg;

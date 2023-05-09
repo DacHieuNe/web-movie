@@ -10,6 +10,14 @@
       type="image/x-icon"
       href="src/assets/images/logo.ico"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body data-theme="light" style="position: relative">
@@ -146,7 +154,7 @@
       <section class="section-live">
         <div class="container">
           <div class="row">
-            <div class="col-xl-9">
+            <div class="col-xl-8 col-md-12">
               <div class="live">
                 <iframe
                   width="100%"
@@ -207,15 +215,19 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3">
+            <div class="col-xl-4 col-md-12">
               <div class="playlist">
                 <div
                   class="playlist__line playlist__line--primary row justify-between"
                 >
-                  <span class="playlist__title playlist__title--secondary"
+                  <span
+                    id="playlist-title-1"
+                    class="playlist__title playlist__title--secondary active"
                     >DANH SÁCH TẬP</span
                   >
-                  <span class="playlist__title playlist__title--secondary"
+                  <span
+                    id="playlist-title-2"
+                    class="playlist__title playlist__title--secondary"
                     >BÌNH LUẬN</span
                   >
                 </div>
@@ -259,22 +271,22 @@
       <section class="section-info">
         <div class="container">
           <div class="row">
-            <div class="col-xl-9">
+            <div class="col-xl-8 col-md-12">
               <div class="info">
                 <div class="row">
-                  <div class="col-xl-3">
+                  <div class="col-xl-3 col-sm-none">
                     <div class="info__img">
                       <img src="" alt="image" />
                     </div>
                   </div>
-                  <div class="col-xl-9">
+                  <div class="col-xl-9 col-sm-12">
                     <div class="info__body">
                       <div class="row items-center">
                         <span class="info__text"> Thể loại: </span>
                         <div class="info__wrap">
-                          <span class="info__category">Hành động</span>
-                          <span class="info__category">Viễn Tưởng</span>
-                          <span class="info__category">Game</span>
+                          <span class="info__category"></span>
+                          <span class="info__category"></span>
+                          <span class="info__category"></span>
                         </div>
                       </div>
                       <p class="info__desc"></p>
@@ -288,6 +300,49 @@
                   <span class="info__tag"></span>
                   <span class="info__tag"></span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="story">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="heading__primary">TRUYỆN TRANH</div>
+            </div>
+          </div>
+          <div class="row gap-xl-12 gap-md-16 manga__wrap"></div>
+        </div>
+      </section>
+      <section class="section-today">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <h3 class="heading__primary">HÔM NAY XEM GÌ</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="swiper today__container" style="z-index: 5">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper today__wrap">
+                  <!-- Slides -->
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                  <div class="swiper-slide"></div>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
               </div>
             </div>
           </div>
@@ -455,6 +510,23 @@
         </div>
       </li>
     </template>
+    <template id="manga-template">
+      <div class="manga">
+        <div class="manga__image">
+          <img src="" alt="thumbnail" />
+        </div>
+        <div class="manga__chapter"></div>
+        <div class="manga__title"></div>
+      </div>
+    </template>
+    <template id="today-template">
+      <div class="today">
+        <div class="today__image">
+          <img src="" alt="thumbnail" />
+        </div>
+        <div class="today__title"></div>
+      </div>
+    </template>
     <div class="modal modal--secondary">
       <div class="modal__overlay"></div>
       <div class="modal__content modal__content--secondary">
@@ -505,7 +577,7 @@
       </div>
     </div>
     <div class="action">
-      <div id="btn-scroll-top" class="action__wrap">
+      <div class="action__wrap">
         <div class="action__top">
           <svg width="60" height="60">
             <circle
@@ -530,20 +602,7 @@
           </svg>
         </div>
         <div class="action__top-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75"
-            />
-          </svg>
+          <i class="fa-solid fa-eye"></i>
         </div>
         <div class="action__top-effect"></div>
       </div>
@@ -556,6 +615,7 @@
     <div class="loader" id="loader">
       <div class="loader-body"><span>Loading...</span></div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script type="module" src="src/js/detail.js"></script>
   </body>
 </html>
