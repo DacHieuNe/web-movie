@@ -8,11 +8,13 @@ import {
   handleAuthen,
   handlePushURL,
   handleMouseEvent,
+  handleConnectNetwork,
 } from "@/js/utils";
 
 (async () => {
   handlePushURL("/");
   handleMouseEvent("mouse");
+  handleConnectNetwork("#alert-success", "#alert-fail");
   await handleAuthen("main");
   const token = await handleGetAccessToken();
 

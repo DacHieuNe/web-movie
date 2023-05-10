@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -129,6 +133,22 @@
         </div>
       </div>
     </section>
+    <div id="alert-fail" class="alert alert--secondary">
+      <i class="fa-solid fa-wifi"></i>
+      <div class="alert__wrap">
+        <h3 class="alert__title">Wifi disconnect!</h3>
+        <p class="alert__desc">Please check your connection</p>
+      </div>
+      <i class="fa-solid fa-x alert-x"></i>
+    </div>
+    <div id="alert-success" class="alert alert--primary">
+      <i class="fa-solid fa-wifi"></i>
+      <div class="alert__wrap">
+        <h3 class="alert__title">Wifi connected!</h3>
+        <p class="alert__desc">Successfully connected!</p>
+      </div>
+      <i class="fa-solid fa-x alert-x"></i>
+    </div>
     <div class="overide"></div>
     <script src="/src/js/authen.js" type="module"></script>
 </body>

@@ -8,8 +8,11 @@ import {
   handleUploadSearchMovie,
   handleCloseResultSearch,
   handleUploadDetailMovie,
+  handleConnectNetwork,
   handleRemoveDataLocalStorage,
+  handleOptionMenu,
   handleToggleActiveAdvance,
+  handleRefreshPage,
   handleUploadListToUI,
   handleUploadUserToUI,
   handleDefaultScroll,
@@ -37,7 +40,6 @@ import {
     ".modal--secondary"
   );
   handleCloseModal(".modal__overlay", "#btn-header-menu", ".modal--secondary");
-  handleScrollTop("#btn-scroll-top");
 
   const {
     all: dataAll,
@@ -87,10 +89,28 @@ import {
   handleRemoveDataLocalStorage(".btn__data");
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleScrollEffect({
-    element: "#scroll-top",
+    element: "#circle",
     value: handleDefaultScroll(),
   });
+  handleOptionMenu({
+    click: "#option-click",
+    top: {
+      selector: "#option-top",
+      class: "active",
+    },
+    home: {
+      selector: "#option-home",
+      class: "active",
+    },
+    effect: {
+      selector: ".menu",
+      class: "active",
+    },
+  });
+  handleScrollTop("#option-top");
+  handleRefreshPage("#option-home");
   handleToggleActiveAdvance("#playlist-title-1", "#playlist-title-2");
   handleSignOut(".btn__signout");
   handleLoadingPage("loader");
+  handleConnectNetwork("#alert-success", "#alert-fail");
 })();

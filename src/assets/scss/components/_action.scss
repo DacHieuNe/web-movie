@@ -3,6 +3,28 @@
   z-index: 1000;
   bottom: 20px;
   right: 20px;
+  &--secondary,
+  &--ternary {
+    z-index: -1000;
+    transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    &.active {
+      z-index: 1000;
+      .action__top-icon {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  &--secondary {
+    &.active {
+      margin-bottom: 100px;
+    }
+  }
+  &--ternary {
+    &.active {
+      margin-right: 100px;
+    }
+  }
   &__wrap {
     position: relative;
     display: flex;
@@ -15,14 +37,42 @@
     }
   }
   &__top-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    color: $color-primary;
     font-size: 18px;
-    transform: translate(-50%, -50%);
+    &--primary {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: $color-primary;
+      transform: translate(-50%, -50%);
+    }
+    &--secondary {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: #fff;
+      background-color: $color-tertiary-light;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    &--ternary {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: #fff;
+      background-color: $color-primary;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      &.active {
+        margin-right: 100px;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   }
   &__top-effect {
     --rotate: 0deg;

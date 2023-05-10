@@ -2,11 +2,11 @@ import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 import { circumference } from "./constant";
 
-export const handleToggleActive = (selector) => {
+export const handleToggleActive = (selector, className = "active") => {
   const element = document.querySelector(selector);
   if (!element) return;
 
-  element.classList.toggle("active");
+  element.classList.toggle(className);
 };
 export const handleToggleActiveAdvance = (selectorFirst, selectorTwo) => {
   const firstElement = document.querySelector(selectorFirst);
@@ -369,4 +369,74 @@ export const handleDefaultScroll = () => {
   const height = document.documentElement.scrollTop;
   window.scrollTo(0, 0);
   return height;
+};
+
+// export const handleHideNode = (selectorClick, selectorHide) => {
+//   const element = document.querySelector(selector);
+//   if (!element) return;
+
+//   element.addEventListener("click", () => {
+//     handleToggleActive(selectorHide);
+//   });
+// };
+export const handleConnectNetwork = (selectorSuccess, selectorFail) => {
+  const successElement = document.querySelector(selectorSuccess);
+  if (!successElement) return;
+
+  const xSuccessElement = successElement.querySelector(".alert-x");
+  if (!xSuccessElement) return;
+
+  const failElement = document.querySelector(selectorFail);
+  if (!failElement) return;
+
+  const xFailElement = failElement.querySelector(".alert-x");
+  if (!xFailElement) return;
+
+  xSuccessElement.addEventListener("click", () => {
+    successElement.classList.remove("active");
+  });
+  xFailElement.addEventListener("click", () => {
+    failElement.classList.remove("active");
+  });
+  window.addEventListener("offline", () => {
+    failElement.classList.add("active");
+    successElement.classList.remove("active");
+    setTimeout(() => {
+      xFailElement.click();
+    }, 4000);
+  });
+  window.addEventListener("online", () => {
+    successElement.classList.add("active");
+    failElement.classList.remove("active");
+    setTimeout(() => {
+      xSuccessElement.click();
+    }, 4000);
+  });
+};
+export const handleOptionMenu = (selector) => {
+  const { click, top, home, effect } = selector;
+  const clickElement = document.querySelector(click);
+  if (!clickElement) return;
+
+  const topElement = document.querySelector(top.selector);
+  if (!topElement) return;
+
+  const homeElement = document.querySelector(home.selector);
+  if (!homeElement) return;
+
+  const effectElement = document.querySelector(effect.selector);
+  if (!effectElement) return;
+  clickElement.addEventListener("click", () => {
+    topElement.classList.toggle(top.class);
+    homeElement.classList.toggle(home.class);
+    effectElement.classList.toggle(effect.class);
+  });
+};
+export const handleRefreshPage = (selectorClick) => {
+  const clickElement = document.querySelector(selectorClick);
+  if (!clickElement) return;
+
+  clickElement.addEventListener("click", () => {
+    window.location.assign("/home.html");
+  });
 };

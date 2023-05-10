@@ -4,6 +4,7 @@ import {
   handleRedirectPage,
   handleMouseEvent,
   handleTogglePassword,
+  handleConnectNetwork,
   handleAuthen,
 } from "@/js/utils";
 
@@ -31,4 +32,5 @@ import {
   handleMouseEvent("mouse");
   handleSubmitForm("modal__form-signup", "signup");
   handleSubmitForm("modal__form-signin", "signin");
+  handleConnectNetwork("#alert-success", "#alert-fail");
 })();

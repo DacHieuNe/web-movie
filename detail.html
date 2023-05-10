@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body data-theme="light" style="position: relative">
+    <div class="loader" id="loader">
+      <div class="loader-body"><span>Loading...</span></div>
+    </div>
     <header class="section-header">
       <section class="header">
         <div class="container">
@@ -576,7 +579,7 @@
         </button>
       </div>
     </div>
-    <div class="action">
+    <div id="option-click" class="action">
       <div class="action__wrap">
         <div class="action__top">
           <svg width="60" height="60">
@@ -589,7 +592,7 @@
               stroke-width="2"
             />
             <circle
-              id="scroll-top"
+              id="circle"
               r="25"
               cx="30"
               cy="30"
@@ -601,19 +604,47 @@
             />
           </svg>
         </div>
-        <div class="action__top-icon">
+        <div class="action__top-icon action__top-icon--primary">
           <i class="fa-solid fa-eye"></i>
         </div>
         <div class="action__top-effect"></div>
       </div>
     </div>
+    <div id="option-top" class="action action--secondary">
+      <div class="action__wrap">
+        <div class="action__top-icon action__top-icon--secondary">
+          <i class="fa-solid fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
+    <div id="option-home" class="action action--ternary">
+      <div class="action__wrap">
+        <div class="action__top-icon action__top-icon--ternary">
+          <i class="fa-solid fa-house"></i>
+        </div>
+      </div>
+    </div>
+    <div class="menu"></div>
     <div class="wrap">
       <div class="mouse mouse--primary" id="mouse">
         <img src="src/assets/images/one-piece.png" alt="onepiece" />
       </div>
     </div>
-    <div class="loader" id="loader">
-      <div class="loader-body"><span>Loading...</span></div>
+    <div id="alert-fail" class="alert alert--secondary">
+      <i class="fa-solid fa-wifi"></i>
+      <div class="alert__wrap">
+        <h3 class="alert__title">Wifi disconnect!</h3>
+        <p class="alert__desc">Please check your connection</p>
+      </div>
+      <i class="fa-solid fa-x alert-x"></i>
+    </div>
+    <div id="alert-success" class="alert alert--primary">
+      <i class="fa-solid fa-wifi"></i>
+      <div class="alert__wrap">
+        <h3 class="alert__title">Wifi connected!</h3>
+        <p class="alert__desc">Successfully connected!</p>
+      </div>
+      <i class="fa-solid fa-x alert-x"></i>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script type="module" src="src/js/detail.js"></script>
