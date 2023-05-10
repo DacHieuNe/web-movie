@@ -1,4 +1,6 @@
 .btn {
+  position: relative;
+  z-index: 5;
   display: inline-block;
   border: none;
   outline: none;

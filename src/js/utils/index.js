@@ -6,3 +6,6 @@ export * from "./uploadData";
 export * from "./form";
 export * from "./authen";
 export * from "./fetchData";
+export * from "./network";
+export * from "./scroll";
+export * from "./comment";

@@ -545,6 +545,8 @@ body {
 }
 
 .btn {
+  position: relative;
+  z-index: 5;
   display: inline-block;
   border: none;
   outline: none;
@@ -708,19 +710,33 @@ body {
 }
 
 .input {
-  width: 100%;
   padding: 1.2rem 1.6rem;
   outline: none;
   color: #000;
   font-size: 1.6rem;
 }
 .input__primary {
+  width: 100%;
   border-radius: 3rem;
   border: 0.1rem solid #c6c3c3;
   transition: all 0.2s;
 }
 .input__primary:focus {
   border: 0.2rem solid #dc2626;
+}
+.input__secondary {
+  position: relative;
+  z-index: 5;
+  border: 0.1rem solid #c6c3c3;
+  font-size: 15px;
+  font-family: SVN-Avobold, sans-serif;
+  transition: all 0.2s;
+}
+.input__secondary:focus {
+  border: 0.2rem solid #dc2626;
+}
+.input__secondary::placeholder {
+  letter-spacing: 1px;
 }
 .input::placeholder {
   color: #c6c3c3;
@@ -1587,30 +1603,20 @@ body {
   color: #dc2626;
   transform: translate(-50%, -50%);
 }
-.action__top-icon--secondary {
-  width: 60px;
-  height: 60px;
+.action__top-icon--secondary, .action__top-icon--ternary {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   color: #fff;
-  background-color: #0d6efd;
   opacity: 0;
   visibility: hidden;
   transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.action__top-icon--secondary {
+  background-color: #0d6efd;
 }
 .action__top-icon--ternary {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  color: #fff;
   background-color: #dc2626;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.action__top-icon--ternary.active {
-  margin-right: 100px;
-  opacity: 1;
-  visibility: visible;
 }
 .action__top-effect {
   --rotate: 0deg;
@@ -1633,9 +1639,23 @@ body {
 }
 
 .playlist {
+  position: relative;
+  z-index: 5;
   --text: #000;
   height: 500px;
   border: 1px solid #c6c3c3;
+  overflow: auto;
+}
+.playlist::-webkit-scrollbar {
+  width: 14px;
+}
+.playlist::-webkit-scrollbar-track {
+  background-color: #ececec;
+}
+.playlist::-webkit-scrollbar-thumb {
+  background-color: #dc2626;
+  border: 3px solid #ececec;
+  border-radius: 30px;
 }
 @media (max-width: 61.9375em) {
   .playlist {
@@ -1673,6 +1693,10 @@ body {
 .playlist__line--primary {
   border-bottom: 1px solid #c6c3c3;
 }
+.playlist__line--secondary {
+  display: none;
+  padding-block: 12px;
+}
 .playlist__wrap--primary {
   width: 74px;
   padding: 6px;
@@ -1688,6 +1712,98 @@ body {
   height: 16px;
   color: var(--text);
   cursor: pointer;
+}
+.playlist__comment {
+  position: relative;
+  z-index: 5;
+  flex-grow: 1;
+  padding: 12px;
+  font-size: 16px;
+  font-family: SVN-Avobold, sans-serif;
+  letter-spacing: 0.5px;
+}
+.playlist__wrap {
+  height: 22px;
+}
+.playlist__list {
+  padding: 0;
+  margin: 12px 0 0;
+  list-style-type: none;
+}
+.playlist__item {
+  margin-bottom: 12px;
+}
+.playlist__trash {
+  position: relative;
+  z-index: 5;
+  padding: 10px;
+  color: #dc2626;
+  font-size: 24px;
+  cursor: pointer;
+}
+.playlist__image {
+  position: relative;
+  z-index: 5;
+}
+.playlist__image img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  vertical-align: middle;
+  object-fit: cover;
+}
+.playlist__subtitle {
+  position: relative;
+  z-index: 5;
+  margin: 0 0 4px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: SVN-Avobold, sans-serif;
+  font-weight: 600;
+}
+.playlist__subtitle--admin {
+  color: #dc2626;
+}
+.playlist__subtitle--mod {
+  color: #0d6efd;
+}
+.playlist__role {
+  position: relative;
+  z-index: 5;
+  display: inline-block;
+  padding: 0.4rem;
+  margin-left: 0.4rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: SVN-Avobold, sans-serif;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+.playlist__role--admin {
+  background-color: #dc2626;
+}
+.playlist__role--mod {
+  background-color: #0d6efd;
+}
+.playlist__desc {
+  position: relative;
+  z-index: 5;
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: SVN-Avobold, sans-serif;
+}
+.playlist__time {
+  position: relative;
+  z-index: 5;
+  color: var(--text);
+  font-size: 12px;
+  font-family: SVN-Avobold, sans-serif;
+  opacity: 0.7;
+}
+.playlist__time span {
+  margin-left: 4px;
 }
 
 .live {
@@ -1809,7 +1925,7 @@ body {
 .info__text {
   position: relative;
   z-index: 5;
-  width: 120px;
+  width: 80px;
   font-size: 16px;
   color: var(--text);
 }
@@ -1821,8 +1937,7 @@ body {
   border-radius: 3px;
   color: #fff;
   background-color: #f87171;
-  font-size: 12px;
-  opacity: 0.9;
+  font-size: 13px;
 }
 .info__desc {
   position: relative;

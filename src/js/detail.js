@@ -11,7 +11,6 @@ import {
   handleConnectNetwork,
   handleRemoveDataLocalStorage,
   handleOptionMenu,
-  handleToggleActiveAdvance,
   handleRefreshPage,
   handleUploadListToUI,
   handleUploadUserToUI,
@@ -20,6 +19,10 @@ import {
   handleCloseModal,
   handlePushURL,
   handleSignOut,
+  handleCommentUser,
+  handleUploadCommentUser,
+  handleRedirectPageV2,
+  // handleRemoveComment,
 } from "@/js/utils";
 
 (async () => {
@@ -84,8 +87,22 @@ import {
     ".header__result-list",
     dataAll
   );
-  handleUploadDetailMovie();
-  handlePushURL("/detail");
+  const searchParams = new URLSearchParams(window.location.search);
+  let id = searchParams.get("id") ? searchParams.get("id") : null;
+  let type = searchParams.get("type") ? searchParams.get("type") : null;
+  handleUploadDetailMovie({
+    id,
+    type,
+  });
+  handleCommentUser(
+    {
+      click: "#btn-comment",
+      input: "#input-comment",
+    },
+    id
+  );
+  handleUploadCommentUser(".playlist__list", id);
+  // handlePushURL("/detail");
   handleRemoveDataLocalStorage(".btn__data");
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleScrollEffect({
@@ -109,7 +126,12 @@ import {
   });
   handleScrollTop("#option-top");
   handleRefreshPage("#option-home");
-  handleToggleActiveAdvance("#playlist-title-1", "#playlist-title-2");
+  handleRedirectPageV2(
+    "#playlist-page-1",
+    "#playlist-title-1",
+    "#playlist-page-2",
+    "#playlist-title-2"
+  );
   handleSignOut(".btn__signout");
   handleLoadingPage("loader");
   handleConnectNetwork("#alert-success", "#alert-fail");

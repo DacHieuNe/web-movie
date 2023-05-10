@@ -235,6 +235,7 @@
                   >
                 </div>
                 <div
+                  id="playlist-page-1"
                   class="playlist__line playlist__line--primary row justify-between"
                 >
                   <span class="playlist__title">Tổng số: 1 video</span>
@@ -243,7 +244,7 @@
                       >Tập</span
                     >
                     <div
-                      class="playlist__wrap playlist__wrap--primary row justify-between items-center"
+                      class="playlist__wrap--primary row justify-between items-center"
                     >
                       <div id="episode" class="playlist__episode"></div>
                       <div class="playlist__play">
@@ -264,6 +265,21 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div
+                  id="playlist-page-2"
+                  class="playlist__line playlist__line--secondary"
+                >
+                  <div class="row">
+                    <input
+                      id="input-comment"
+                      class="input input__secondary f-grow-xl-1"
+                      type="text"
+                      placeholder="Comment here ..."
+                    />
+                    <button id="btn-comment" class="btn btn__slide">Gửi</button>
+                  </div>
+                  <ul class="playlist__list"></ul>
                 </div>
                 <div class="playlist__line"></div>
               </div>
@@ -499,6 +515,27 @@
         </div>
       </section>
     </footer>
+    <template id="comment-template">
+      <li class="row gap-xl-12 items-center playlist__item">
+        <div class="playlist__image">
+          <img src="" alt="image" />
+        </div>
+        <div class="playlist__info f-grow-xl-1">
+          <div class="playlist__wrap">
+            <span class="playlist__subtitle"></span>
+            <span class="playlist__role"></span>
+          </div>
+          <p class="playlist__desc"></p>
+          <div class="row playlist__time">
+            <i class="fa-regular fa-clock"></i>
+            <span></span>
+          </div>
+        </div>
+        <div class="playlist__trash">
+          <i class="fa-regular fa-trash-can"></i>
+        </div>
+      </li>
+    </template>
     <template id="result-template">
       <li class="result">
         <div class="result__img">

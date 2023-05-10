@@ -17,7 +17,7 @@
   &__text {
     position: relative;
     z-index: 5;
-    width: 120px;
+    width: 80px;
     font-size: 16px;
     color: var(--text);
   }
@@ -29,8 +29,7 @@
     border-radius: 3px;
     color: #fff;
     background-color: $color-primary-normal;
-    font-size: 12px;
-    opacity: 0.9;
+    font-size: 13px;
   }
   &__desc {
     position: relative;

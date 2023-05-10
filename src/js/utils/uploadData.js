@@ -261,8 +261,9 @@ export const handleUploadUserToUI = (
     password: "",
   };
 
-  let { username, email, password } = usersValue;
+  let { id, username, email, password } = usersValue;
 
+  document.body.dataset.id = id;
   const nameSplit = username.split(" ");
   username = nameSplit[nameSplit.length - 1];
   const nameElement = document.querySelector(selectorName);
@@ -283,6 +284,7 @@ export const handleUploadUserToUI = (
     roleElement.classList.add("header__role--admin");
     nameElement.classList.add("header__name--admin");
     roleElement.textContent = "Admin";
+    document.body.dataset.role = "Admin";
     return;
   }
   let checkMod = role.MOD.some(
@@ -293,9 +295,11 @@ export const handleUploadUserToUI = (
     roleElement.classList.add("header__role--mod");
     nameElement.classList.add("header__name--mod");
     roleElement.textContent = "Mod";
+    document.body.dataset.role = "Mod";
     return;
   }
   roleElement.classList.add("header--user");
+  document.body.dataset.role = "User";
 };
 export const handleUploadSearchMovie = (
   selectorSearch,
@@ -353,11 +357,8 @@ export const handleUploadSearchMovie = (
   });
 };
 
-export const handleUploadDetailMovie = () => {
-  const searchParams = new URLSearchParams(window.location.search);
-
-  let id = searchParams.get("id") ? searchParams.get("id") : null;
-  let type = searchParams.get("type") ? searchParams.get("type") : null;
+export const handleUploadDetailMovie = (data) => {
+  const { id, type } = data;
 
   const localData = JSON.parse(localStorage.getItem("datas"));
   if (!localData) return;

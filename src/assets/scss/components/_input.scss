@@ -1,15 +1,29 @@
 .input {
-  width: 100%;
   padding: 1.2rem 1.6rem;
   outline: none;
   color: $color-black;
   font-size: $default-font-size;
   &__primary {
+    width: 100%;
     border-radius: 3rem;
     border: 0.1rem solid $color-secondary-light;
     transition: all 0.2s;
     &:focus {
       border: 0.2rem solid $color-primary;
+    }
+  }
+  &__secondary {
+    position: relative;
+    z-index: 5;
+    border: 0.1rem solid $color-secondary-light;
+    font-size: 15px;
+    font-family: SVN-Avobold, sans-serif;
+    transition: all 0.2s;
+    &:focus {
+      border: 0.2rem solid $color-primary;
+    }
+    &::placeholder {
+      letter-spacing: 1px;
     }
   }
   &::placeholder {

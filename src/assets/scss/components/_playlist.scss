@@ -1,7 +1,21 @@
 .playlist {
+  position: relative;
+  z-index: 5;
   --text: #000;
   height: 500px;
   border: 1px solid $color-secondary-light;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 14px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #ececec;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-primary;
+    border: 3px solid #ececec;
+    border-radius: 30px;
+  }
   @include respond(tablet) {
     height: auto;
     margin-top: 20px;
@@ -37,6 +51,10 @@
     &--primary {
       border-bottom: 1px solid $color-secondary-light;
     }
+    &--secondary {
+      display: none;
+      padding-block: 12px;
+    }
   }
   &__wrap {
     &--primary {
@@ -57,5 +75,97 @@
     height: 16px;
     color: var(--text);
     cursor: pointer;
+  }
+  &__comment {
+    position: relative;
+    z-index: 5;
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 16px;
+    font-family: SVN-Avobold, sans-serif;
+    letter-spacing: 0.5px;
+  }
+  &__wrap {
+    height: 22px;
+  }
+  &__list {
+    padding: 0;
+    margin: 12px 0 0;
+    list-style-type: none;
+  }
+  &__item {
+    margin-bottom: 12px;
+  }
+  &__trash {
+    position: relative;
+    z-index: 5;
+    padding: 10px;
+    color: $color-primary;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  &__image {
+    position: relative;
+    z-index: 5;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      vertical-align: middle;
+      object-fit: cover;
+    }
+  }
+  &__subtitle {
+    position: relative;
+    z-index: 5;
+    margin: 0 0 4px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: SVN-Avobold, sans-serif;
+    font-weight: 600;
+    &--admin {
+      color: $color-primary;
+    }
+    &--mod {
+      color: $color-tertiary-light;
+    }
+  }
+  &__role {
+    position: relative;
+    z-index: 5;
+    display: inline-block;
+    padding: 0.4rem;
+    margin-left: 0.4rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.1rem;
+    font-family: SVN-Avobold, sans-serif;
+    font-weight: 600;
+    transform: translateY(-2px);
+    &--admin {
+      background-color: $color-primary;
+    }
+    &--mod {
+      background-color: $color-tertiary-light;
+    }
+  }
+  &__desc {
+    position: relative;
+    z-index: 5;
+    margin: 0 0 8px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: SVN-Avobold, sans-serif;
+  }
+  &__time {
+    position: relative;
+    z-index: 5;
+    color: var(--text);
+    font-size: 12px;
+    font-family: SVN-Avobold, sans-serif;
+    opacity: 0.7;
+    span {
+      margin-left: 4px;
+    }
   }
 }
