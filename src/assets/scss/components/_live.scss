@@ -3,6 +3,38 @@
   position: relative;
   z-index: 5;
   padding: 0 12px;
+  @include respond(tablet) {
+    padding-inline: 0;
+  }
+  iframe {
+    @include respond(large-phone) {
+      height: 400px !important;
+    }
+  }
+  &__grid {
+    @include respond(tablet) {
+      flex-direction: row;
+      justify-content: space-between;
+      .live__emotion {
+        span:nth-child(2) {
+          display: none;
+        }
+      }
+      .live__icon {
+        top: 45%;
+        color: var(--text);
+      }
+      .live__amount {
+        background-color: transparent;
+        font-size: 13px;
+      }
+      .live__emotion--primary,
+      .live__emotion--secondary {
+        --text: #000;
+        background-color: transparent;
+      }
+    }
+  }
   &__title {
     line-height: 1.5;
     margin: 16px 0 8px;
@@ -24,6 +56,7 @@
     color: #fff;
     background-color: var(--text);
     font-size: 12px;
+    cursor: pointer;
     &--primary {
       --text: #dc2626;
       margin-right: 12px;

@@ -105,7 +105,9 @@ import {
       dataAll
     );
     handleCloseResultSearch("#btn-close-search", ".header__result");
-    handleRedirectURLMovie(".movie__wrap");
+    handleRedirectURLMovie(".movie__wrap", "movie");
+    handleRedirectURLMovie(".today__wrap", "today");
+    handleRedirectURLMovie(".slide__wrap", "slide");
     handleScrollEffect({
       element: "#circle",
       value: handleDefaultScroll(),

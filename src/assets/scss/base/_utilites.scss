@@ -8,3 +8,24 @@
 .text-right {
   text-align: right;
 }
+.swal-custom {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  width: 400px !important;
+  height: 360px !important;
+  .swal2-title {
+    padding-top: 0.4rem;
+    font-size: 2.6rem;
+  }
+  .swal2-html-container {
+    font-size: 1.6rem;
+  }
+  .swal2-styled {
+    padding: 1.2rem 1.4rem !important;
+    font-size: 1.6rem !important;
+    // &.swal2-cancel {
+    //   font-size: 1.4rem !important;
+    // }
+  }
+}

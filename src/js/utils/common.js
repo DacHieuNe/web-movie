@@ -225,6 +225,14 @@ export const handleChangeTheme = (type) => {
         const liveElement = document.querySelector(".live");
         if (!liveElement) return;
         liveElement.style.setProperty("--text", "#fff");
+
+        if(window.innerWidth < 992) {
+          const liveEmotionList = document.querySelectorAll(".live__emotion");
+          if(!liveEmotionList) return;
+          liveEmotionList.forEach(emotion => {
+            emotion.style.setProperty("--text", "#fff");
+          })
+        }
       }
     } else {
       header.style.backgroundColor = "#fff";
@@ -253,6 +261,14 @@ export const handleChangeTheme = (type) => {
         const liveElement = document.querySelector(".live");
         if (!liveElement) return;
         liveElement.style.setProperty("--text", "#000");
+      
+        if(window.innerWidth < 992) {
+          const liveEmotionList = document.querySelectorAll(".live__emotion");
+          if(!liveEmotionList) return;
+          liveEmotionList.forEach(emotion => {
+            emotion.style.setProperty("--text", "#000");
+          })
+        }
       }
     }
   });
@@ -279,12 +295,14 @@ export const handleCloseResultSearch = (selectorClick, selectorResult) => {
   });
 };
 
-export const handleRedirectURLMovie = (selector) => {
+export const handleRedirectURLMovie = (selector, type) => {
   const element = document.querySelector(selector);
   if (!element) return;
 
   element.addEventListener("click", (e) => {
-    if (!e.target.matches(".movie")) return;
+    if (type == "movie" && !e.target.matches(".movie")) return;
+    if (type == "today" && !e.target.matches(".today")) return;
+    if (type == "slide" && !e.target.matches(".btn__slide")) return;
 
     window.location.assign(
       `/detail.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`

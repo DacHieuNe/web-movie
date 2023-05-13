@@ -52,5 +52,8 @@
     color: #000;
     background-color: $color-gray-normal;
     font-size: 13px;
+    @include respond(large-phone) {
+      margin: 8px;
+    }
   }
 }

@@ -170,7 +170,7 @@
                 ></iframe>
                 <div class="live__body">
                   <h3 class="live__title"></h3>
-                  <div class="row f-col">
+                  <div class="row f-col live__grid">
                     <span class="live__view"></span>
                     <div class="row">
                       <div class="live__emotion live__emotion--primary">
@@ -190,7 +190,7 @@
                             />
                           </svg>
                         </div>
-                        thích
+                        <span>thích</span>
                         <span id="live-love" class="live__amount"></span>
                       </div>
                       <div class="live__emotion live__emotion--secondary">
@@ -210,7 +210,7 @@
                             />
                           </svg>
                         </div>
-                        theo dõi
+                        <span>theo dõi</span>
                         <span id="live-follower" class="live__amount"></span>
                       </div>
                     </div>
@@ -270,15 +270,37 @@
                   id="playlist-page-2"
                   class="playlist__line playlist__line--secondary"
                 >
-                  <div class="row">
-                    <input
-                      id="input-comment"
-                      class="input input__secondary f-grow-xl-1"
-                      type="text"
-                      placeholder="Comment here ..."
-                    />
-                    <button id="btn-comment" class="btn btn__slide">Gửi</button>
-                  </div>
+                  <form id="form-comment">
+                    <div class="row playlist__pos">
+                      <input
+                        id="input-comment"
+                        class="input input__secondary f-grow-xl-1"
+                        type="text"
+                        placeholder=" "
+                        required
+                      />
+                      <label
+                        class="playlist__text playlist__text--primary"
+                        for="input-comment"
+                      >
+                        Comment here...
+                      </label>
+                      <label
+                        data-empty="Please enter your comment !"
+                        data-valid="Valid comment !"
+                        class="playlist__text playlist__text--secondary"
+                        for="input-comment"
+                      >
+                      </label>
+                      <button
+                        type="submit"
+                        id="btn-comment"
+                        class="btn btn__slide"
+                      >
+                        Gửi
+                      </button>
+                    </div>
+                  </form>
                   <ul class="playlist__list"></ul>
                 </div>
                 <div class="playlist__line"></div>
@@ -530,6 +552,9 @@
             <i class="fa-regular fa-clock"></i>
             <span></span>
           </div>
+        </div>
+        <div class="playlist__top">
+          <i class="fa-regular fa-circle-up"></i>
         </div>
         <div class="playlist__trash">
           <i class="fa-regular fa-trash-can"></i>

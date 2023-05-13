@@ -13,7 +13,7 @@ export const cloneDataComment = (selectorTemplate, data, index) => {
 
   const content = templateElement.content;
 
-  const { id, comment, username, image, createdAt, email, password } = data;
+  let { id, comment, username, image, createdAt, email, password } = data;
 
   const item = content.querySelector(".playlist__item").cloneNode(true);
   item.dataset.id = id;
@@ -24,10 +24,18 @@ export const cloneDataComment = (selectorTemplate, data, index) => {
 
   const nameElement = item.querySelector(".playlist__subtitle");
   if (!nameElement) return;
+  if (username.length > 18) {
+    nameElement.title = username;
+    username = username.slice(0, 18) + "...";
+  }
   nameElement.textContent = username;
 
   const descElement = item.querySelector(".playlist__desc");
   if (!descElement) return;
+  if (comment.length > 30) {
+    descElement.title = comment;
+    comment = comment.slice(0, 30) + "...";
+  }
   descElement.textContent = comment;
 
   const trashElement = item.querySelector(".playlist__trash");
@@ -83,12 +91,15 @@ export const handleUploadCommentUser = (selectorList, postId) => {
         if (item.dataset.role == "Admin") {
           const trashElement = item.querySelector(".playlist__trash");
           trashElement.style.display = "none";
-        } else if (item.dataset.role == "Mod") {
-          if (item.dataset.id != document.body.dataset.id) {
-            const trashElement = item.querySelector(".playlist__trash");
-            trashElement.style.display = "none";
-          }
+        } else if (
+          item.dataset.role == "Mod" &&
+          item.dataset.id != document.body.dataset.id
+        ) {
+          const trashElement = item.querySelector(".playlist__trash");
+          trashElement.style.display = "none";
         }
+        const topElement = item.querySelector(".playlist__top");
+        topElement.style.display = "none";
       });
     } else if (document.body.dataset.role == "User") {
       listItemElement.forEach((item) => {
@@ -101,26 +112,27 @@ export const handleUploadCommentUser = (selectorList, postId) => {
             trashElement.style.display = "none";
           }
         }
+        const topElement = item.querySelector(".playlist__top");
+        topElement.style.display = "none";
       });
     }
     const listTrashElement = listElement.querySelectorAll(".playlist__trash");
     if (!listTrashElement) return;
-
     listTrashElement.forEach((item) => {
       item.addEventListener("click", () => {
         Swal.fire({
           title: "Are you sure?",
           text: "You won't be able to revert this!",
           icon: "warning",
+          customClass: {
+            popup: "swal-custom",
+          },
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
           if (result.isConfirmed) {
-            //   const docRef = doc(db, "posts", postId);
-            //   const docData = await getDoc(docRef);
-            //   const { users } = docData.data();
             let cloneUsers = [...dataUser];
             cloneUsers = cloneUsers.filter(
               (user, ind) => ind != item.dataset.index
@@ -128,7 +140,53 @@ export const handleUploadCommentUser = (selectorList, postId) => {
             await updateDoc(colRef, {
               users: cloneUsers,
             });
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your comment has been deleted.",
+              icon: "success",
+              customClass: {
+                popup: "swal-custom",
+              },
+            });
+            // Swal.fire("Deleted!", "Your comment has been deleted.", "success");
+          }
+        });
+      });
+    });
+
+    const listTopElement = listElement.querySelectorAll(".playlist__top");
+    if (!listTopElement) return;
+    listTopElement.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          customClass: {
+            popup: "swal-custom",
+          },
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, put comments",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            let cloneUsers = [...dataUser];
+            const dataTamp = cloneUsers[index];
+            cloneUsers.splice(index, 1);
+            cloneUsers.unshift(dataTamp);
+
+            await updateDoc(colRef, {
+              users: cloneUsers,
+            });
+            Swal.fire({
+              title: "Success!",
+              text: "Your comment has been putted.",
+              icon: "success",
+              customClass: {
+                popup: "swal-custom",
+              },
+            });
           }
         });
       });
@@ -152,7 +210,8 @@ export const handleCommentUser = async (selector, postId) => {
   const userRef = doc(db, "users", userId);
   const dataUser = await getDoc(userRef);
 
-  clickElement.addEventListener("click", async () => {
+  clickElement.addEventListener("submit", async (e) => {
+    e.preventDefault();
     const value = inputElement.value;
     inputElement.value = "";
 
@@ -165,6 +224,7 @@ export const handleCommentUser = async (selector, postId) => {
 
     const date = new Date();
     setDoc(docRef, {
+      ...postData.data(),
       users: [
         ...data,
         {
@@ -179,7 +239,3 @@ export const handleCommentUser = async (selector, postId) => {
     });
   });
 };
-// export const handleRemoveComment = (selectorList, postId) => {
-//   const listElement = document.querySelectorAll(selectorList);
-//   if (!listElement) return;
-// };

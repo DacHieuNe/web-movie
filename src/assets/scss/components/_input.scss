@@ -19,8 +19,24 @@
     font-size: 15px;
     font-family: SVN-Avobold, sans-serif;
     transition: all 0.2s;
-    &:focus {
+    &:focus + .playlist__text,
+    &:not(:placeholder-shown) + .playlist__text {
+      top: -29%;
+      font-size: 12px;
+    }
+    &:placeholder-shown {
       border: 0.2rem solid $color-primary;
+    }
+    &:valid {
+      border: 0.2rem solid $color-green-light;
+    }
+    &:placeholder-shown ~ .playlist__text--secondary::before {
+      content: attr(data-empty);
+      color: $color-primary;
+    }
+    &:valid ~ .playlist__text--secondary::before {
+      content: attr(data-valid);
+      color: $color-green-light;
     }
     &::placeholder {
       letter-spacing: 1px;

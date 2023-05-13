@@ -113,6 +113,25 @@ body {
   text-align: right;
 }
 
+.swal-custom {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  width: 400px !important;
+  height: 360px !important;
+}
+.swal-custom .swal2-title {
+  padding-top: 0.4rem;
+  font-size: 2.6rem;
+}
+.swal-custom .swal2-html-container {
+  font-size: 1.6rem;
+}
+.swal-custom .swal2-styled {
+  padding: 1.2rem 1.4rem !important;
+  font-size: 1.6rem !important;
+}
+
 .container {
   max-width: 1316px;
   margin: 0 auto;
@@ -732,8 +751,23 @@ body {
   font-family: SVN-Avobold, sans-serif;
   transition: all 0.2s;
 }
-.input__secondary:focus {
+.input__secondary:focus + .playlist__text, .input__secondary:not(:placeholder-shown) + .playlist__text {
+  top: -29%;
+  font-size: 12px;
+}
+.input__secondary:placeholder-shown {
   border: 0.2rem solid #dc2626;
+}
+.input__secondary:valid {
+  border: 0.2rem solid #198754;
+}
+.input__secondary:placeholder-shown ~ .playlist__text--secondary::before {
+  content: attr(data-empty);
+  color: #dc2626;
+}
+.input__secondary:valid ~ .playlist__text--secondary::before {
+  content: attr(data-valid);
+  color: #198754;
 }
 .input__secondary::placeholder {
   letter-spacing: 1px;
@@ -1464,6 +1498,7 @@ body {
 }
 .today__image {
   width: 100%;
+  pointer-events: none;
 }
 .today__image img {
   width: 100%;
@@ -1487,6 +1522,7 @@ body {
   background-image: linear-gradient(to bottom, transparent, #000);
   font-size: 16px;
   transition: all 0.1s;
+  pointer-events: none;
 }
 @media (max-width: 35.9375em) {
   .today__title {
@@ -1659,7 +1695,6 @@ body {
 }
 @media (max-width: 61.9375em) {
   .playlist {
-    height: auto;
     margin-top: 20px;
   }
 }
@@ -1671,6 +1706,7 @@ body {
   color: var(--text);
   font-size: 14px;
   font-weight: 500;
+  font-family: SVN-Avobold, sans-serif;
 }
 .playlist__title.active::before {
   content: "";
@@ -1695,13 +1731,20 @@ body {
 }
 .playlist__line--secondary {
   display: none;
-  padding-block: 12px;
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+.playlist__wrap {
+  height: 22px;
 }
 .playlist__wrap--primary {
   width: 74px;
   padding: 6px;
   border-radius: 3px;
   background-color: #e5e7eb;
+}
+.playlist__pos {
+  position: relative;
 }
 .playlist__episode {
   color: var(--text);
@@ -1722,18 +1765,15 @@ body {
   font-family: SVN-Avobold, sans-serif;
   letter-spacing: 0.5px;
 }
-.playlist__wrap {
-  height: 22px;
-}
 .playlist__list {
   padding: 0;
-  margin: 12px 0 0;
+  margin: 30px 0 0;
   list-style-type: none;
 }
 .playlist__item {
   margin-bottom: 12px;
 }
-.playlist__trash {
+.playlist__trash, .playlist__top {
   position: relative;
   z-index: 5;
   padding: 10px;
@@ -1805,12 +1845,70 @@ body {
 .playlist__time span {
   margin-left: 4px;
 }
+.playlist__text {
+  position: absolute;
+  z-index: 5;
+  font-size: 15px;
+  transform: translateY(-50%);
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.playlist__text--primary {
+  top: 46%;
+  left: 13px;
+  color: #928484;
+  pointer-events: none;
+}
+.playlist__text--secondary {
+  top: calc(100% + 2px);
+  left: 13px;
+  right: 0;
+}
+.playlist__text--secondary::before {
+  content: "Tada";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-family: SVN-Avobold, sans-serif;
+}
 
 .live {
   --text: #000;
   position: relative;
   z-index: 5;
   padding: 0 12px;
+}
+@media (max-width: 61.9375em) {
+  .live {
+    padding-inline: 0;
+  }
+}
+@media (max-width: 47.9375em) {
+  .live iframe {
+    height: 400px !important;
+  }
+}
+@media (max-width: 61.9375em) {
+  .live__grid {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .live__grid .live__emotion span:nth-child(2) {
+    display: none;
+  }
+  .live__grid .live__icon {
+    top: 45%;
+    color: var(--text);
+  }
+  .live__grid .live__amount {
+    background-color: transparent;
+    font-size: 13px;
+  }
+  .live__grid .live__emotion--primary,
+  .live__grid .live__emotion--secondary {
+    --text: #000;
+    background-color: transparent;
+  }
 }
 .live__title {
   line-height: 1.5;
@@ -1833,6 +1931,7 @@ body {
   color: #fff;
   background-color: var(--text);
   font-size: 12px;
+  cursor: pointer;
 }
 .live__emotion--primary {
   --text: #dc2626;
@@ -1958,6 +2057,11 @@ body {
   color: #000;
   background-color: #e5e7eb;
   font-size: 13px;
+}
+@media (max-width: 47.9375em) {
+  .info__tag {
+    margin: 8px;
+  }
 }
 
 .alert {

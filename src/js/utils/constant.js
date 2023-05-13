@@ -27,6 +27,10 @@ export const role = {
       email: "mod@mod.com",
       password: "Mod123",
     },
+    {
+      email: "hieu@mod.com",
+      password: "Hieu123",
+    },
   ],
 };
 

@@ -9,3 +9,4 @@ export * from "./fetchData";
 export * from "./network";
 export * from "./scroll";
 export * from "./comment";
+export * from "./emotion";

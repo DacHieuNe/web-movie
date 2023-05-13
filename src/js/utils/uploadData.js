@@ -35,10 +35,11 @@ const cloneDataSlide = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { category, description, name, images } = data;
+  const { id, category, description, name, images } = data;
 
   const slideItem = content.querySelector(".slide__item").cloneNode(true);
   slideItem.style.backgroundImage = `url(${images})`;
+  slideItem.dataset.id = id;
 
   const slideTag = slideItem.querySelector(".slide__tag");
   if (!slideTag) return;
@@ -51,6 +52,10 @@ const cloneDataSlide = (selectorTemplate, data) => {
   const slideDesc = slideItem.querySelector(".slide__desc");
   if (!slideDesc) return;
   slideDesc.textContent = description;
+
+  const slideButton = slideItem.querySelector(".btn__slide");
+  if (!slideButton) return;
+  slideButton.dataset.id = id;
 
   return slideItem;
 };
@@ -115,9 +120,10 @@ const cloneDataToday = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { images, name, view } = data;
+  const { id, images, name, view } = data;
 
   const todayGrid = content.querySelector(".today").cloneNode(true);
+  todayGrid.dataset.id = id;
 
   todayGrid.dataset.view = view;
   const todayImage = todayGrid.querySelector(".today__image img");
@@ -412,13 +418,13 @@ export const handleUploadDetailMovie = (data) => {
   if (!liveViewElement) return;
   liveViewElement.textContent = `${view} lượt xem`;
 
-  const liveLoveElement = liveElement.querySelector("#live-love");
-  if (!liveLoveElement) return;
-  liveLoveElement.textContent = love;
+  // const liveLoveElement = liveElement.querySelector("#live-love");
+  // if (!liveLoveElement) return;
+  // liveLoveElement.textContent = love;
 
-  const liveFollowerElement = liveElement.querySelector("#live-follower");
-  if (!liveFollowerElement) return;
-  liveFollowerElement.textContent = follower;
+  // const liveFollowerElement = liveElement.querySelector("#live-follower");
+  // if (!liveFollowerElement) return;
+  // liveFollowerElement.textContent = follower;
 
   const infoElement = document.querySelector(".info");
   if (!infoElement) return;

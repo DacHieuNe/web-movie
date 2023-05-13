@@ -8,8 +8,10 @@ import {
   handleUploadSearchMovie,
   handleCloseResultSearch,
   handleUploadDetailMovie,
+  handleEmotionAmount,
   handleConnectNetwork,
   handleRemoveDataLocalStorage,
+  handleClickEmotionAmount,
   handleOptionMenu,
   handleRefreshPage,
   handleUploadListToUI,
@@ -96,12 +98,16 @@ import {
   });
   handleCommentUser(
     {
-      click: "#btn-comment",
+      click: "#form-comment",
       input: "#input-comment",
     },
     id
   );
   handleUploadCommentUser(".playlist__list", id);
+  handleEmotionAmount("#live-love", id, "heart");
+  handleClickEmotionAmount(".live__emotion--primary", id, "heart");
+  handleEmotionAmount("#live-follower", id, "follower");
+  handleClickEmotionAmount(".live__emotion--secondary", id, "follower");
   // handlePushURL("/detail");
   handleRemoveDataLocalStorage(".btn__data");
   handleCloseResultSearch("#btn-close-search", ".header__result");
