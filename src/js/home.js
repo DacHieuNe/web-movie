@@ -31,6 +31,11 @@ import {
     // handleLoadingPage("loader");
     setTimeout(() => {
       handleUploadUserToUI(".header__name", ".header__email", ".header__role");
+      const skeletonList = document.querySelectorAll(".loading-skeleton");
+      if (!skeletonList) return;
+      skeletonList.forEach((item) => {
+        item.classList.add("active");
+      });
     }, 2200);
     // handleUploadUserToUI(".header__name", ".header__email", ".header__role");
     // fetch data movie slide
@@ -80,10 +85,6 @@ import {
     handleSlideMain();
 
     handleMouseEvent("mouse");
-    handleChangeTheme({
-      element: "#button__theme",
-      location: "",
-    });
     handleOpenModal("#btn-header-menu", ".modal--secondary");
     handleCloseModal(
       "#btn-modal-reject",
@@ -96,6 +97,7 @@ import {
       ".modal--secondary"
     );
     handleRemoveDataLocalStorage(".btn__data");
+    handleRemoveDataLocalStorage("#option-data");
     handleUploadSearchMovie(
       "#btn-search",
       "#input-search",
@@ -104,6 +106,10 @@ import {
       ".header__result-list",
       dataAll
     );
+    handleChangeTheme({
+      element: "#button__theme",
+      location: "",
+    });
     handleCloseResultSearch("#btn-close-search", ".header__result");
     handleRedirectURLMovie(".movie__wrap", "movie");
     handleRedirectURLMovie(".today__wrap", "today");
@@ -120,6 +126,10 @@ import {
       },
       home: {
         selector: "#option-home",
+        class: "active",
+      },
+      data: {
+        selector: "#option-data",
         class: "active",
       },
       effect: {

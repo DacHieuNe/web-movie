@@ -26,3 +26,12 @@
     transform: translateY(-50%) scale(1);
   }
 }
+
+@keyframes bg {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: -200%;
+  }
+}

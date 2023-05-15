@@ -9,12 +9,17 @@ import {
   handlePushURL,
   handleMouseEvent,
   handleConnectNetwork,
+  handleRedirectFacebookV1,
 } from "@/js/utils";
 
 (async () => {
   handlePushURL("/");
   handleMouseEvent("mouse");
   handleConnectNetwork("#alert-success", "#alert-fail");
+  handleRedirectFacebookV1(
+    ".link__button",
+    "https://www.facebook.com/DacHieuNe.Hihi1/"
+  );
   await handleAuthen("main");
   const token = await handleGetAccessToken();
 
@@ -42,7 +47,6 @@ import {
     })
   );
   const localUser = localStorage.getItem("users");
-
   if (localUser) {
     window.location.assign(
       `/home.html?id=${JSON.parse(localUser).id}${Math.floor(

@@ -7,8 +7,8 @@
     position: relative;
     z-index: 2;
     padding: 1rem 1.4rem 1.2rem;
-    border: 0.2rem solid $color-secondary-light;
     border-radius: 3rem;
+    box-shadow: -5px -5px 6px 0px #f5f1f1, 5px 5px 6px 0px #aba7a7;
     transition: all 0.2s;
     @include respond(desktop) {
       padding-inline: 1.2rem;
@@ -36,6 +36,27 @@
     font-family: SVN-Avobold, sans-serif;
     @include respond(small-phone) {
       font-size: 1.5rem;
+    }
+  }
+  &__button {
+    // css neumorphism
+    position: relative;
+    z-index: 5;
+    padding: 1.5rem 3rem;
+    border-radius: 30px;
+    border: 1px solid $color-secondary-dark;
+    background-image: repeating-linear-gradient(
+      -35deg,
+      $color-primary 0%,
+      $color-gray-red 20%
+    );
+    box-shadow: 0 7px 0 $color-primary-dark, 0 14px 0 $color-gray-dark,
+      0 4px 0 14px $color-white, 0 0 50px 20px $color-primary;
+    transition: 0.5s;
+    cursor: pointer;
+    &.active {
+      box-shadow: 0 0 0 $color-primary-dark, 0 0 0 $color-gray-dark,
+        0 0 0 14px $color-white, 0 0 50px 50px $color-primary;
     }
   }
 }

@@ -24,6 +24,9 @@
     <div class="loader" id="loader">
       <div class="loader-body"><span>Loading...</span></div>
     </div>
+    <div class="loading-skeleton loading-skeleton--primary"></div>
+    <div class="loading-skeleton loading-skeleton--secondary"></div>
+    <div class="loading-skeleton loading-skeleton--ternary"></div>
     <header class="section-header">
       <section class="header">
         <div class="container">
@@ -234,37 +237,42 @@
                     >BÌNH LUẬN</span
                   >
                 </div>
-                <div
-                  id="playlist-page-1"
-                  class="playlist__line playlist__line--primary row justify-between"
-                >
-                  <span class="playlist__title">Tổng số: 1 video</span>
-                  <div class="playlist__wrap row items-center">
-                    <span class="playlist__title playlist__title--primary"
-                      >Tập</span
+                <div id="playlist-page-1">
+                  <div
+                    class="playlist__line playlist__line--primary row justify-between"
+                  >
+                    <span class="playlist__title"
+                      >Tổng số:
+                      <span class="playlist__total"></span> video</span
                     >
-                    <div
-                      class="playlist__wrap--primary row justify-between items-center"
-                    >
-                      <div id="episode" class="playlist__episode"></div>
-                      <div class="playlist__play">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-                          />
-                        </svg>
+                    <div class="playlist__wrap row items-center">
+                      <span class="playlist__title playlist__title--primary"
+                        >Tập</span
+                      >
+                      <div
+                        class="playlist__wrap--primary row justify-between items-center"
+                      >
+                        <div id="episode" class="playlist__episode"></div>
+                        <div class="playlist__play">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div class="playlist__relate"></div>
                 </div>
                 <div
                   id="playlist-page-2"
@@ -564,14 +572,11 @@
     <template id="result-template">
       <li class="result">
         <div class="result__img">
-          <img
-            src="https://images.unsplash.com/photo-1682687221006-b7fd60cf9dd0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            alt="image"
-          />
+          <img src="" alt="image" />
         </div>
         <div class="result__info">
-          <h4>ONE PIECE TẬP 1019</h4>
-          <span>6,324,366 lượt xem</span>
+          <h4></h4>
+          <span></span>
         </div>
       </li>
     </template>
@@ -676,6 +681,13 @@
       <div class="action__wrap">
         <div class="action__top-icon action__top-icon--secondary">
           <i class="fa-solid fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
+    <div id="option-data" class="action action--fourth">
+      <div class="action__wrap">
+        <div class="action__top-icon action__top-icon--fourth">
+          <i class="fa-solid fa-power-off"></i>
         </div>
       </div>
     </div>

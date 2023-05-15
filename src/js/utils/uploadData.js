@@ -7,13 +7,14 @@ const cloneResultMovie = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { name, view, image } = data;
+  const { id, name, view, images } = data;
 
   const item = content.querySelector(".result").cloneNode(true);
+  item.dataset.id = id;
 
   const imageElement = item.querySelector(".result__img > img");
   if (!imageElement) return;
-  imageElement.src = image;
+  imageElement.src = images;
 
   const viewElement = item.querySelector(".result__info > span");
   if (!viewElement) return;
@@ -43,7 +44,19 @@ const cloneDataSlide = (selectorTemplate, data) => {
 
   const slideTag = slideItem.querySelector(".slide__tag");
   if (!slideTag) return;
-  slideTag.textContent = category;
+
+  const slideTagParent = slideTag.parentElement;
+  if (!slideTagParent) return;
+
+  category.forEach((item, index) => {
+    if (index == 0) {
+      slideTag.textContent = item;
+    } else {
+      const cloneNode = slideTag.cloneNode(true);
+      cloneNode.textContent = item;
+      slideTagParent.insertBefore(cloneNode, slideTagParent.children[index]);
+    }
+  });
 
   const slideHeading = slideItem.querySelector(".slide__heading");
   if (!slideHeading) return;
@@ -363,7 +376,7 @@ export const handleUploadSearchMovie = (
   });
 };
 
-export const handleUploadDetailMovie = (data) => {
+export const handleUploadDetailMovie = (data, dataAll) => {
   const { id, type } = data;
 
   const localData = JSON.parse(localStorage.getItem("datas"));
@@ -371,6 +384,11 @@ export const handleUploadDetailMovie = (data) => {
 
   let dataTemp = null;
   switch (type) {
+    case "all": {
+      const { all } = localData;
+      dataTemp = all;
+      break;
+    }
     case "news": {
       const { news } = localData;
       dataTemp = news;
@@ -397,12 +415,43 @@ export const handleUploadDetailMovie = (data) => {
     name,
     view,
     images,
+    type: dataType,
     love,
     follower,
     description,
     tag,
     category,
   } = dataMain;
+  // handleUploadRelateMovie(id, dataType, dataAll);
+
+  const filterRelateMovie = dataAll.filter(
+    (item) => item.id != id && item.type == dataType
+  );
+  const relateElement = document.querySelector(".playlist__relate");
+  if (!relateElement) return;
+
+  filterRelateMovie.forEach((item) => {
+    const cloneData = cloneResultMovie("#result-template", {
+      id: item.id,
+      name: item.title,
+      view: item.view,
+      images: item.images,
+    });
+    relateElement.appendChild(cloneData);
+  });
+
+  const relateListElement = relateElement.querySelectorAll(".result");
+  if (!relateListElement) return;
+
+  relateListElement.forEach((item) => {
+    item.addEventListener("click", () => {
+      window.location.assign(`/detail.html?type=all&id=${item.dataset.id}`);
+    });
+  });
+  const totalEpisode = document.querySelector(".playlist__total");
+  if (!totalEpisode) return;
+  totalEpisode.textContent = filterRelateMovie.length + 1;
+
   const liveElement = document.querySelector(".live");
   if (!liveElement) return;
 

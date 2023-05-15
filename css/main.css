@@ -100,6 +100,14 @@ body {
     transform: translateY(-50%) scale(1);
   }
 }
+@keyframes bg {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: -200%;
+  }
+}
 .disabled {
   pointer-events: none;
   opacity: 0.6;
@@ -306,6 +314,7 @@ body {
   margin-left: auto;
 }
 .header__security {
+  height: 42px;
   font-family: SVN-Avobold, sans-serif;
 }
 .header__security h3 {
@@ -786,8 +795,8 @@ body {
   position: relative;
   z-index: 2;
   padding: 1rem 1.4rem 1.2rem;
-  border: 0.2rem solid #c6c3c3;
   border-radius: 3rem;
+  box-shadow: -5px -5px 6px 0px #f5f1f1, 5px 5px 6px 0px #aba7a7;
   transition: all 0.2s;
 }
 @media (max-width: 74.9375em) {
@@ -822,6 +831,20 @@ body {
   .link__form {
     font-size: 1.5rem;
   }
+}
+.link__button {
+  position: relative;
+  z-index: 5;
+  padding: 1.5rem 3rem;
+  border-radius: 30px;
+  border: 1px solid #d35400;
+  background-image: repeating-linear-gradient(-35deg, #dc2626 0%, #e74c3c 20%);
+  box-shadow: 0 7px 0 #6b0e0e, 0 14px 0 #95a5a6, 0 4px 0 14px #fff, 0 0 50px 20px #dc2626;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.link__button.active {
+  box-shadow: 0 0 0 #6b0e0e, 0 0 0 #95a5a6, 0 0 0 14px #fff, 0 0 50px 50px #dc2626;
 }
 
 .slide {
@@ -873,7 +896,7 @@ body {
 .slide__tag {
   display: inline-block;
   padding: 0.6rem 0.6rem 0.8rem;
-  margin-bottom: 3rem;
+  margin: 0 0.6rem 3rem 0;
   color: #dc2626;
   background-color: #fff;
   font-size: 1.3rem;
@@ -984,8 +1007,7 @@ body {
   left: -320px;
   z-index: 5;
   visibility: hidden;
-  backdrop-filter: blur(0.4px) brightness(0.7);
-  transition: 1s cubic-bezier(0.825, 0.09, 0.085, 1.01);
+  transition: left 1s cubic-bezier(0.825, 0.09, 0.085, 1.01), visibility 1s cubic-bezier(0.825, 0.09, 0.085, 1.01);
 }
 .modal--secondary.active {
   left: 0;
@@ -1598,16 +1620,19 @@ body {
   bottom: 20px;
   right: 20px;
 }
-.action--secondary, .action--ternary {
+.action--secondary, .action--ternary, .action--fourth {
   z-index: -1000;
   transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.action--secondary.active, .action--ternary.active {
+.action--secondary.active, .action--ternary.active, .action--fourth.active {
   z-index: 1000;
 }
-.action--secondary.active .action__top-icon, .action--ternary.active .action__top-icon {
+.action--secondary.active .action__top-icon, .action--ternary.active .action__top-icon, .action--fourth.active .action__top-icon {
   opacity: 1;
   visibility: visible;
+}
+.action--fourth.active {
+  transform: translate(-62px, -59px);
 }
 .action--secondary.active {
   margin-bottom: 100px;
@@ -1639,19 +1664,24 @@ body {
   color: #dc2626;
   transform: translate(-50%, -50%);
 }
-.action__top-icon--secondary, .action__top-icon--ternary {
+.action__top-icon--secondary, .action__top-icon--ternary, .action__top-icon--fourth {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  color: #fff;
   opacity: 0;
   visibility: hidden;
   transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+.action__top-icon--fourth {
+  color: #000;
+  background-color: #fff;
+}
 .action__top-icon--secondary {
+  color: #fff;
   background-color: #0d6efd;
 }
 .action__top-icon--ternary {
+  color: #fff;
   background-color: #dc2626;
 }
 .action__top-effect {
@@ -1871,6 +1901,9 @@ body {
   width: 100%;
   font-family: SVN-Avobold, sans-serif;
 }
+.playlist__relate {
+  --color: #000;
+}
 
 .live {
   --text: #000;
@@ -2010,6 +2043,7 @@ body {
 .info__img {
   position: relative;
   z-index: 5;
+  min-height: 280px;
   height: 100%;
 }
 .info__img img {
@@ -2118,6 +2152,37 @@ body {
 }
 .menu.active {
   transform: translate(-50%, -50%);
+}
+
+.loading-skeleton {
+  position: absolute;
+  z-index: 5;
+  border-radius: 5px;
+  background-color: #ececec;
+  background-image: linear-gradient(110deg, #e5e5e5 8%, #fcfcfc 18%, #e5e5e5 33%);
+  background-size: 200%;
+  animation: bg 1s linear infinite;
+}
+.loading-skeleton.active {
+  display: none;
+}
+.loading-skeleton--primary {
+  top: 12px;
+  left: 109px;
+  width: 34px;
+  height: 20px;
+}
+.loading-skeleton--secondary {
+  top: 12px;
+  left: 145px;
+  width: 34px;
+  height: 20px;
+}
+.loading-skeleton--ternary {
+  top: 36px;
+  left: 87px;
+  width: 120px;
+  height: 22px;
 }
 
 .banner {

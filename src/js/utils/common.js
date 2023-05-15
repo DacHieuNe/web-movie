@@ -145,7 +145,7 @@ export const handleRedirectPageV2 = (
     if (type == "normal") {
       childFirstElement.classList.add("active");
       childSecondElement.classList.remove("active");
-      parentFirstElement.style.display = "flex";
+      parentFirstElement.style.display = "block";
       parentSecondElement.style.display = "none";
     }
   });
@@ -226,12 +226,22 @@ export const handleChangeTheme = (type) => {
         if (!liveElement) return;
         liveElement.style.setProperty("--text", "#fff");
 
-        if(window.innerWidth < 992) {
+        const relateElement = document.querySelector(".playlist__relate");
+        if (!relateElement) return;
+        relateElement.style.setProperty("--color", "#fff");
+
+        // const relateListElement = relateElement.querySelectorAll(".result");
+        // if (!relateListElement) return;
+        // relateListElement.forEach((item) => {
+        //   item.style.setProperty("--text", "#fff");
+        // });
+
+        if (window.innerWidth < 992) {
           const liveEmotionList = document.querySelectorAll(".live__emotion");
-          if(!liveEmotionList) return;
-          liveEmotionList.forEach(emotion => {
+          if (!liveEmotionList) return;
+          liveEmotionList.forEach((emotion) => {
             emotion.style.setProperty("--text", "#fff");
-          })
+          });
         }
       }
     } else {
@@ -261,13 +271,23 @@ export const handleChangeTheme = (type) => {
         const liveElement = document.querySelector(".live");
         if (!liveElement) return;
         liveElement.style.setProperty("--text", "#000");
-      
-        if(window.innerWidth < 992) {
+
+        const relateElement = document.querySelector(".playlist__relate");
+        if (!relateElement) return;
+        relateElement.style.setProperty("--color", "#000");
+
+        // const relateListElement = relateElement.querySelectorAll(".result");
+        // if (!relateListElement) return;
+        // relateListElement.forEach((item) => {
+        //   item.style.setProperty("--text", "#000");
+        // });
+
+        if (window.innerWidth < 992) {
           const liveEmotionList = document.querySelectorAll(".live__emotion");
-          if(!liveEmotionList) return;
-          liveEmotionList.forEach(emotion => {
+          if (!liveEmotionList) return;
+          liveEmotionList.forEach((emotion) => {
             emotion.style.setProperty("--text", "#000");
-          })
+          });
         }
       }
     }
@@ -319,7 +339,7 @@ export const handleRedirectURLMovie = (selector, type) => {
 //   });
 // };
 export const handleOptionMenu = (selector) => {
-  const { click, top, home, effect } = selector;
+  const { click, top, home, data, effect } = selector;
   const clickElement = document.querySelector(click);
   if (!clickElement) return;
 
@@ -331,9 +351,16 @@ export const handleOptionMenu = (selector) => {
 
   const effectElement = document.querySelector(effect.selector);
   if (!effectElement) return;
+  console.log(0);
+
+  const dataElement = document.querySelector(data.selector);
+  if (!dataElement) return;
+
+  console.log(1);
   clickElement.addEventListener("click", () => {
     topElement.classList.toggle(top.class);
     homeElement.classList.toggle(home.class);
+    dataElement.classList.toggle(data.class);
     effectElement.classList.toggle(effect.class);
   });
 };
@@ -343,5 +370,32 @@ export const handleRefreshPage = (selectorClick) => {
 
   clickElement.addEventListener("click", () => {
     window.location.assign("/home.html");
+  });
+};
+
+const throttleRedirectFacebook = () => {
+  let time = null;
+  // higher other function
+  return (element, link) => {
+    if (time) return;
+    element.classList.add("active");
+    time = setTimeout(() => {
+      // window.open(link, "_blank");
+      element.classList.remove("active");
+    }, 500);
+    setTimeout(() => {
+      time = null;
+      window.open(link, "_blank");
+    }, 1000);
+  };
+};
+export const handleRedirectFacebookV1 = (selector, link) => {
+  const element = document.querySelector(selector);
+  if (!element) return;
+
+  const useThrottle = throttleRedirectFacebook();
+  // throttle
+  element.addEventListener("click", (event) => {
+    useThrottle(event.target, link);
   });
 };

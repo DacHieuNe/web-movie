@@ -1,0 +1,35 @@
+.loading-skeleton {
+  position: absolute;
+  z-index: 5;
+  &.active {
+    display: none;
+  }
+  &--primary {
+    top: 12px;
+    left: 109px;
+    width: 34px;
+    height: 20px;
+  }
+  &--secondary {
+    top: 12px;
+    left: 145px;
+    width: 34px;
+    height: 20px;
+  }
+  &--ternary {
+    top: 36px;
+    left: 87px;
+    width: 120px;
+    height: 22px;
+  }
+  border-radius: 5px;
+  background-color: #ececec;
+  background-image: linear-gradient(
+    110deg,
+    #e5e5e5 8%,
+    #fcfcfc 18%,
+    #e5e5e5 33%
+  );
+  background-size: 200%;
+  animation: bg 1s linear infinite;
+}

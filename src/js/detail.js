@@ -29,7 +29,14 @@ import {
 
 (async () => {
   await handleAuthen("movie-detail");
-  handleUploadUserToUI(".header__name", ".header__email", ".header__role");
+  setTimeout(() => {
+    handleUploadUserToUI(".header__name", ".header__email", ".header__role");
+    const skeletonList = document.querySelectorAll(".loading-skeleton");
+    if (!skeletonList) return;
+    skeletonList.forEach((item) => {
+      item.classList.add("active");
+    });
+  }, 2200);
   const data = localStorage.getItem("datas");
   if (!data) return;
 
@@ -92,10 +99,13 @@ import {
   const searchParams = new URLSearchParams(window.location.search);
   let id = searchParams.get("id") ? searchParams.get("id") : null;
   let type = searchParams.get("type") ? searchParams.get("type") : null;
-  handleUploadDetailMovie({
-    id,
-    type,
-  });
+  handleUploadDetailMovie(
+    {
+      id,
+      type,
+    },
+    dataAll
+  );
   handleCommentUser(
     {
       click: "#form-comment",
@@ -110,6 +120,7 @@ import {
   handleClickEmotionAmount(".live__emotion--secondary", id, "follower");
   // handlePushURL("/detail");
   handleRemoveDataLocalStorage(".btn__data");
+  handleRemoveDataLocalStorage("#option-data");
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleScrollEffect({
     element: "#circle",
@@ -123,6 +134,10 @@ import {
     },
     home: {
       selector: "#option-home",
+      class: "active",
+    },
+    data: {
+      selector: "#option-data",
       class: "active",
     },
     effect: {

@@ -10,11 +10,13 @@
     left: -320px;
     z-index: 5;
     visibility: hidden;
-    backdrop-filter: blur(0.4px) brightness(0.7);
-    transition: 1s cubic-bezier(0.825, 0.09, 0.085, 1.01);
+    // backdrop-filter: brightness(0.7);
+    transition: left 1s cubic-bezier(0.825, 0.09, 0.085, 1.01),
+      visibility 1s cubic-bezier(0.825, 0.09, 0.085, 1.01);
     &.active {
       left: 0;
       visibility: visible;
+
       .modal__content--secondary {
         .link__modal {
           opacity: 1;
