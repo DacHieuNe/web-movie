@@ -29,29 +29,9 @@ import {
 
 (async () => {
   await handleAuthen("movie-detail");
-  setTimeout(() => {
-    handleUploadUserToUI(".header__name", ".header__email", ".header__role");
-    const skeletonList = document.querySelectorAll(".loading-skeleton");
-    if (!skeletonList) return;
-    skeletonList.forEach((item) => {
-      item.classList.add("active");
-    });
-  }, 2200);
+
   const data = localStorage.getItem("datas");
   if (!data) return;
-
-  handleMouseEvent("mouse");
-  handleChangeTheme({
-    element: "#button__theme",
-    location: "detail",
-  });
-  handleOpenModal("#btn-header-menu", ".modal--secondary");
-  handleCloseModal(
-    "#btn-modal-reject",
-    "#btn-header-menu",
-    ".modal--secondary"
-  );
-  handleCloseModal(".modal__overlay", "#btn-header-menu", ".modal--secondary");
 
   const {
     all: dataAll,
@@ -88,17 +68,10 @@ import {
       },
     },
   });
-  handleUploadSearchMovie(
-    "#btn-search",
-    "#input-search",
-    ".header__result",
-    ".header__noresult",
-    ".header__result-list",
-    dataAll
-  );
   const searchParams = new URLSearchParams(window.location.search);
   let id = searchParams.get("id") ? searchParams.get("id") : null;
   let type = searchParams.get("type") ? searchParams.get("type") : null;
+
   handleUploadDetailMovie(
     {
       id,
@@ -119,9 +92,46 @@ import {
   handleEmotionAmount("#live-follower", id, "follower");
   handleClickEmotionAmount(".live__emotion--secondary", id, "follower");
   // handlePushURL("/detail");
+  handleRedirectPageV2(
+    "#playlist-page-1",
+    "#playlist-title-1",
+    "#playlist-page-2",
+    "#playlist-title-2"
+  );
+
+  // Share code between pages
+  setTimeout(() => {
+    handleUploadUserToUI(".header__name", ".header__email", ".header__role");
+
+    const skeletonList = document.querySelectorAll(".loading-skeleton");
+    if (!skeletonList) return;
+    skeletonList.forEach((item) => {
+      item.classList.add("active");
+    });
+  }, 2200);
+  handleOpenModal("#btn-header-menu", ".modal--secondary");
+  handleCloseModal(
+    "#btn-modal-reject",
+    "#btn-header-menu",
+    ".modal--secondary"
+  );
+  handleCloseModal(".modal__overlay", "#btn-header-menu", ".modal--secondary");
+  handleMouseEvent("mouse");
+  handleUploadSearchMovie(
+    "#btn-search",
+    "#input-search",
+    ".header__result",
+    ".header__noresult",
+    ".header__result-list",
+    dataAll
+  );
+  handleCloseResultSearch("#btn-close-search", ".header__result");
   handleRemoveDataLocalStorage(".btn__data");
   handleRemoveDataLocalStorage("#option-data");
-  handleCloseResultSearch("#btn-close-search", ".header__result");
+  handleChangeTheme({
+    element: "#button__theme",
+    location: "",
+  });
   handleScrollEffect({
     element: "#circle",
     value: handleDefaultScroll(),
@@ -147,12 +157,6 @@ import {
   });
   handleScrollTop("#option-top");
   handleRefreshPage("#option-home");
-  handleRedirectPageV2(
-    "#playlist-page-1",
-    "#playlist-title-1",
-    "#playlist-page-2",
-    "#playlist-title-2"
-  );
   handleSignOut(".btn__signout");
   handleLoadingPage("loader");
   handleConnectNetwork("#alert-success", "#alert-fail");

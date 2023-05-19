@@ -14,6 +14,7 @@ export default defineConfig({
         detail: resolve(__dirname, "detail.html"),
         home: resolve(__dirname, "home.html"),
         authen: resolve(__dirname, "authen.html"),
+        story: resolve(__dirname, "story.html"),
       },
     },
   },

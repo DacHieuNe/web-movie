@@ -28,18 +28,6 @@ import {
   const url = new URL(window.location);
   const { pathname } = url;
   if (pathname != "/") {
-    // handleLoadingPage("loader");
-    setTimeout(() => {
-      handleUploadUserToUI(".header__name", ".header__email", ".header__role");
-      const skeletonList = document.querySelectorAll(".loading-skeleton");
-      if (!skeletonList) return;
-      skeletonList.forEach((item) => {
-        item.classList.add("active");
-      });
-    }, 2200);
-    // handleUploadUserToUI(".header__name", ".header__email", ".header__role");
-    // fetch data movie slide
-
     const data = localStorage.getItem("datas");
     if (!data) return;
 
@@ -84,7 +72,20 @@ import {
     paramScroll.length = dataSlide.length;
     handleSlideMain();
 
-    handleMouseEvent("mouse");
+    handleRedirectURLMovie(".movie__wrap", "movie");
+    handleRedirectURLMovie(".today__wrap", "today");
+    handleRedirectURLMovie(".slide__wrap", "slide");
+    handleRedirectURLMovie(".manga__wrap", "story");
+
+    // Share code between pages
+    setTimeout(() => {
+      handleUploadUserToUI(".header__name", ".header__email", ".header__role");
+      const skeletonList = document.querySelectorAll(".loading-skeleton");
+      if (!skeletonList) return;
+      skeletonList.forEach((item) => {
+        item.classList.add("active");
+      });
+    }, 2200);
     handleOpenModal("#btn-header-menu", ".modal--secondary");
     handleCloseModal(
       "#btn-modal-reject",
@@ -96,8 +97,7 @@ import {
       "#btn-header-menu",
       ".modal--secondary"
     );
-    handleRemoveDataLocalStorage(".btn__data");
-    handleRemoveDataLocalStorage("#option-data");
+    handleMouseEvent("mouse");
     handleUploadSearchMovie(
       "#btn-search",
       "#input-search",
@@ -106,14 +106,13 @@ import {
       ".header__result-list",
       dataAll
     );
+    handleCloseResultSearch("#btn-close-search", ".header__result");
+    handleRemoveDataLocalStorage(".btn__data");
+    handleRemoveDataLocalStorage("#option-data");
     handleChangeTheme({
       element: "#button__theme",
       location: "",
     });
-    handleCloseResultSearch("#btn-close-search", ".header__result");
-    handleRedirectURLMovie(".movie__wrap", "movie");
-    handleRedirectURLMovie(".today__wrap", "today");
-    handleRedirectURLMovie(".slide__wrap", "slide");
     handleScrollEffect({
       element: "#circle",
       value: handleDefaultScroll(),

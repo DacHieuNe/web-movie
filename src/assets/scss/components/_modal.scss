@@ -8,7 +8,7 @@
   }
   &--secondary {
     left: -320px;
-    z-index: 5;
+    z-index: 6;
     visibility: hidden;
     // backdrop-filter: brightness(0.7);
     transition: left 1s cubic-bezier(0.825, 0.09, 0.085, 1.01),

@@ -60,7 +60,7 @@
   &__wrap {
     height: 22px;
     &--primary {
-      width: 74px;
+      width: 84px;
       padding: 6px;
       border-radius: 3px;
       background-color: $color-gray-normal;
@@ -78,6 +78,7 @@
   &__play {
     width: 16px;
     height: 16px;
+    padding-top: 1px;
     color: var(--text);
     cursor: pointer;
   }

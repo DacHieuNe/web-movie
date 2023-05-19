@@ -1005,7 +1005,7 @@ body {
 }
 .modal--secondary {
   left: -320px;
-  z-index: 5;
+  z-index: 6;
   visibility: hidden;
   transition: left 1s cubic-bezier(0.825, 0.09, 0.085, 1.01), visibility 1s cubic-bezier(0.825, 0.09, 0.085, 1.01);
 }
@@ -1294,17 +1294,21 @@ body {
 
 .loader {
   position: absolute;
+  min-height: 1500px;
   z-index: 1000;
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
   margin: 0;
   background-color: #000;
   overflow: hidden;
+}
+.loader-wrap {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .loader-body {
   width: 10em;
@@ -1313,7 +1317,6 @@ body {
   box-sizing: border-box;
   border-top: 0.3em solid hotpink;
   border-radius: 50%;
-  position: relative;
   animation: rotating 2s ease-in-out infinite;
   --direction: 1;
 }
@@ -1473,6 +1476,7 @@ body {
 }
 .manga__image {
   width: 100%;
+  pointer-events: none;
 }
 .manga__image img {
   width: 100%;
@@ -1489,6 +1493,7 @@ body {
   color: #fff;
   background-color: black;
   font-size: 14px;
+  pointer-events: none;
   transition: all 0.1s;
 }
 .manga__title {
@@ -1500,6 +1505,7 @@ body {
   color: #fff;
   background-image: linear-gradient(to bottom, transparent, #000);
   font-size: 16px;
+  pointer-events: none;
   transition: all 0.1s;
 }
 @media (max-width: 35.9375em) {
@@ -1768,7 +1774,7 @@ body {
   height: 22px;
 }
 .playlist__wrap--primary {
-  width: 74px;
+  width: 84px;
   padding: 6px;
   border-radius: 3px;
   background-color: #e5e7eb;
@@ -1783,6 +1789,7 @@ body {
 .playlist__play {
   width: 16px;
   height: 16px;
+  padding-top: 1px;
   color: var(--text);
   cursor: pointer;
 }

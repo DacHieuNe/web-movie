@@ -30,12 +30,150 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body data-theme="light" style="position: relative">
+    <!-- Share code between pages -->
     <div class="loader" id="loader">
-      <div class="loader-body"><span>Loading...</span></div>
+      <div class="loader-wrap">
+        <div class="loader-body"><span>Loading...</span></div>
+      </div>
     </div>
     <div class="loading-skeleton loading-skeleton--primary"></div>
     <div class="loading-skeleton loading-skeleton--secondary"></div>
     <div class="loading-skeleton loading-skeleton--ternary"></div>
+    <template id="result-template">
+      <li class="result">
+        <div class="result__img">
+          <img src="" alt="image" />
+        </div>
+        <div class="result__info">
+          <h4></h4>
+          <span></span>
+        </div>
+      </li>
+    </template>
+    <div class="modal modal--secondary">
+      <div class="modal__overlay"></div>
+      <div class="modal__content modal__content--secondary">
+        <div class="modal__data">
+          <h4>
+            Nhấn vào nút bên dưới để lấy dữ liệu mới nhất từ hệ thống , sau khi
+            nhấn xong thì F5:
+          </h4>
+          <button class="btn btn__data">GET DATA</button>
+        </div>
+        <h3>Các danh mục:</h3>
+        <ul class="modal__list">
+          <li class="modal__item">
+            <a href="" class="link link__modal">Anime</a>
+          </li>
+          <li class="modal__item">
+            <a href="" class="link link__modal">Movie</a>
+          </li>
+          <li class="modal__item">
+            <a href="" class="link link__modal">Ưu đãi</a>
+          </li>
+          <li class="modal__item">
+            <a href="" class="link link__modal">BXH</a>
+          </li>
+        </ul>
+        <button
+          class="btn btn__reject btn__reject--primary"
+          id="btn-modal-reject"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <button class="btn btn__slide btn__signout btn__signout--secondary">
+          ĐĂNG XUẤT
+        </button>
+      </div>
+    </div>
+    <div id="option-click" class="action">
+      <div class="action__wrap">
+        <div class="action__top">
+          <svg width="60" height="60">
+            <circle
+              r="25"
+              cx="30"
+              cy="30"
+              fill="none"
+              stroke="#ccc"
+              stroke-width="2"
+            />
+            <circle
+              id="circle"
+              r="25"
+              cx="30"
+              cy="30"
+              fill="none"
+              stroke="#dc2626"
+              stroke-width="2"
+              stroke-dasharray="157"
+              stroke-dashoffset="157"
+            />
+          </svg>
+        </div>
+        <div class="action__top-icon action__top-icon--primary">
+          <i class="fa-solid fa-eye"></i>
+        </div>
+        <div class="action__top-effect"></div>
+      </div>
+    </div>
+    <div id="option-top" class="action action--secondary">
+      <div class="action__wrap">
+        <div class="action__top-icon action__top-icon--secondary">
+          <i class="fa-solid fa-chevron-up"></i>
+        </div>
+      </div>
+    </div>
+    <div id="option-data" class="action action--fourth">
+      <div class="action__wrap">
+        <div class="action__top-icon action__top-icon--fourth">
+          <i class="fa-solid fa-power-off"></i>
+        </div>
+      </div>
+    </div>
+    <div id="option-home" class="action action--ternary">
+      <div class="action__wrap">
+        <div class="action__top-icon action__top-icon--ternary">
+          <i class="fa-solid fa-house"></i>
+        </div>
+      </div>
+    </div>
+    <div class="menu"></div>
+    <div class="wrap">
+      <div class="mouse mouse--primary" id="mouse">
+        <img src="src/assets/images/one-piece.png" alt="onepiece" />
+      </div>
+    </div>
+    <div id="alert-fail" class="alert alert--secondary">
+      <i class="fa-solid fa-wifi"></i>
+      <div class="alert__wrap">
+        <h3 class="alert__title">Wifi disconnect!</h3>
+        <p class="alert__desc">Please check your connection</p>
+      </div>
+      <i class="fa-solid fa-x alert-x"></i>
+    </div>
+    <div id="alert-success" class="alert alert--primary">
+      <i class="fa-solid fa-wifi"></i>
+      <div class="alert__wrap">
+        <h3 class="alert__title">Wifi connected!</h3>
+        <p class="alert__desc">Successfully connected!</p>
+      </div>
+      <i class="fa-solid fa-x alert-x"></i>
+    </div>
+
     <header class="section-header">
       <section class="header">
         <div class="container">
@@ -580,7 +718,7 @@
       </div>
     </template>
     <template id="manga-template">
-      <div class="manga">
+      <div class="manga" data-type="storys">
         <div class="manga__image">
           <img src="" alt="thumbnail" />
         </div>
@@ -596,186 +734,7 @@
         <div class="today__title"></div>
       </div>
     </template>
-    <template id="result-template">
-      <li class="result">
-        <div class="result__img">
-          <img
-            src="https://images.unsplash.com/photo-1682687221006-b7fd60cf9dd0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            alt="image"
-          />
-        </div>
-        <div class="result__info">
-          <h4>ONE PIECE TẬP 1019</h4>
-          <span>6,324,366 lượt xem</span>
-        </div>
-      </li>
-    </template>
-    <div class="modal modal--secondary">
-      <div class="modal__overlay"></div>
-      <div class="modal__content modal__content--secondary">
-        <div class="modal__data">
-          <h4>
-            Nhấn vào nút bên dưới để lấy dữ liệu mới nhất từ hệ thống , sau khi
-            nhấn xong thì F5:
-          </h4>
-          <button class="btn btn__data">GET DATA</button>
-        </div>
-        <h3>Các danh mục:</h3>
-        <ul class="modal__list">
-          <li class="modal__item">
-            <a href="" class="link link__modal">Anime</a>
-          </li>
-          <li class="modal__item">
-            <a href="" class="link link__modal">Movie</a>
-          </li>
-          <li class="modal__item">
-            <a href="" class="link link__modal">Ưu đãi</a>
-          </li>
-          <li class="modal__item">
-            <a href="" class="link link__modal">BXH</a>
-          </li>
-        </ul>
-        <button
-          class="btn btn__reject btn__reject--primary"
-          id="btn-modal-reject"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <button class="btn btn__slide btn__signout btn__signout--secondary">
-          ĐĂNG XUẤT
-        </button>
-      </div>
-    </div>
-    <div id="option-click" class="action">
-      <div class="action__wrap">
-        <div class="action__top">
-          <svg width="60" height="60">
-            <circle
-              r="25"
-              cx="30"
-              cy="30"
-              fill="none"
-              stroke="#ccc"
-              stroke-width="2"
-            />
-            <circle
-              id="circle"
-              r="25"
-              cx="30"
-              cy="30"
-              fill="none"
-              stroke="#dc2626"
-              stroke-width="2"
-              stroke-dasharray="157"
-              stroke-dashoffset="157"
-            />
-          </svg>
-        </div>
-        <div class="action__top-icon action__top-icon--primary">
-          <i class="fa-solid fa-eye"></i>
-        </div>
-        <div class="action__top-effect"></div>
-      </div>
-    </div>
-    <div id="option-top" class="action action--secondary">
-      <div class="action__wrap">
-        <div class="action__top-icon action__top-icon--secondary">
-          <i class="fa-solid fa-chevron-up"></i>
-        </div>
-      </div>
-    </div>
-    <div id="option-data" class="action action--fourth">
-      <div class="action__wrap">
-        <div class="action__top-icon action__top-icon--fourth">
-          <i class="fa-solid fa-power-off"></i>
-        </div>
-      </div>
-    </div>
-    <div id="option-home" class="action action--ternary">
-      <div class="action__wrap">
-        <div class="action__top-icon action__top-icon--ternary">
-          <i class="fa-solid fa-house"></i>
-        </div>
-      </div>
-    </div>
-    <div class="menu"></div>
-    <div class="wrap">
-      <div class="mouse mouse--primary" id="mouse">
-        <img src="src/assets/images/one-piece.png" alt="onepiece" />
-      </div>
-    </div>
-    <div id="alert-fail" class="alert alert--secondary">
-      <i class="fa-solid fa-wifi"></i>
-      <div class="alert__wrap">
-        <h3 class="alert__title">Wifi disconnect!</h3>
-        <p class="alert__desc">Please check your connection</p>
-      </div>
-      <i class="fa-solid fa-x alert-x"></i>
-    </div>
-    <div id="alert-success" class="alert alert--primary">
-      <i class="fa-solid fa-wifi"></i>
-      <div class="alert__wrap">
-        <h3 class="alert__title">Wifi connected!</h3>
-        <p class="alert__desc">Successfully connected!</p>
-      </div>
-      <i class="fa-solid fa-x alert-x"></i>
-    </div>
-    <!-- <script
-      type="text/javascript"
-      src="//code.jquery.com/jquery-1.11.0.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="//code.jquery.com/jquery-migrate-1.2.1.min.js"
-    ></script>
-    <script src="/src/js/vendors/slick.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script type="module" src="/src/js/home.js"></script>
-    <!-- <script>
-      $(document).ready(function () {
-        $(".today__wrap").slick({
-          arrows: false,
-          infinite: true,
-          slidesToShow: 6,
-          slidesToScroll: 6,
-          responsive: [
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-              },
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-              },
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-              },
-            },
-          ],
-        });
-      });
-    </script> -->
   </body>
 </html>

@@ -40,7 +40,6 @@ const cloneDataSlide = (selectorTemplate, data) => {
 
   const slideItem = content.querySelector(".slide__item").cloneNode(true);
   slideItem.style.backgroundImage = `url(${images})`;
-  slideItem.dataset.id = id;
 
   const slideTag = slideItem.querySelector(".slide__tag");
   if (!slideTag) return;
@@ -109,9 +108,10 @@ const cloneDataAnime = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { chap, post, title } = data;
+  const { id, chap, post, title } = data;
 
   const mangaGrid = content.querySelector(".manga").cloneNode(true);
+  mangaGrid.dataset.id = id;
 
   const mangaImage = mangaGrid.querySelector(".manga__image img");
   if (!mangaImage) return;

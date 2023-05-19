@@ -323,6 +323,12 @@ export const handleRedirectURLMovie = (selector, type) => {
     if (type == "movie" && !e.target.matches(".movie")) return;
     if (type == "today" && !e.target.matches(".today")) return;
     if (type == "slide" && !e.target.matches(".btn__slide")) return;
+    if (type == "story" && !e.target.matches(".manga")) return;
+
+    if(type == "story") {
+      window.location.assign(`story.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`);
+      return;
+    }
 
     window.location.assign(
       `/detail.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
@@ -351,12 +357,10 @@ export const handleOptionMenu = (selector) => {
 
   const effectElement = document.querySelector(effect.selector);
   if (!effectElement) return;
-  console.log(0);
 
   const dataElement = document.querySelector(data.selector);
   if (!dataElement) return;
 
-  console.log(1);
   clickElement.addEventListener("click", () => {
     topElement.classList.toggle(top.class);
     homeElement.classList.toggle(home.class);
