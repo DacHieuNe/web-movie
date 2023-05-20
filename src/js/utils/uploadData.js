@@ -416,8 +416,6 @@ export const handleUploadDetailMovie = (data, dataAll) => {
     view,
     images,
     type: dataType,
-    love,
-    follower,
     description,
     tag,
     category,
@@ -508,5 +506,21 @@ export const handleUploadDetailMovie = (data, dataAll) => {
       return;
     }
     item.textContent = category[index];
+  });
+};
+
+export const handleUploadDetailManga = (data) => {
+  const imgTemplate = document.createElement("img");
+  imgTemplate.alt = "image";
+
+  console.log("data", data);
+  const { chap, chapter, description, name, post, status, title, view } = data;
+
+  const chapElement = document.querySelector(".chap");
+  if (!chapElement) return;
+  chapter.forEach((item) => {
+    const imgElement = imgTemplate.cloneNode(true);
+    imgElement.src = item;
+    chapElement.appendChild(imgElement);
   });
 };

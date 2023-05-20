@@ -1,0 +1,121 @@
+.story-detail {
+  &__space {
+    margin-top: 20px;
+  }
+  &__subtitle {
+    position: relative;
+    z-index: 6;
+    line-height: 21px;
+    font-size: 16px;
+    color: $color-black;
+  }
+  &__heading {
+    position: relative;
+    z-index: 6;
+    & > span:first-child {
+      font-size: 18px;
+      transform: translateY(-1px);
+    }
+  }
+  &__line {
+    position: relative;
+    z-index: 6;
+    line-height: 21px;
+    font-size: 16px;
+    margin-inline: 8px;
+    transform: translateY(-1px);
+  }
+  &__tag {
+    position: relative;
+    z-index: 6;
+    width: 80%;
+    line-height: 24px;
+    margin-block: 12px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &__image {
+    position: relative;
+    z-index: 6;
+    padding-right: 10px;
+    img {
+      width: 100%;
+      height: 320px;
+      border-radius: 12px;
+      vertical-align: middle;
+    }
+  }
+  &__subdesc {
+    position: relative;
+    z-index: 6;
+    & > span:first-child {
+      width: 100px;
+    }
+    & > span {
+      line-height: 21px;
+      color: #000;
+      font-size: 14px;
+      font-family: SVN-Avobold, sans-serif;
+    }
+    &--primary {
+      margin-bottom: 8px;
+    }
+    &--secondary {
+      margin-bottom: 16px;
+    }
+  }
+  &__title {
+    position: relative;
+    z-index: 6;
+    line-height: 30px;
+    color: #000;
+    font-size: 20px;
+  }
+  &__btn {
+    --bg: #000;
+    position: relative;
+    line-height: 27px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+    border-radius: 30px;
+    background-color: var(--bg);
+    color: #fff;
+    font-size: 14px;
+    &--primary {
+      --bg: rgba(125, 63, 152, 0.52);
+    }
+    &--secondary {
+      --bg: #198754;
+    }
+    &--ternary {
+      --bg: #d35400;
+      margin-left: 16px;
+    }
+    span {
+      position: relative;
+      display: inline-block;
+      margin-left: 16px;
+      color: var(--bg);
+      font-size: 12px;
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 2.5px;
+        left: -6.3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+    }
+  }
+  &__desc {
+    position: relative;
+    z-index: 5;
+    line-height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}

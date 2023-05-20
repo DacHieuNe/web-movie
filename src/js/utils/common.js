@@ -403,3 +403,14 @@ export const handleRedirectFacebookV1 = (selector, link) => {
     useThrottle(event.target, link);
   });
 };
+
+export const getIdAndTypeFromSearchParams = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+  let id = searchParams.get("id") ? searchParams.get("id") : null;
+  let type = searchParams.get("type") ? searchParams.get("type") : null;
+
+  return {
+    id,
+    type
+  }
+}

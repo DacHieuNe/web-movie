@@ -64,6 +64,9 @@
     &--secondary {
       --text: #0f766e;
     }
+    &--ternary {
+      --text: rgba(125, 63, 152, 0.52);
+    }
   }
   &__amount {
     display: inline-block;

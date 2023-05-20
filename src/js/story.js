@@ -16,15 +16,24 @@ import {
   handleCloseModal,
   handleOpenModal,
   handleUploadUserToUI,
+  handleUploadDetailManga,
+  getIdAndTypeFromSearchParams,
 } from "@/js/utils";
 
 (async () => {
   await handleAuthen("movie-detail");
 
+  // Get key datas from local storage
   const data = localStorage.getItem("datas");
   if (!data) return;
 
-  const { all: dataAll } = JSON.parse(data);
+  // get list story and list all
+  const { storys: dataStory, all: dataAll } = JSON.parse(data);
+
+  // get item base on id URL
+  const { id } = getIdAndTypeFromSearchParams();
+  const dataFilter = dataStory.find((item) => item.id == id);
+  handleUploadDetailManga(dataFilter);
 
   // Share code between pages
   setTimeout(() => {

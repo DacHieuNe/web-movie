@@ -24,6 +24,7 @@ import {
   handleCommentUser,
   handleUploadCommentUser,
   handleRedirectPageV2,
+  getIdAndTypeFromSearchParams,
   // handleRemoveComment,
 } from "@/js/utils";
 
@@ -68,9 +69,7 @@ import {
       },
     },
   });
-  const searchParams = new URLSearchParams(window.location.search);
-  let id = searchParams.get("id") ? searchParams.get("id") : null;
-  let type = searchParams.get("type") ? searchParams.get("type") : null;
+  const { id, type } = getIdAndTypeFromSearchParams();
 
   handleUploadDetailMovie(
     {
