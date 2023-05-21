@@ -81,7 +81,7 @@
   }
   &__search {
     position: relative;
-    z-index: 6;
+    z-index: 7;
     display: flex;
     @include respond(desktop) {
       max-width: 210px;

@@ -7,12 +7,14 @@
     z-index: 6;
     line-height: 21px;
     font-size: 16px;
-    color: $color-black;
+    color: var(--text);
   }
   &__heading {
+    --text: #000;
     position: relative;
     z-index: 6;
     & > span:first-child {
+      color: var(--text);
       font-size: 18px;
       transform: translateY(-1px);
     }
@@ -21,17 +23,23 @@
     position: relative;
     z-index: 6;
     line-height: 21px;
-    font-size: 16px;
     margin-inline: 8px;
+    color: var(--text);
+    font-size: 16px;
     transform: translateY(-1px);
   }
   &__tag {
     position: relative;
     z-index: 6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
     width: 80%;
     line-height: 24px;
     margin-block: 12px;
-    color: #000;
+    color: var(--text);
     font-size: 16px;
     font-weight: 500;
   }
@@ -40,21 +48,25 @@
     z-index: 6;
     padding-right: 10px;
     img {
-      width: 100%;
+      width: 200px;
       height: 320px;
       border-radius: 12px;
       vertical-align: middle;
+      object-fit: cover;
     }
+  }
+  &__nowrap {
+    flex-wrap: nowrap;
   }
   &__subdesc {
     position: relative;
     z-index: 6;
+    color: var(--text);
     & > span:first-child {
       width: 100px;
     }
     & > span {
       line-height: 21px;
-      color: #000;
       font-size: 14px;
       font-family: SVN-Avobold, sans-serif;
     }
@@ -68,8 +80,13 @@
   &__title {
     position: relative;
     z-index: 6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
     line-height: 30px;
-    color: #000;
+    color: var(--text);
     font-size: 20px;
   }
   &__btn {
@@ -112,10 +129,18 @@
     }
   }
   &__desc {
+    --text: #000;
     position: relative;
     z-index: 5;
     line-height: 24px;
+    color: var(--text);
     font-size: 16px;
     font-weight: 400;
+    @include respond(tablet) {
+      margin-top: 20px;
+    }
+  }
+  &__info {
+    --text: #000;
   }
 }

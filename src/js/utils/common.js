@@ -244,6 +244,21 @@ export const handleChangeTheme = (type) => {
           });
         }
       }
+      if (type.location == "chap-detail") {
+        const storyDetailHeading = document.querySelector(
+          ".story-detail__heading"
+        );
+        if (!storyDetailHeading) return;
+        storyDetailHeading.style.setProperty("--text", "#fff");
+
+        const storyDetailInfo = document.querySelector(".story-detail__info");
+        if (!storyDetailInfo) return;
+        storyDetailInfo.style.setProperty("--text", "#fff");
+
+        const storyDetailDesc = document.querySelector(".story-detail__desc");
+        if (!storyDetailDesc) return;
+        storyDetailDesc.style.setProperty("--text", "#fff");
+      }
     } else {
       header.style.backgroundColor = "#fff";
       header.style.color = "#000";
@@ -290,6 +305,21 @@ export const handleChangeTheme = (type) => {
           });
         }
       }
+      if (type.location == "chap-detail") {
+        const storyDetailHeading = document.querySelector(
+          ".story-detail__heading"
+        );
+        if (!storyDetailHeading) return;
+        storyDetailHeading.style.setProperty("--text", "#000");
+
+        const storyDetailInfo = document.querySelector(".story-detail__info");
+        if (!storyDetailInfo) return;
+        storyDetailInfo.style.setProperty("--text", "#000");
+
+        const storyDetailDesc = document.querySelector(".story-detail__desc");
+        if (!storyDetailDesc) return;
+        storyDetailDesc.style.setProperty("--text", "#000");
+      }
     }
   });
 };
@@ -325,8 +355,10 @@ export const handleRedirectURLMovie = (selector, type) => {
     if (type == "slide" && !e.target.matches(".btn__slide")) return;
     if (type == "story" && !e.target.matches(".manga")) return;
 
-    if(type == "story") {
-      window.location.assign(`story.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`);
+    if (type == "story") {
+      window.location.assign(
+        `story.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
+      );
       return;
     }
 
@@ -411,6 +443,6 @@ export const getIdAndTypeFromSearchParams = () => {
 
   return {
     id,
-    type
-  }
-}
+    type,
+  };
+};

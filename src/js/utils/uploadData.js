@@ -513,8 +513,54 @@ export const handleUploadDetailManga = (data) => {
   const imgTemplate = document.createElement("img");
   imgTemplate.alt = "image";
 
-  console.log("data", data);
-  const { chap, chapter, description, name, post, status, title, view } = data;
+  const {
+    chap,
+    chapter,
+    author,
+    description,
+    name,
+    post,
+    status,
+    title,
+    view,
+    tag,
+  } = data;
+
+  const subNameElement = document.querySelector("#subname");
+  if (!subNameElement) return;
+  subNameElement.textContent = name;
+
+  const subChapElement = document.querySelector("#subchap");
+  if (!subChapElement) return;
+  subChapElement.textContent = chap;
+
+  const postElement = document.querySelector("#post");
+  if (!postElement) return;
+  postElement.src = post;
+
+  const titleElement = document.querySelector(".story-detail__title");
+  if (!titleElement) return;
+  titleElement.textContent = title;
+
+  const tagElement = document.querySelector(".story-detail__tag");
+  if (!tagElement) return;
+  tagElement.textContent = tag;
+
+  const authorElement = document.querySelector("#author");
+  if (!authorElement) return;
+  authorElement.textContent = author;
+
+  const statusElement = document.querySelector("#status");
+  if (!statusElement) return;
+  statusElement.textContent = status;
+
+  const viewElement = document.querySelector("#view");
+  if (!viewElement) return;
+  viewElement.textContent = view;
+
+  const descElement = document.querySelector(".story-detail__desc");
+  if (!descElement) return;
+  descElement.textContent = description;
 
   const chapElement = document.querySelector(".chap");
   if (!chapElement) return;
@@ -522,5 +568,6 @@ export const handleUploadDetailManga = (data) => {
     const imgElement = imgTemplate.cloneNode(true);
     imgElement.src = item;
     chapElement.appendChild(imgElement);
+    console.log(1);
   });
 };

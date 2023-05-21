@@ -18,6 +18,8 @@ import {
   handleUploadUserToUI,
   handleUploadDetailManga,
   getIdAndTypeFromSearchParams,
+  handleEmotionAmount,
+  handleClickEmotionAmount,
 } from "@/js/utils";
 
 (async () => {
@@ -34,6 +36,11 @@ import {
   const { id } = getIdAndTypeFromSearchParams();
   const dataFilter = dataStory.find((item) => item.id == id);
   handleUploadDetailManga(dataFilter);
+
+  handleEmotionAmount("#love > span", id, "heart");
+  handleClickEmotionAmount("#love", id, "heart");
+  handleEmotionAmount("#follower > span", id, "follower");
+  handleClickEmotionAmount("#follower", id, "follower");
 
   // Share code between pages
   setTimeout(() => {
@@ -66,7 +73,7 @@ import {
   handleRemoveDataLocalStorage("#option-data");
   handleChangeTheme({
     element: "#button__theme",
-    location: "",
+    location: "chap-detail",
   });
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleScrollEffect({

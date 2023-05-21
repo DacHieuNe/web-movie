@@ -362,7 +362,7 @@ body {
 }
 .header__search {
   position: relative;
-  z-index: 6;
+  z-index: 7;
   display: flex;
 }
 @media (max-width: 74.9375em) {
@@ -2203,13 +2203,15 @@ body {
   z-index: 6;
   line-height: 21px;
   font-size: 16px;
-  color: #000;
+  color: var(--text);
 }
 .story-detail__heading {
+  --text: #000;
   position: relative;
   z-index: 6;
 }
 .story-detail__heading > span:first-child {
+  color: var(--text);
   font-size: 18px;
   transform: translateY(-1px);
 }
@@ -2217,17 +2219,23 @@ body {
   position: relative;
   z-index: 6;
   line-height: 21px;
-  font-size: 16px;
   margin-inline: 8px;
+  color: var(--text);
+  font-size: 16px;
   transform: translateY(-1px);
 }
 .story-detail__tag {
   position: relative;
   z-index: 6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
   width: 80%;
   line-height: 24px;
   margin-block: 12px;
-  color: #000;
+  color: var(--text);
   font-size: 16px;
   font-weight: 500;
 }
@@ -2237,21 +2245,25 @@ body {
   padding-right: 10px;
 }
 .story-detail__image img {
-  width: 100%;
+  width: 200px;
   height: 320px;
   border-radius: 12px;
   vertical-align: middle;
+  object-fit: cover;
+}
+.story-detail__nowrap {
+  flex-wrap: nowrap;
 }
 .story-detail__subdesc {
   position: relative;
   z-index: 6;
+  color: var(--text);
 }
 .story-detail__subdesc > span:first-child {
   width: 100px;
 }
 .story-detail__subdesc > span {
   line-height: 21px;
-  color: #000;
   font-size: 14px;
   font-family: SVN-Avobold, sans-serif;
 }
@@ -2264,8 +2276,13 @@ body {
 .story-detail__title {
   position: relative;
   z-index: 6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
   line-height: 30px;
-  color: #000;
+  color: var(--text);
   font-size: 20px;
 }
 .story-detail__btn {
@@ -2308,14 +2325,25 @@ body {
   background-color: #fff;
 }
 .story-detail__desc {
+  --text: #000;
   position: relative;
   z-index: 5;
   line-height: 24px;
+  color: var(--text);
   font-size: 16px;
   font-weight: 400;
 }
+@media (max-width: 61.9375em) {
+  .story-detail__desc {
+    margin-top: 20px;
+  }
+}
+.story-detail__info {
+  --text: #000;
+}
 
 .chap img {
+  display: block;
   max-width: 100%;
   margin: 10px auto 0;
   object-fit: cover;

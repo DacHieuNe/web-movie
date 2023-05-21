@@ -69,13 +69,13 @@ export const handleScrollEffect = (type) => {
     //   }
     // }
     let percent = (document.documentElement.scrollTop * 100) / type.value;
-    if (window.innerWidth < 576) {
-      percent = (document.documentElement.scrollTop * 100) / 7017;
-    } else if (window.innerWidth < 768) {
-      percent = (document.documentElement.scrollTop * 100) / 2771;
-    } else if (window.innerWidth < 992) {
-      percent = (document.documentElement.scrollTop * 100) / 2319;
-    }
+    // if (window.innerWidth < 576) {
+    //   percent = (document.documentElement.scrollTop * 100) / 7017;
+    // } else if (window.innerWidth < 768) {
+    //   percent = (document.documentElement.scrollTop * 100) / 2771;
+    // } else if (window.innerWidth < 992) {
+    //   percent = (document.documentElement.scrollTop * 100) / 2319;
+    // }
 
     const element = document.querySelector(type.element);
     if (!element) return;
@@ -108,8 +108,11 @@ export const handleScrollTop = (selector) => {
   });
 };
 export const handleDefaultScroll = () => {
-  window.scrollTo(0, 10000);
+  window.scrollTo(0, 20000);
   const height = document.documentElement.scrollTop;
-  window.scrollTo(0, 0);
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 500);
+  // window.scrollTo(0, 0);
   return height;
 };
