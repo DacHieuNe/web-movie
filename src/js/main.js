@@ -1,10 +1,7 @@
 import {
-  handleDataToday,
-  handleDataAnime,
   handleGetAccessToken,
-  handleDataSlide,
-  handleDataNewMovie,
-  handleDataAll,
+  handleDataAllMovie,
+  handleDataAllStory,
   handleAuthen,
   handlePushURL,
   handleMouseEvent,
@@ -21,29 +18,19 @@ import {
     "https://www.facebook.com/DacHieuNe.Hihi1/"
   );
   await handleAuthen("main");
+
+  // get token
   const token = await handleGetAccessToken();
-
-  // fetch data movie slide
-  const dataSlide = await handleDataSlide(token);
-
-  // fetch data movie new
-  const dataMovieNew = await handleDataNewMovie(token);
-
-  // fetch data anime
-  const dataAnime = await handleDataAnime(token);
-
-  const dataToday = await handleDataToday(token);
-
-  const dataAll = await handleDataAll(token);
+  // get data all story
+  const dataAllStory = await handleDataAllStory(token);
+  // get data all movie
+  const dataAllMovie = await handleDataAllMovie(token);
 
   localStorage.setItem(
     "datas",
     JSON.stringify({
-      all: dataAll,
-      slides: dataSlide,
-      news: dataMovieNew,
-      storys: dataAnime,
-      todays: dataToday,
+      "all-movie": dataAllMovie,
+      "all-story": dataAllStory,
     })
   );
   const localUser = localStorage.getItem("users");

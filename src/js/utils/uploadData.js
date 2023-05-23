@@ -156,7 +156,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
 
   let caseSpecial = null;
   let caseNumber = 0;
-  if (type == "today") {
+  if (type == "todays") {
     caseSpecial = wrapElement.querySelectorAll(".swiper-slide");
   }
 
@@ -164,11 +164,11 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
   list.forEach((item) => {
     let itemList;
     switch (type) {
-      case "slide": {
+      case "slides": {
         itemList = cloneDataSlide("#slide-template", item);
         break;
       }
-      case "new-movie": {
+      case "news": {
         itemList = cloneDataNewMovie("#movie-template", item);
         break;
       }
@@ -176,7 +176,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         itemList = cloneDataAnime("#manga-template", item);
         break;
       }
-      case "today": {
+      case "todays": {
         itemList = cloneDataToday("#today-template", item);
         break;
       }

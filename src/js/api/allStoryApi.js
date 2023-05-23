@@ -1,8 +1,8 @@
 import axiosClient from "./axiosClient";
 
-const todayApi = {
+const allStoryApi = {
   getAll(token) {
-    const url = "/api/todays";
+    const url = "/api/all-story";
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -11,4 +11,4 @@ const todayApi = {
   },
 };
 
-export default todayApi;
+export default allStoryApi;

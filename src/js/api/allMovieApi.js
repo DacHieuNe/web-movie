@@ -1,8 +1,8 @@
 import axiosClient from "./axiosClient";
 
-const allApi = {
+const allMovieApi = {
   getAll(token) {
-    const url = "/api/all";
+    const url = "/api/all-movie";
     return axiosClient.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -11,4 +11,4 @@ const allApi = {
   },
 };
 
-export default allApi;
+export default allMovieApi;

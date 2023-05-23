@@ -57,17 +57,18 @@ import {
         },
       },
     });
-    const {
-      all: dataAll,
-      slides: dataSlide,
-      news: dataMovieNew,
-      storys: dataAnime,
-      todays: dataToday,
-    } = JSON.parse(data);
-    handleUploadListToUI(".slide__wrap", dataSlide, "slide");
-    handleUploadListToUI(".movie__wrap", dataMovieNew, "new-movie");
-    handleUploadListToUI(".manga__wrap", dataAnime, "story");
-    handleUploadListToUI(".today__wrap", dataToday, "today");
+    const { "all-movie": dataAllMovie, "all-story": dataAllStory } =
+      JSON.parse(data);
+
+    const dataNews = dataAllMovie.filter((item) => item.article == "news");
+    const dataSlides = dataAllMovie.filter((item) => item.article == "slides");
+    const dataTodays = dataAllMovie.filter((item) => item.article == "todays");
+    const dataStorys = dataAllStorys.filter((item) => item.article == "storys");
+
+    handleUploadListToUI(".slide__wrap", dataSlides, "slides");
+    handleUploadListToUI(".movie__wrap", dataNews, "news");
+    handleUploadListToUI(".today__wrap", dataTodays, "todays");
+    // handleUploadListToUI(".manga__wrap", dataAnime, "story");
 
     paramScroll.length = dataSlide.length;
     handleSlideMain();

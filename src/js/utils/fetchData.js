@@ -1,9 +1,6 @@
 import userApi from "@/js/api/userApi";
-import slideApi from "@/js/api/slideApi";
-import movieNewApi from "@/js/api/movieNewApi";
-import animeApi from "@/js/api/animeApi";
-import todayApi from "@/js/api/todayApi";
-import allApi from "@/js/api/allApi";
+import allStoryApi from "@/js/api/slideApi";
+import allMovieApi from "@/js/api/allApi";
 
 export const handleGetAccessToken = async () => {
   try {
@@ -14,48 +11,58 @@ export const handleGetAccessToken = async () => {
   }
   return null;
 };
-export const handleDataSlide = async (token) => {
+// export const handleDataSlide = async (token) => {
+//   try {
+//     const data = await slideApi.getAllSlide(token);
+//     return data;
+//   } catch (error) {
+//     console.log("Get data slide error");
+//     console.log("error", error);
+//   }
+//   return null;
+// };
+// export const handleDataNewMovie = async (token) => {
+//   try {
+//     const data = await movieNewApi.getAll(token);
+//     return data;
+//   } catch (error) {
+//     console.log("error", error);
+//   }
+//   return null;
+// };
+// export const handleDataAnime = async (token) => {
+//   try {
+//     const data = await animeApi.getAll(token);
+//     return data;
+//   } catch (error) {
+//     console.log("error", error);
+//   }
+//   return null;
+// };
+// export const handleDataToday = async (token) => {
+//   try {
+//     const data = await todayApi.getAll(token);
+//     return data;
+//   } catch (error) {
+//     console.log("error", error);
+//   }
+//   return null;
+// };
+export const handleDataAllMovie = async (token) => {
   try {
-    const data = await slideApi.getAllSlide(token);
+    const data = await allMovieApi.getAll(token);
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+  return null;
+};
+export const handleDataAllStory = async (token) => {
+  try {
+    const data = await allStoryApi.getAll(token);
     return data;
   } catch (error) {
     console.log("Get data slide error");
-    console.log("error", error);
-  }
-  return null;
-};
-export const handleDataNewMovie = async (token) => {
-  try {
-    const data = await movieNewApi.getAll(token);
-    return data;
-  } catch (error) {
-    console.log("error", error);
-  }
-  return null;
-};
-export const handleDataAnime = async (token) => {
-  try {
-    const data = await animeApi.getAll(token);
-    return data;
-  } catch (error) {
-    console.log("error", error);
-  }
-  return null;
-};
-export const handleDataToday = async (token) => {
-  try {
-    const data = await todayApi.getAll(token);
-    return data;
-  } catch (error) {
-    console.log("error", error);
-  }
-  return null;
-};
-export const handleDataAll = async (token) => {
-  try {
-    const data = await allApi.getAll(token);
-    return data;
-  } catch (error) {
     console.log("error", error);
   }
   return null;
