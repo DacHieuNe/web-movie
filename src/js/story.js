@@ -30,11 +30,12 @@ import {
   if (!data) return;
 
   // get list story and list all
-  const { storys: dataStory, all: dataAll } = JSON.parse(data);
+  const { "all-story": dataAllStory, "all-movie": dataAllMovie } =
+    JSON.parse(data);
 
   // get item base on id URL
   const { id } = getIdAndTypeFromSearchParams();
-  const dataFilter = dataStory.find((item) => item.id == id);
+  const dataFilter = dataAllStory.find((item) => item.id == id);
   handleUploadDetailManga(dataFilter);
 
   handleEmotionAmount("#love > span", id, "heart");
@@ -66,7 +67,7 @@ import {
     ".header__result",
     ".header__noresult",
     ".header__result-list",
-    dataAll
+    dataAllMovie
   );
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleRemoveDataLocalStorage(".btn__data");

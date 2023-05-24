@@ -357,13 +357,13 @@ export const handleRedirectURLMovie = (selector, type) => {
 
     if (type == "story") {
       window.location.assign(
-        `story.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
+        `story.html?article=${e.target.dataset.type}&id=${e.target.dataset.id}`
       );
       return;
     }
 
     window.location.assign(
-      `/detail.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
+      `/detail.html?article=${e.target.dataset.type}&id=${e.target.dataset.id}`
     );
   });
 };
@@ -436,13 +436,15 @@ export const handleRedirectFacebookV1 = (selector, link) => {
   });
 };
 
-export const getIdAndTypeFromSearchParams = () => {
+export const getIdAndArticleFromSearchParams = () => {
   const searchParams = new URLSearchParams(window.location.search);
   let id = searchParams.get("id") ? searchParams.get("id") : null;
-  let type = searchParams.get("type") ? searchParams.get("type") : null;
+  let article = searchParams.get("article")
+    ? searchParams.get("article")
+    : null;
 
   return {
     id,
-    type,
+    article,
   };
 };

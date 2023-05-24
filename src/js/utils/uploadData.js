@@ -7,10 +7,11 @@ const cloneResultMovie = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, name, view, images } = data;
+  const { id, name, view, images, type } = data;
 
   const item = content.querySelector(".result").cloneNode(true);
   item.dataset.id = id;
+  item.dataset.article = type;
 
   const imageElement = item.querySelector(".result__img > img");
   if (!imageElement) return;
@@ -77,10 +78,11 @@ const cloneDataNewMovie = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, name, images, episode, view } = data;
+  const { id, name, images, episode, view, type } = data;
 
   const movieGrid = content.querySelector(".movie").cloneNode(true);
   movieGrid.dataset.id = id;
+  movieGrid.dataset.type = type;
 
   const movieItem = movieGrid.querySelector(".movie__box");
 
@@ -172,7 +174,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         itemList = cloneDataNewMovie("#movie-template", item);
         break;
       }
-      case "story": {
+      case "storys": {
         itemList = cloneDataAnime("#manga-template", item);
         break;
       }
@@ -182,7 +184,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
       }
     }
     domList.push(itemList);
-    if (type == "today") {
+    if (type == "todays") {
       caseSpecial[caseNumber].appendChild(itemList);
       caseNumber++;
     } else {
@@ -190,7 +192,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
     }
   });
   switch (type) {
-    case "slide": {
+    case "slides": {
       domList.forEach((item) => {
         const slideDesc = item.querySelector(".slide__desc");
         if (!slideDesc) return;
@@ -215,7 +217,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         }
       });
     }
-    case "new-movie": {
+    case "news": {
       domList.forEach((item) => {
         let movieName = item.querySelector(".movie__name");
         if (!movieName) return;
@@ -232,7 +234,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         }
       });
     }
-    case "story": {
+    case "storys": {
       domList.forEach((item) => {
         const storyName = item.querySelector(".manga__title");
         if (!storyName) return;
@@ -251,7 +253,7 @@ export const handleUploadListToUI = (selectorWrap, list, type) => {
         }
       });
     }
-    case "today": {
+    case "todays": {
       domList.forEach((item) => {
         const todayTitle = item.querySelector(".today__title");
         if (!todayTitle) return;
@@ -338,9 +340,12 @@ export const handleUploadSearchMovie = (
     const searchValue = inputElement.value;
 
     inputElement.value = "";
-    const data = list.filter((item) =>
-      item.name.toLowerCase().includes(searchValue.toLowerCase())
+    const data = list.filter(
+      (item) =>
+        (item.episode == 1 || item.episode == "Tập dài") &&
+        item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
+
     const resultElement = document.querySelector(selectorResult);
     if (!resultElement) return;
     resultElement.classList.remove("active--secondary");
@@ -363,7 +368,11 @@ export const handleUploadSearchMovie = (
 
     if (data.length > 0) {
       data.forEach((item) => {
-        const itemNew = cloneResultMovie("#result-template", item);
+        let tampItem = item;
+        if (item.episode == 1) {
+          tampItem.name = tampItem.split(" TẬP")[0];
+        }
+        const itemNew = cloneResultMovie("#result-template", tampItem);
         resultListElement.appendChild(itemNew);
       });
       if (resultElement.offsetHeight > 540) {
@@ -377,37 +386,40 @@ export const handleUploadSearchMovie = (
 };
 
 export const handleUploadDetailMovie = (data, dataAll) => {
-  const { id, type } = data;
+  const { id, article } = data;
 
   const localData = JSON.parse(localStorage.getItem("datas"));
   if (!localData) return;
 
-  let dataTemp = null;
-  switch (type) {
-    case "all": {
-      const { all } = localData;
-      dataTemp = all;
-      break;
-    }
-    case "news": {
-      const { news } = localData;
-      dataTemp = news;
-      break;
-    }
-    case "slides": {
-      const { slides } = localData;
-      dataTemp = slides;
-      break;
-    }
-    case "todays": {
-      const { todays } = localData;
-      dataTemp = todays;
-      break;
-    }
-    default:
-      break;
-  }
-  const dataMain = dataTemp.find((item) => item.id == id);
+  const { "all-movie": dataAllMovie } = localData;
+  const dataMain = dataAllMovie.find(
+    (item) => item.article == article && item.id == id
+  );
+  // switch (type) {
+  //   case "all": {
+  //     const { all } = localData;
+  //     dataTemp = all;
+  //     break;
+  //   }
+  //   case "news": {
+  //     const { news } = localData;
+  //     dataTemp = news;
+  //     break;
+  //   }
+  //   case "slides": {
+  //     const { slides } = localData;
+  //     dataTemp = slides;
+  //     break;
+  //   }
+  //   case "todays": {
+  //     const { todays } = localData;
+  //     dataTemp = todays;
+  //     break;
+  //   }
+  //   default:
+  //     break;
+  // }
+  // const dataMain = dataTemp.find((item) => item.id == id);
 
   const {
     episode,
@@ -422,7 +434,7 @@ export const handleUploadDetailMovie = (data, dataAll) => {
   } = dataMain;
   // handleUploadRelateMovie(id, dataType, dataAll);
 
-  const filterRelateMovie = dataAll.filter(
+  const filterRelateMovie = dataAllMovie.filter(
     (item) => item.id != id && item.type == dataType
   );
   const relateElement = document.querySelector(".playlist__relate");
@@ -443,7 +455,9 @@ export const handleUploadDetailMovie = (data, dataAll) => {
 
   relateListElement.forEach((item) => {
     item.addEventListener("click", () => {
-      window.location.assign(`/detail.html?type=all&id=${item.dataset.id}`);
+      window.location.assign(
+        `/detail.html?article=${item.dataset.article}&id=${item.dataset.id}`
+      );
     });
   });
   const totalEpisode = document.querySelector(".playlist__total");

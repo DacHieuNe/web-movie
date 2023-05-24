@@ -24,7 +24,7 @@ import {
   handleCommentUser,
   handleUploadCommentUser,
   handleRedirectPageV2,
-  getIdAndTypeFromSearchParams,
+  getIdAndArticleFromSearchParams,
   // handleRemoveComment,
 } from "@/js/utils";
 
@@ -34,14 +34,11 @@ import {
   const data = localStorage.getItem("datas");
   if (!data) return;
 
-  const {
-    all: dataAll,
-    storys: dataAnime,
-    todays: dataToday,
-  } = JSON.parse(data);
+  const { "all-movie": dataAllMovie } = JSON.parse(data);
 
-  handleUploadListToUI(".manga__wrap", dataAnime, "story");
-  handleUploadListToUI(".today__wrap", dataToday, "today");
+  const dataTodays = dataAllMovie.filter((item) => item.article == "todays");
+  // handleUploadListToUI(".manga__wrap", dataAnime, "story");
+  handleUploadListToUI(".today__wrap", dataTodays, "todays");
 
   const swiper = new Swiper(".today__container", {
     slidesPerView: 2,
@@ -69,14 +66,14 @@ import {
       },
     },
   });
-  const { id, type } = getIdAndTypeFromSearchParams();
+  const { id, article } = getIdAndArticleFromSearchParams();
 
   handleUploadDetailMovie(
     {
       id,
-      type,
+      article,
     },
-    dataAll
+    dataAllMovie
   );
   handleCommentUser(
     {
@@ -122,7 +119,7 @@ import {
     ".header__result",
     ".header__noresult",
     ".header__result-list",
-    dataAll
+    dataAllMovie
   );
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleRemoveDataLocalStorage(".btn__data");

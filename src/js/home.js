@@ -63,14 +63,14 @@ import {
     const dataNews = dataAllMovie.filter((item) => item.article == "news");
     const dataSlides = dataAllMovie.filter((item) => item.article == "slides");
     const dataTodays = dataAllMovie.filter((item) => item.article == "todays");
-    const dataStorys = dataAllStorys.filter((item) => item.article == "storys");
+    const dataStorys = dataAllStory.filter((item) => item.article == "storys");
 
     handleUploadListToUI(".slide__wrap", dataSlides, "slides");
     handleUploadListToUI(".movie__wrap", dataNews, "news");
     handleUploadListToUI(".today__wrap", dataTodays, "todays");
-    // handleUploadListToUI(".manga__wrap", dataAnime, "story");
+    handleUploadListToUI(".manga__wrap", dataStorys, "storys");
 
-    paramScroll.length = dataSlide.length;
+    paramScroll.length = dataSlides.length;
     handleSlideMain();
 
     handleRedirectURLMovie(".movie__wrap", "movie");
@@ -105,7 +105,7 @@ import {
       ".header__result",
       ".header__noresult",
       ".header__result-list",
-      dataAll
+      dataAllMovie
     );
     handleCloseResultSearch("#btn-close-search", ".header__result");
     handleRemoveDataLocalStorage(".btn__data");

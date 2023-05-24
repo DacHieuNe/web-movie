@@ -1,6 +1,6 @@
 import userApi from "@/js/api/userApi";
-import allStoryApi from "@/js/api/slideApi";
-import allMovieApi from "@/js/api/allApi";
+import allStoryApi from "@/js/api/allStoryApi";
+import allMovieApi from "@/js/api/allMovieApi";
 
 export const handleGetAccessToken = async () => {
   try {
