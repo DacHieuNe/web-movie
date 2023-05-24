@@ -258,6 +258,7 @@
                     </svg>
                   </button>
                   <div class="header__result">
+                    <div class="loading-data"></div>
                     <h3 class="header__noresult"></h3>
                     <ul class="header__result-list"></ul>
                     <button
@@ -391,7 +392,7 @@
                         class="playlist__wrap--primary row justify-between items-center"
                       >
                         <div id="episode" class="playlist__episode"></div>
-                        <div class="playlist__play">
+                        <!-- <div class="playlist__play">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -406,7 +407,7 @@
                               d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
                             />
                           </svg>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -515,6 +516,7 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper today__wrap">
                   <!-- Slides -->
+                  <div class="swiper-slide"></div>
                   <div class="swiper-slide"></div>
                   <div class="swiper-slide"></div>
                   <div class="swiper-slide"></div>
@@ -684,7 +686,7 @@
       </section>
     </footer>
     <template id="comment-template">
-      <li class="row gap-xl-12 items-center playlist__item">
+      <li class="row gap-xl-12 items-start playlist__item">
         <div class="playlist__image">
           <img src="" alt="image" />
         </div>

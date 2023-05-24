@@ -108,11 +108,10 @@ export const handleScrollTop = (selector) => {
   });
 };
 export const handleDefaultScroll = () => {
-  window.scrollTo(0, 20000);
+  window.scrollTo(0, 40000);
   const height = document.documentElement.scrollTop;
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 500);
-  // window.scrollTo(0, 0);
   return height;
 };

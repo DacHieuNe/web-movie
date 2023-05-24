@@ -24,7 +24,8 @@ import {
   handleCommentUser,
   handleUploadCommentUser,
   handleRedirectPageV2,
-  getIdAndArticleFromSearchParams,
+  getIdAndTypeFromSearchParams,
+  handleRedirectURLMovie,
   // handleRemoveComment,
 } from "@/js/utils";
 
@@ -34,10 +35,13 @@ import {
   const data = localStorage.getItem("datas");
   if (!data) return;
 
-  const { "all-movie": dataAllMovie } = JSON.parse(data);
+  const { "all-movie": dataAllMovie, "all-story": dataAllStory } =
+    JSON.parse(data);
 
   const dataTodays = dataAllMovie.filter((item) => item.article == "todays");
-  // handleUploadListToUI(".manga__wrap", dataAnime, "story");
+  const dataStorys = dataAllStory.filter((item) => item.article == "storys");
+
+  handleUploadListToUI(".manga__wrap", dataStorys, "storys");
   handleUploadListToUI(".today__wrap", dataTodays, "todays");
 
   const swiper = new Swiper(".today__container", {
@@ -66,12 +70,12 @@ import {
       },
     },
   });
-  const { id, article } = getIdAndArticleFromSearchParams();
+  const { id, type } = getIdAndTypeFromSearchParams();
 
   handleUploadDetailMovie(
     {
       id,
-      article,
+      type,
     },
     dataAllMovie
   );
@@ -94,6 +98,8 @@ import {
     "#playlist-page-2",
     "#playlist-title-2"
   );
+  handleRedirectURLMovie(".today__wrap", "today");
+  handleRedirectURLMovie(".manga__wrap", "story");
 
   // Share code between pages
   setTimeout(() => {
@@ -126,7 +132,7 @@ import {
   handleRemoveDataLocalStorage("#option-data");
   handleChangeTheme({
     element: "#button__theme",
-    location: "",
+    location: "detail",
   });
   handleScrollEffect({
     element: "#circle",

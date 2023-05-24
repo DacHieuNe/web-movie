@@ -357,13 +357,13 @@ export const handleRedirectURLMovie = (selector, type) => {
 
     if (type == "story") {
       window.location.assign(
-        `story.html?article=${e.target.dataset.type}&id=${e.target.dataset.id}`
+        `story.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
       );
       return;
     }
 
     window.location.assign(
-      `/detail.html?article=${e.target.dataset.type}&id=${e.target.dataset.id}`
+      `/detail.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
     );
   });
 };
@@ -436,15 +436,31 @@ export const handleRedirectFacebookV1 = (selector, link) => {
   });
 };
 
-export const getIdAndArticleFromSearchParams = () => {
+export const getIdAndTypeFromSearchParams = () => {
   const searchParams = new URLSearchParams(window.location.search);
   let id = searchParams.get("id") ? searchParams.get("id") : null;
-  let article = searchParams.get("article")
-    ? searchParams.get("article")
-    : null;
+  let type = searchParams.get("type") ? searchParams.get("type") : null;
 
   return {
     id,
-    article,
+    type,
   };
+};
+
+export const handleClickDocument = (type) => {
+  let resultElement = null;
+  if (type == "detail") {
+    resultElement = document.querySelector(".header__result");
+  }
+
+  window.addEventListener("click", (e) => {
+    console.log("e", e.target);
+    if (
+      resultElement &&
+      resultElement.classList.contains("active--primary") &&
+      !e.target.matches("#btn-search")
+    ) {
+      resultElement.classList.remove("active--primary");
+    }
+  });
 };

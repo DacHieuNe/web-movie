@@ -21,6 +21,7 @@ import {
   handlePushURL,
   paramScroll,
   handleRemoveDataLocalStorage,
+  handleClickDocument,
 } from "@/js/utils";
 
 (async () => {
@@ -30,6 +31,19 @@ import {
   if (pathname != "/") {
     const data = localStorage.getItem("datas");
     if (!data) return;
+
+    const { "all-movie": dataAllMovie, "all-story": dataAllStory } =
+      JSON.parse(data);
+
+    const dataNews = dataAllMovie.filter((item) => item.article == "news");
+    const dataSlides = dataAllMovie.filter((item) => item.article == "slides");
+    const dataTodays = dataAllMovie.filter((item) => item.article == "todays");
+    const dataStorys = dataAllStory.filter((item) => item.article == "storys");
+
+    handleUploadListToUI(".slide__wrap", dataSlides, "slides");
+    handleUploadListToUI(".movie__wrap", dataNews, "news");
+    handleUploadListToUI(".today__wrap", dataTodays, "todays");
+    handleUploadListToUI(".manga__wrap", dataStorys, "storys");
 
     const swiper = new Swiper(".today__container", {
       slidesPerView: 2,
@@ -57,19 +71,6 @@ import {
         },
       },
     });
-    const { "all-movie": dataAllMovie, "all-story": dataAllStory } =
-      JSON.parse(data);
-
-    const dataNews = dataAllMovie.filter((item) => item.article == "news");
-    const dataSlides = dataAllMovie.filter((item) => item.article == "slides");
-    const dataTodays = dataAllMovie.filter((item) => item.article == "todays");
-    const dataStorys = dataAllStory.filter((item) => item.article == "storys");
-
-    handleUploadListToUI(".slide__wrap", dataSlides, "slides");
-    handleUploadListToUI(".movie__wrap", dataNews, "news");
-    handleUploadListToUI(".today__wrap", dataTodays, "todays");
-    handleUploadListToUI(".manga__wrap", dataStorys, "storys");
-
     paramScroll.length = dataSlides.length;
     handleSlideMain();
 
@@ -137,6 +138,7 @@ import {
         class: "active",
       },
     });
+    handleClickDocument("detail");
     handleScrollTop("#option-top");
     handleRefreshPage("#option-home");
     handleSignOut(".btn__signout");

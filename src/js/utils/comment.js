@@ -32,10 +32,10 @@ export const cloneDataComment = (selectorTemplate, data, index) => {
 
   const descElement = item.querySelector(".playlist__desc");
   if (!descElement) return;
-  if (comment.length > 30) {
-    descElement.title = comment;
-    comment = comment.slice(0, 30) + "...";
-  }
+  // if (comment.length > 30) {
+  //   descElement.title = comment;
+  //   comment = comment.slice(0, 30) + "...";
+  // }
   descElement.textContent = comment;
 
   const trashElement = item.querySelector(".playlist__trash");

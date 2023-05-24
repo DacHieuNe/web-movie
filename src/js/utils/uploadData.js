@@ -11,7 +11,7 @@ const cloneResultMovie = (selectorTemplate, data) => {
 
   const item = content.querySelector(".result").cloneNode(true);
   item.dataset.id = id;
-  item.dataset.article = type;
+  item.dataset.type = type;
 
   const imageElement = item.querySelector(".result__img > img");
   if (!imageElement) return;
@@ -24,10 +24,10 @@ const cloneResultMovie = (selectorTemplate, data) => {
   const nameElement = item.querySelector(".result__info > h4");
   if (!nameElement) return;
   nameElement.textContent = name;
-  if (nameElement.textContent.length > 24) {
-    nameElement.title = nameElement.textContent;
-    nameElement.textContent = nameElement.textContent.slice(0, 24) + "...";
-  }
+  // if (nameElement.textContent.length > 24) {
+  //   nameElement.title = nameElement.textContent;
+  //   nameElement.textContent = nameElement.textContent.slice(0, 24) + "...";
+  // }
 
   return item;
 };
@@ -37,7 +37,7 @@ const cloneDataSlide = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, category, description, name, images } = data;
+  const { id, category, description, name, images, type } = data;
 
   const slideItem = content.querySelector(".slide__item").cloneNode(true);
   slideItem.style.backgroundImage = `url(${images})`;
@@ -69,6 +69,7 @@ const cloneDataSlide = (selectorTemplate, data) => {
   const slideButton = slideItem.querySelector(".btn__slide");
   if (!slideButton) return;
   slideButton.dataset.id = id;
+  slideButton.dataset.type = type;
 
   return slideItem;
 };
@@ -110,10 +111,11 @@ const cloneDataAnime = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, chap, post, title } = data;
+  const { id, chap, post, title, type } = data;
 
   const mangaGrid = content.querySelector(".manga").cloneNode(true);
   mangaGrid.dataset.id = id;
+  mangaGrid.dataset.type = type;
 
   const mangaImage = mangaGrid.querySelector(".manga__image img");
   if (!mangaImage) return;
@@ -135,10 +137,11 @@ const cloneDataToday = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, images, name, view } = data;
+  const { id, images, name, view, type } = data;
 
   const todayGrid = content.querySelector(".today").cloneNode(true);
   todayGrid.dataset.id = id;
+  todayGrid.dataset.type = type;
 
   todayGrid.dataset.view = view;
   const todayImage = todayGrid.querySelector(".today__image img");
@@ -328,7 +331,8 @@ export const handleUploadSearchMovie = (
   selectorResult,
   selectorNoresult,
   selectorResultList,
-  list
+  list,
+  type = "detail"
 ) => {
   const searchElement = document.querySelector(selectorSearch);
   if (!searchElement) return;
@@ -348,8 +352,10 @@ export const handleUploadSearchMovie = (
 
     const resultElement = document.querySelector(selectorResult);
     if (!resultElement) return;
-    resultElement.classList.remove("active--secondary");
-    resultElement.classList.add("active--primary");
+
+    const loadingDataElement = resultElement.querySelector(".loading-data");
+    if (!loadingDataElement) return;
+    loadingDataElement.hidden = false;
 
     const resultInformElement = resultElement.querySelector(selectorNoresult);
     if (!resultInformElement) return;
@@ -360,40 +366,49 @@ export const handleUploadSearchMovie = (
     if (!resultListElement) return;
     resultListElement.textContent = "";
 
-    if (!searchValue) {
-      resultInformElement.classList.add("active");
-      resultInformElement.textContent = "Nhập tên anime để tìm kiếm.";
-      return;
-    }
-
-    if (data.length > 0) {
-      data.forEach((item) => {
-        let tampItem = item;
-        if (item.episode == 1) {
-          tampItem.name = tampItem.split(" TẬP")[0];
-        }
-        const itemNew = cloneResultMovie("#result-template", tampItem);
-        resultListElement.appendChild(itemNew);
-      });
-      if (resultElement.offsetHeight > 540) {
-        resultElement.classList.add("active--secondary");
+    resultElement.classList.remove("active--secondary");
+    resultElement.classList.add("active--primary");
+    setTimeout(() => {
+      loadingDataElement.hidden = true;
+      if (!searchValue) {
+        resultInformElement.classList.add("active");
+        resultInformElement.textContent = `Nhập tên ${
+          type == "detail" ? "anime" : "truyện"
+        } để tìm kiếm.`;
+        return;
       }
-    } else {
-      resultInformElement.classList.add("active");
-      resultInformElement.textContent = "Không có kết quả tìm kiếm phù hợp.";
-    }
+
+      if (data.length > 0) {
+        data.forEach((item) => {
+          let tampItem = item;
+          if (item.episode == 1) {
+            tampItem.name = tampItem.name.split(" TẬP")[0];
+            tampItem.name = tampItem.name.split("- Tập")[0];
+          }
+          const itemNew = cloneResultMovie("#result-template", tampItem);
+          resultListElement.appendChild(itemNew);
+        });
+        if (resultElement.offsetHeight > 540) {
+          resultElement.classList.add("active--secondary");
+        }
+      } else {
+        resultInformElement.classList.add("active");
+        resultInformElement.textContent = "Không có kết quả tìm kiếm phù hợp.";
+      }
+    }, 1000);
   });
 };
 
-export const handleUploadDetailMovie = (data, dataAll) => {
-  const { id, article } = data;
+export const handleUploadDetailMovie = (data, dataAllMovie) => {
+  const { id, type } = data;
 
-  const localData = JSON.parse(localStorage.getItem("datas"));
-  if (!localData) return;
+  // const localData = JSON.parse(localStorage.getItem("datas"));
+  // if (!localData) return;
 
-  const { "all-movie": dataAllMovie } = localData;
+  // const { "all-movie": dataAllMovie } = localData;
+
   const dataMain = dataAllMovie.find(
-    (item) => item.article == article && item.id == id
+    (item) => item.type == type && item.id == id
   );
   // switch (type) {
   //   case "all": {
@@ -435,8 +450,9 @@ export const handleUploadDetailMovie = (data, dataAll) => {
   // handleUploadRelateMovie(id, dataType, dataAll);
 
   const filterRelateMovie = dataAllMovie.filter(
-    (item) => item.id != id && item.type == dataType
+    (item) => item.type == dataType
   );
+  filterRelateMovie.sort((a, b) => a.episode - b.episode);
   const relateElement = document.querySelector(".playlist__relate");
   if (!relateElement) return;
 
@@ -445,8 +461,21 @@ export const handleUploadDetailMovie = (data, dataAll) => {
       id: item.id,
       name: item.title,
       view: item.view,
+      type: item.type,
       images: item.images,
     });
+    const resultInfoElement = cloneData.querySelector(".result__info");
+    if (!resultInfoElement) return;
+
+    const nameElement = resultInfoElement.querySelector("h4");
+    if (!nameElement) return;
+    nameElement.textContent = `${item.article == "slides" ? "" : "Tập"} ${
+      item.episode
+    } - ${nameElement.textContent}`;
+
+    if (item.id == id) {
+      resultInfoElement.classList.add("active");
+    }
     relateElement.appendChild(cloneData);
   });
 
@@ -456,13 +485,13 @@ export const handleUploadDetailMovie = (data, dataAll) => {
   relateListElement.forEach((item) => {
     item.addEventListener("click", () => {
       window.location.assign(
-        `/detail.html?article=${item.dataset.article}&id=${item.dataset.id}`
+        `/detail.html?type=${item.dataset.type}&id=${item.dataset.id}`
       );
     });
   });
   const totalEpisode = document.querySelector(".playlist__total");
   if (!totalEpisode) return;
-  totalEpisode.textContent = filterRelateMovie.length + 1;
+  totalEpisode.textContent = filterRelateMovie.length;
 
   const liveElement = document.querySelector(".live");
   if (!liveElement) return;
@@ -582,6 +611,5 @@ export const handleUploadDetailManga = (data) => {
     const imgElement = imgTemplate.cloneNode(true);
     imgElement.src = item;
     chapElement.appendChild(imgElement);
-    console.log(1);
   });
 };

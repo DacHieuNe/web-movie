@@ -67,7 +67,8 @@ import {
     ".header__result",
     ".header__noresult",
     ".header__result-list",
-    dataAllMovie
+    dataAllStory,
+    "story"
   );
   handleCloseResultSearch("#btn-close-search", ".header__result");
   handleRemoveDataLocalStorage(".btn__data");
@@ -77,10 +78,12 @@ import {
     location: "chap-detail",
   });
   handleCloseResultSearch("#btn-close-search", ".header__result");
-  handleScrollEffect({
-    element: "#circle",
-    value: handleDefaultScroll(),
-  });
+  setTimeout(() => {
+    handleScrollEffect({
+      element: "#circle",
+      value: handleDefaultScroll(),
+    });
+  }, 500);
   handleOptionMenu({
     click: "#option-click",
     top: {
