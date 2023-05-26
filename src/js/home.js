@@ -10,7 +10,7 @@ import {
   handleCloseModal,
   handleMouseEvent,
   handleUploadSearchMovie,
-  handleCloseResultSearch,
+  // handleCloseResultSearch,
   handleConnectNetwork,
   handleScrollEffect,
   handleScrollTop,
@@ -78,6 +78,7 @@ import {
     handleRedirectURLMovie(".today__wrap", "today");
     handleRedirectURLMovie(".slide__wrap", "slide");
     handleRedirectURLMovie(".manga__wrap", "story");
+    handleRedirectURLMovie(".header__result-list", "result");
 
     // Share code between pages
     setTimeout(() => {
@@ -108,7 +109,7 @@ import {
       ".header__result-list",
       dataAllMovie
     );
-    handleCloseResultSearch("#btn-close-search", ".header__result");
+    // handleCloseResultSearch("#btn-close-search", ".header__result");
     handleRemoveDataLocalStorage(".btn__data");
     handleRemoveDataLocalStorage("#option-data");
     handleChangeTheme({

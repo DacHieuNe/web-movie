@@ -354,8 +354,12 @@ export const handleRedirectURLMovie = (selector, type) => {
     if (type == "today" && !e.target.matches(".today")) return;
     if (type == "slide" && !e.target.matches(".btn__slide")) return;
     if (type == "story" && !e.target.matches(".manga")) return;
+    if (type == "result" && !e.target.matches(".result")) return;
 
-    if (type == "story") {
+    if (
+      type == "story" ||
+      (type == "result" && element.dataset.type == "story")
+    ) {
       window.location.assign(
         `story.html?type=${e.target.dataset.type}&id=${e.target.dataset.id}`
       );
@@ -454,11 +458,13 @@ export const handleClickDocument = (type) => {
   }
 
   window.addEventListener("click", (e) => {
-    console.log("e", e.target);
     if (
       resultElement &&
       resultElement.classList.contains("active--primary") &&
-      !e.target.matches("#btn-search")
+      !e.target.matches("#btn-search") &&
+      !e.target.matches(".header__result") &&
+      !e.target.matches(".header__noresult") &&
+      !e.target.matches(".result")
     ) {
       resultElement.classList.remove("active--primary");
     }

@@ -6,7 +6,7 @@ import {
   handleScrollEffect,
   handleScrollTop,
   handleUploadSearchMovie,
-  handleCloseResultSearch,
+  // handleCloseResultSearch,
   handleUploadDetailMovie,
   handleEmotionAmount,
   handleConnectNetwork,
@@ -26,6 +26,7 @@ import {
   handleRedirectPageV2,
   getIdAndTypeFromSearchParams,
   handleRedirectURLMovie,
+  handleClickDocument,
   // handleRemoveComment,
 } from "@/js/utils";
 
@@ -100,6 +101,7 @@ import {
   );
   handleRedirectURLMovie(".today__wrap", "today");
   handleRedirectURLMovie(".manga__wrap", "story");
+  handleRedirectURLMovie(".header__result-list", "result");
 
   // Share code between pages
   setTimeout(() => {
@@ -127,7 +129,7 @@ import {
     ".header__result-list",
     dataAllMovie
   );
-  handleCloseResultSearch("#btn-close-search", ".header__result");
+  // handleCloseResultSearch("#btn-close-search", ".header__result");
   handleRemoveDataLocalStorage(".btn__data");
   handleRemoveDataLocalStorage("#option-data");
   handleChangeTheme({
@@ -157,6 +159,7 @@ import {
       class: "active",
     },
   });
+  handleClickDocument("detail");
   handleScrollTop("#option-top");
   handleRefreshPage("#option-home");
   handleSignOut(".btn__signout");

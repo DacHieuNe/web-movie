@@ -25,6 +25,7 @@
   &__img {
     min-width: 120px;
     height: 60px;
+    pointer-events: none;
     overflow: hidden;
     img {
       width: 100%;
@@ -37,6 +38,7 @@
   &__info {
     line-height: 1.7;
     color: var(--color);
+    pointer-events: none;
     &.active {
       h4 {
         color: $color-primary;

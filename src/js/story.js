@@ -7,7 +7,7 @@ import {
   handleScrollTop,
   handleOptionMenu,
   handleScrollEffect,
-  handleCloseResultSearch,
+  // handleCloseResultSearch,
   handleChangeTheme,
   handleRemoveDataLocalStorage,
   handleDefaultScroll,
@@ -20,6 +20,8 @@ import {
   getIdAndTypeFromSearchParams,
   handleEmotionAmount,
   handleClickEmotionAmount,
+  handleClickDocument,
+  handleRedirectURLMovie,
 } from "@/js/utils";
 
 (async () => {
@@ -38,6 +40,7 @@ import {
   const dataFilter = dataAllStory.find((item) => item.id == id);
   handleUploadDetailManga(dataFilter);
 
+  handleRedirectURLMovie(".header__result-list", "result");
   handleEmotionAmount("#love > span", id, "heart");
   handleClickEmotionAmount("#love", id, "heart");
   handleEmotionAmount("#follower > span", id, "follower");
@@ -70,14 +73,14 @@ import {
     dataAllStory,
     "story"
   );
-  handleCloseResultSearch("#btn-close-search", ".header__result");
+  // handleCloseResultSearch("#btn-close-search", ".header__result");
   handleRemoveDataLocalStorage(".btn__data");
   handleRemoveDataLocalStorage("#option-data");
   handleChangeTheme({
     element: "#button__theme",
     location: "chap-detail",
   });
-  handleCloseResultSearch("#btn-close-search", ".header__result");
+  // handleCloseResultSearch("#btn-close-search", ".header__result");
   setTimeout(() => {
     handleScrollEffect({
       element: "#circle",
@@ -103,6 +106,7 @@ import {
       class: "active",
     },
   });
+  handleClickDocument("detail");
   handleScrollTop("#option-top");
   handleRefreshPage("#option-home");
   handleSignOut(".btn__signout");

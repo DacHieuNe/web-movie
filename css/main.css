@@ -377,6 +377,9 @@ body {
   z-index: 7;
   display: flex;
 }
+.header__search > .btn__inside > svg {
+  pointer-events: none;
+}
 @media (max-width: 74.9375em) {
   .header__search {
     max-width: 210px;
@@ -440,6 +443,9 @@ body {
 .header__result .btn__reject {
   background-color: var(--color);
   color: var(--bg-color);
+}
+.header__result .btn__reject svg {
+  pointer-events: none;
 }
 .header__noresult.active {
   padding: 0 0 20px 20px;
@@ -2074,6 +2080,7 @@ body {
 .result__img {
   min-width: 120px;
   height: 60px;
+  pointer-events: none;
   overflow: hidden;
 }
 .result__img img {
@@ -2086,6 +2093,7 @@ body {
 .result__info {
   line-height: 1.7;
   color: var(--color);
+  pointer-events: none;
 }
 .result__info.active h4 {
   color: #dc2626;

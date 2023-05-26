@@ -7,7 +7,7 @@ const cloneResultMovie = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, name, view, images, type } = data;
+  const { id, name, view, images, type, post } = data;
 
   const item = content.querySelector(".result").cloneNode(true);
   item.dataset.id = id;
@@ -15,7 +15,7 @@ const cloneResultMovie = (selectorTemplate, data) => {
 
   const imageElement = item.querySelector(".result__img > img");
   if (!imageElement) return;
-  imageElement.src = images;
+  imageElement.src = images || post;
 
   const viewElement = item.querySelector(".result__info > span");
   if (!viewElement) return;
@@ -342,13 +342,22 @@ export const handleUploadSearchMovie = (
 
   searchElement.addEventListener("click", () => {
     const searchValue = inputElement.value;
-
     inputElement.value = "";
-    const data = list.filter(
-      (item) =>
-        (item.episode == 1 || item.episode == "Tập dài") &&
-        item.name.toLowerCase().includes(searchValue.toLowerCase())
-    );
+
+    let data = null;
+    if (type == "detail") {
+      data = list.filter(
+        (item) =>
+          (item.episode == 1 || item.episode == "Tập dài") &&
+          item.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    } else if (type == "story") {
+      data = list.filter(
+        (item) =>
+          item.chap == "Chap 1" &&
+          item.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
 
     const resultElement = document.querySelector(selectorResult);
     if (!resultElement) return;
