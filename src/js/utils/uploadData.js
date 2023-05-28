@@ -79,7 +79,7 @@ const cloneDataNewMovie = (selectorTemplate, data) => {
 
   const content = templateElement.content;
 
-  const { id, name, images, episode, view, type } = data;
+  const { id, name, images, episode, view, type, total } = data;
 
   const movieGrid = content.querySelector(".movie").cloneNode(true);
   movieGrid.dataset.id = id;
@@ -98,10 +98,16 @@ const cloneDataNewMovie = (selectorTemplate, data) => {
   const movieEpisode = movieItem.querySelector(".movie__episode");
   if (!movieEpisode) return;
   movieEpisode.textContent = `Tập: ${episode}`;
+  if (total) {
+    movieEpisode.textContent = `${total} / ${total} tập`;
+  }
 
   const movieView = movieItem.querySelector(".movie__view");
   if (!movieView) return;
   movieView.textContent = `View: ${view}`;
+  if (total) {
+    movieView.textContent = `${view} lượt xem`;
+  }
 
   return movieGrid;
 };
@@ -621,4 +627,22 @@ export const handleUploadDetailManga = (data) => {
     imgElement.src = item;
     chapElement.appendChild(imgElement);
   });
+};
+export const handleUploadFullMovie = (data) => {
+  const dataTamp = [];
+  data.forEach((item) => {
+    if (item.episode == "1") {
+      dataTamp.push(item);
+    }
+  });
+  const dataMain = dataTamp.map((item) => {
+    const type = item.type;
+    const total = data.filter((v) => v.type == type);
+    item.name = item.name.split(" TẬP")[0];
+    return {
+      ...item,
+      total: total.length,
+    };
+  });
+  handleUploadListToUI(".movie__wrap", dataMain, "news");
 };

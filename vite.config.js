@@ -15,6 +15,7 @@ export default defineConfig({
         home: resolve(__dirname, "home.html"),
         authen: resolve(__dirname, "authen.html"),
         story: resolve(__dirname, "story.html"),
+        "all-movie": resolve(__dirname, "all-movie.html"),
       },
     },
   },
