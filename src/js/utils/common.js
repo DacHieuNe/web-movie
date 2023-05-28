@@ -1,5 +1,6 @@
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
+import Swal from "sweetalert2";
 
 export const handleToggleActive = (selector, className = "active") => {
   const element = document.querySelector(selector);
@@ -371,7 +372,26 @@ export const handleRedirectURLMovie = (selector, type) => {
     );
   });
 };
+export const handleRedirectURLMovieV2 = (selector, data) => {
+  const element = document.querySelector(selector);
+  if (!element) return;
 
+  const { type, id } = data || { type: "", id: "" };
+  element.addEventListener("click", () => {
+    if (!data) {
+      Swal.fire({
+        icon: "error",
+        title: "Error !",
+        text: "Thông cảm cho chúng tôi ! Manga chưa có movie",
+        customClass: {
+          popup: "swal-custom",
+        },
+      });
+      return;
+    }
+    window.location.assign(`/detail.html?type=${type}&id=${id}`);
+  });
+};
 // export const handleHideNode = (selectorClick, selectorHide) => {
 //   const element = document.querySelector(selector);
 //   if (!element) return;

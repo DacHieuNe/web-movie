@@ -22,6 +22,7 @@ import {
   handleClickEmotionAmount,
   handleClickDocument,
   handleRedirectURLMovie,
+  handleRedirectURLMovieV2,
 } from "@/js/utils";
 
 (async () => {
@@ -36,11 +37,17 @@ import {
     JSON.parse(data);
 
   // get item base on id URL
-  const { id } = getIdAndTypeFromSearchParams();
+  const { id, type } = getIdAndTypeFromSearchParams();
   const dataFilter = dataAllStory.find((item) => item.id == id);
   handleUploadDetailManga(dataFilter);
 
+  const dataFilterMovie = dataAllMovie.find(
+    (item) => item.type == type && item.episode == "1"
+  );
+
+  console.log("data", dataFilterMovie);
   handleRedirectURLMovie(".header__result-list", "result");
+  handleRedirectURLMovieV2("#btn-redirect-movie", dataFilterMovie);
   handleEmotionAmount("#love > span", id, "heart");
   handleClickEmotionAmount("#love", id, "heart");
   handleEmotionAmount("#follower > span", id, "follower");
